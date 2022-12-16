@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>Builderment Seeds</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <!-- Upload Button -->
+        <label for="file">Upload File!</label>
+        <input type="file" accept=".json" id="file">
+        
+        <br>
+
+        <!-- Resource Filter -->
+        <label for="button">Resource filter:</label>
+        <button id="resourceFilter">None</button>
+        <span class="leftArrow" id="leftArrow">◀</span>
+        <span class="downArrow" id="downArrow">▼</span>
+        <div class="dropdown" id="resourceDropdown">
+            <ul>
+                <li>None</li>
+                <li>Highest Wood</li>
+                <li>Lowest Wood</li>
+                <li>Highest Stone</li>
+                <li>Lowest Stone</li>
+                <li>Highest Iron</li>
+                <li>Lowest Iron</li>
+                <li>Highest Copper</li>
+                <li>Lowest Copper</li>
+                <li>Highest Coal</li>
+                <li>Lowest Coal</li>
+                <li>Highest Wolframite</li>
+                <li>Lowest Wolframite</li>
+                <li>Highest Earth Token</li>
+                <li>Lowest Earth Token</li>
+            </ul>
+        </div>
+
+        <br>
+
+        <!-- World Size Filter -->
+        <label for="range">World Size:</label>
+        <br>
+        <input type="radio" name="worldSize" id="worldSizeNone" checked>
+        <span>None</span>
+        <br>
+        <input type="radio" name="worldSize" id="worldSizeNum">
+        <input type="range" id="worldSizeFilter" min="1" max="5">
+
+        <br>
+
+        <!-- Resource Amount Filter -->
+        <label for="range">Resource Amount:</label>
+        <br>
+        <input type="radio" name="resourceAmount" id="resourceAmountNone" checked>
+        <span>None</span>
+        <br>
+        <input type="radio" name="resourceAmount" id="resourceAmountNum">
+        <input type="range" id="resourceAmountFilter" min="1" max="5">
+
+        <!-- Table -->
+        <table>
+            <thead>
+                <th>Seed</th>
+                <th>Wood</th>
+                <th>Stone</th>
+                <th>Iron</th>
+                <th>Copper</th>
+                <th>Coal</th>
+                <th>Wolframite</th>
+                <th>World Size</th>
+                <th>Resource Amount</th>
+                <th>Max Earth Token</th>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </body>
+    <script src="index.js" type="module"></script>
+</html>
