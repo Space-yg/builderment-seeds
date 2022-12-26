@@ -1,4 +1,4 @@
 # builderment-seeds
-Upload a JSON file of the seeds data and sort through it!
+Download and upload the JSON file and sort through it!
 
-Her is the link to the website: https://space-yg.github.io/builderment-seeds/
+Here is the link to the website: https://space-yg.github.io/builderment-seeds/
