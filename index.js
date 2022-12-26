@@ -44,7 +44,6 @@ async function upload(event) {
             td.innerHTML = Math.round(lowestET * 1000) / 1000;
             tr.appendChild(td);
             seedData.push(tr);
-            tbody.appendChild(tr);
         }
         Filter();
     }
@@ -52,43 +51,17 @@ async function upload(event) {
 }
 document.getElementById("file").addEventListener("input", upload);
 
-// Dropdown menu
-const leftArrow = document.getElementById("leftArrow");
-const downArrow = document.getElementById("downArrow");
-const resourceDropdown = document.getElementById("resourceDropdown");
-leftArrow.style.visibility = "visible";
-/**
- * @param {PointerEvent} event 
- */
-function dropdown(event) {
-    if (event.target.id === "resourceFilter" || event.target.id === "leftArrow" || event.target.id === "downArrow") {
-        if (leftArrow.style.visibility === "visible") {
-            leftArrow.style.visibility = "hidden";
-            downArrow.style.visibility = "visible";
-            resourceDropdown.style.visibility = "visible";
-        } else {
-            leftArrow.style.visibility = "visible";
-            downArrow.style.visibility = "hidden";
-            resourceDropdown.style.visibility = "hidden";
-        }
-    } else {
-        leftArrow.style.visibility = "visible";
-        downArrow.style.visibility = "hidden";
-        resourceDropdown.style.visibility = "hidden";
-    }
-}
-document.body.addEventListener("click", dropdown);
-
 /**
  * Filter
- * @param {String} resourceFilter button.innerHTML
+ * @param {String} resourceFilter (select.selectedIndex) ? `${select.options[select.selectedIndex].parentElement.label} ${select.options[select.selectedIndex].text}` : "None"
  * @param {String} worldSize worldSize.value
+ * @param {String} resourceAmount resourceAmount.value
  */
 function filter(resourceFilter, worldSize, resourceAmount) {
     // Add all data to row
     var rows = [];
     for (let i = 0; i < seedData.length; i++) rows.push(seedData[i]);
-    
+
     // Filter World Size
     var size;
     if (worldSize === "1") size = 50;
@@ -96,8 +69,7 @@ function filter(resourceFilter, worldSize, resourceAmount) {
     else if (worldSize === "3") size = 100;
     else if (worldSize === "4") size = 150;
     else if (worldSize === "5") size = 200;
-    else size = "None";
-    if (size !== "None") rows = rows.filter(row => parseInt(row.cells[7].innerHTML) === size);
+    if (size !== undefined) rows = rows.filter(row => parseInt(row.cells[7].innerHTML) === size);
 
     // Filter Resources Amount
     var Amount;
@@ -106,8 +78,7 @@ function filter(resourceFilter, worldSize, resourceAmount) {
     else if (resourceAmount === "3") Amount = 100;
     else if (resourceAmount === "4") Amount = 150;
     else if (resourceAmount === "5") Amount = 200;
-    else Amount = "None";
-    if (Amount !== "None") rows = rows.filter(row => parseInt(row.cells[8].innerHTML) === Amount);
+    if (Amount !== undefined) rows = rows.filter(row => parseInt(row.cells[8].innerHTML) === Amount);
 
     // Filter Resource
     var column;
@@ -120,37 +91,31 @@ function filter(resourceFilter, worldSize, resourceAmount) {
     else if (resource[1] === "Wolframite") column = 6;
     else if (resource[1] === "Earth") column = 9;
     if (resource[0] === "Highest") rows.sort(function (a, b) { return b.cells[column].innerHTML - a.cells[column].innerHTML; });
-    else if (resource[0] === "Lowest") rows.sort(function (a, b) { return a.cells[column].innerHTML - b.cells[column].innerHTML; })
-    tbody.innerHTML = "";
-    for (let i = 0; i < rows.length; i++) tbody.appendChild(rows[i]);
+    else if (resource[0] === "Lowest") rows.sort(function (a, b) { return a.cells[column].innerHTML - b.cells[column].innerHTML; });
+    
+    // Put data in table
+    display(rows);
 }
 
 // Initials
-const button = document.getElementsByTagName("button")[0];
+const select = document.getElementById("resourceFilter");
 const worldSize = document.getElementById("worldSizeFilter");
 const resourceAmount = document.getElementById("resourceAmountFilter");
 
 // Filter function
 function Filter() {
+    var resource = (select.selectedIndex) ? `${select.options[select.selectedIndex].parentElement.label} ${select.options[select.selectedIndex].text}` : "None";
     if (document.getElementById("worldSizeNone").checked) {
-        if (document.getElementById("resourceAmountNone").checked) filter(button.innerHTML, "None", "None");
-        else filter(button.innerHTML, "None", resourceAmount.value);
+        if (document.getElementById("resourceAmountNone").checked) filter(resource, "None", "None");
+        else filter(resource, "None", resourceAmount.value);
     } else {
-        if (document.getElementById("resourceAmountNone").checked) filter(button.innerHTML, worldSize.value, "None");
-        else filter(button.innerHTML, worldSize.value, resourceAmount.value);
+        if (document.getElementById("resourceAmountNone").checked) filter(resource, worldSize.value, "None");
+        else filter(resource, worldSize.value, resourceAmount.value);
     }
 }
 
 // Filter Resources
-const resourcesDropdown = resourceDropdown.children[0].children;
-/**
- * @param {PointerEvent} event
- */
-function resourceFilter(event) {
-    button.innerHTML = event.target.innerHTML;
-    Filter();
-}
-for (let i = 0; i < resourcesDropdown.length; i++) resourcesDropdown[i].addEventListener("click", resourceFilter);
+select.addEventListener("change", Filter);
 
 // World Size Filter
 worldSize.addEventListener("mouseup", Filter);
@@ -161,3 +126,22 @@ document.getElementById("worldSizeNum").addEventListener("click", Filter);
 resourceAmount.addEventListener("mouseup", Filter);
 document.getElementById("resourceAmountNone").addEventListener("click", Filter);
 document.getElementById("resourceAmountNum").addEventListener("click", Filter);
+
+// Display data in table
+function display(data, showLimit = 50) {
+    tbody.innerHTML = "";
+    for (let i = 0; i < data.length && i < showLimit; i++) tbody.appendChild(data[i]);
+    if (data.length >= showLimit) {
+        const tr = document.createElement("tr");
+        const th = document.createElement("th");
+        const button = document.createElement("button");
+        button.setAttribute("class", "showMore");
+        button.addEventListener("click", () => { display(data, showLimit + 50); });
+        button.innerHTML = "Show more";
+        th.setAttribute("colspan", "10");
+        th.style.textAlign = "center";
+        th.appendChild(button);
+        tr.appendChild(th);
+        tbody.appendChild(tr);
+    }
+}

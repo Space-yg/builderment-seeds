@@ -7,74 +7,22 @@ body {
 
 /* Upload Button */
 label[for="file"] {
-    background-color: lightgray;
+    /* Position */
     padding: 5px;
     border-radius: 7px;
+    /* Font */
+    background-color: lightgray;
 }
 input[type="file"] {
+    /* Position */
     visibility: hidden;
 }
 
-/* Button */
-button {
+/* Select */
+select {
     /* Position */
-    height: 25px;
-    width: 175px;
-    margin: 0 0 10px 0;
-    /* Font */
-    font-size: 18px;
-    background-color: white;
-    border-radius: 5px;
-    text-align: left;
-}
-button:hover, span.downArrow, span.leftArrow {
-    /* Mouse */
-    cursor: pointer;
-}
-
-/* Dropdown */
-div.dropdown {
-    /* Position */
-    position: absolute;
-    width: 175px;
-    left: 124px;
-    top: 55px;
-    /* Other */
-    background-color: white;
-    visibility: hidden;
-}
-div.dropdown ul {
-    /* Position */
-    padding: 0;
-    margin: 0;
-}
-div.dropdown ul li {
-    /* Position */
-    padding: 0;
-    margin: 0;
-    padding: 2px 7px;
-    border: 1px solid;
-    /* Font */
-    list-style: none;
-}
-div.dropdown ul li:hover {
-    /* Other */
-    background-color: wheat;
-    cursor: pointer;
-}
-span.leftArrow {
-    /* Position */
-    margin: 0 0 0 -27px;
-}
-span.downArrow {
-    /* Position */
-    margin: 0 0 0 -20px;
-    /* Other */
-    visibility: hidden;
-}
-span.leftArrow, span.downArrow {
-    /* Other */
-    cursor: pointer;
+    padding: 5px;
+    border-radius: 7px;
 }
 
 /* Table */
@@ -94,4 +42,20 @@ th, td {
 tbody th {
     /* Font */
     text-align: left;
+}
+
+/* Show More Button */
+th button {
+    /* Position */
+    margin: 0;
+    width: auto;
+    border: 0;
+    /* Font */
+    font-size: 18px;
+    background-color: transparent;
+    color: blue;
+}
+button:hover {
+    /* Font */
+    cursor: pointer;
 }

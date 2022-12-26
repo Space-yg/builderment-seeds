@@ -9,31 +9,30 @@
         <input type="file" accept=".json" id="file">
         
         <br>
-
-        <!-- Resource Filter -->
-        <label for="button">Resource filter:</label>
-        <button id="resourceFilter">None</button>
-        <span class="leftArrow" id="leftArrow">◀</span>
-        <span class="downArrow" id="downArrow">▼</span>
-        <div class="dropdown" id="resourceDropdown">
-            <ul>
-                <li>None</li>
-                <li>Highest Wood</li>
-                <li>Lowest Wood</li>
-                <li>Highest Stone</li>
-                <li>Lowest Stone</li>
-                <li>Highest Iron</li>
-                <li>Lowest Iron</li>
-                <li>Highest Copper</li>
-                <li>Lowest Copper</li>
-                <li>Highest Coal</li>
-                <li>Lowest Coal</li>
-                <li>Highest Wolframite</li>
-                <li>Lowest Wolframite</li>
-                <li>Highest Earth Token</li>
-                <li>Lowest Earth Token</li>
-            </ul>
-        </div>
+        
+        <!-- Drop Down Menu -->
+        <label for="select">Resource filter:</label>
+        <select name="resourceFilter" id="resourceFilter">
+            <option>None</option>
+            <optgroup label="Highest">
+                <option>Wood</option>
+                <option>Stone</option>
+                <option>Iron</option>
+                <option>Copper</option>
+                <option>Coal</option>
+                <option>Wolframite</option>
+                <option>Earth Token</option>
+            </optgroup>
+            <optgroup label="Lowest">
+                <option>Wood</option>
+                <option>Stone</option>
+                <option>Iron</option>
+                <option>Copper</option>
+                <option>Coal</option>
+                <option>Wolframite</option>
+                <option>Earth Token</option>
+            </optgroup>
+        </select>
 
         <br>
 
@@ -74,5 +73,5 @@
             <tbody></tbody>
         </table>
     </body>
-    <script src="index.js" type="module"></script>
+    <script src="index.js"></script>
 </html>
