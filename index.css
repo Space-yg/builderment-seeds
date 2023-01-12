@@ -5,24 +5,17 @@ body {
     color: black;
 }
 
-/* Upload Button */
-label[for="file"] {
-    /* Position */
-    padding: 5px;
-    border-radius: 7px;
-    /* Font */
-    background-color: lightgray;
-}
-input[type="file"] {
-    /* Position */
-    visibility: hidden;
-}
-
 /* Select */
 select {
     /* Position */
+    margin: 2px 0;
     padding: 5px;
     border-radius: 7px;
+}
+
+/* Input Amount */
+input[type="number"], select[name="order"] {
+    visibility: hidden;
 }
 
 /* Table */
@@ -53,7 +46,7 @@ th button {
     /* Font */
     font-size: 18px;
     background-color: transparent;
-    color: blue;
+    color: rgb(153, 0, 255);
 }
 button:hover {
     /* Font */

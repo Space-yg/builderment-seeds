@@ -4,34 +4,36 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
-        <!-- Upload Button -->
-        <label for="file">Upload File!</label>
-        <input type="file" accept=".json" id="file">
-        
-        <br>
-        
-        <!-- Drop Down Menu -->
-        <label for="select">Resource filter:</label>
+        <!-- Resource Filter -->
+        <label for="resourceFilter">Resource:</label>
         <select name="resourceFilter" id="resourceFilter">
             <option>None</option>
-            <optgroup label="Highest">
-                <option>Wood</option>
-                <option>Stone</option>
-                <option>Iron</option>
-                <option>Copper</option>
-                <option>Coal</option>
-                <option>Wolframite</option>
-                <option>Earth Token</option>
-            </optgroup>
-            <optgroup label="Lowest">
-                <option>Wood</option>
-                <option>Stone</option>
-                <option>Iron</option>
-                <option>Copper</option>
-                <option>Coal</option>
-                <option>Wolframite</option>
-                <option>Earth Token</option>
-            </optgroup>
+            <option>Wood</option>
+            <option>Stone</option>
+            <option>Iron</option>
+            <option>Copper</option>
+            <option>Coal</option>
+            <option>Wolframite</option>
+            <option>Earth Token</option>
+        </select>
+
+        <br>
+
+        <!-- Amount Filter -->
+        <label for="amountFilter">Filter:</label>
+        <select name="amountFilter" id="amountFilter">
+            <option>Max</option>
+            <option>Min</option>
+            <option>></option>
+            <option>≥</option>
+            <option>=</option>
+            <option>≤</option>
+            <option><</option>
+        </select>
+        <input type="number" min="0" placeholder="Amount" id="amount">
+        <select name="order" id="order">
+            <option>Ascending</option>
+            <option>Descending</option>
         </select>
 
         <br>
@@ -68,10 +70,10 @@
                 <th>Wolframite</th>
                 <th>World Size</th>
                 <th>Resource Amount</th>
-                <th>Max Earth Token</th>
+                <th>Resource</th>
             </thead>
             <tbody></tbody>
         </table>
     </body>
-    <script src="index.js"></script>
+    <script src="index.js" type="module"></script>
 </html>
