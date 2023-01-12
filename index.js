@@ -1,4 +1,4 @@
-import * as s from "./seeds2.json" assert {type: "json"};
+import * as s from "./seeds.json" assert {type: "json"};
 
 // Test any functionality
 function test() { console.log("Test"); }
