@@ -1,4 +1,7 @@
 import * as s from "./seeds.json" assert {type: "json"};
+console.log(s);
+console.log(s.default);
+console.log(s.default.seeds);
 
 // Initials
 const tbody = document.getElementsByTagName("tbody")[0];
@@ -13,17 +16,8 @@ const worldSizeCheck = document.getElementById("worldSizeCheck");
 // World Size Filter
 const resourceAmount = document.getElementById("resourceAmountFilter");
 const resourceAmountCheck = document.getElementById("resourceAmountCheck");
-// Other
-const ET = {
-    wd: 7242,
-    s: 5028,
-    i: 7932,
-    cp: 5315,
-    cl: 6954,
-    wl: 3520
-};
+
 const seeds = s.default.seeds;
-console.log(seeds);
 /** @type {HTMLTableRowElement[]} */
 var seedData = [];
 
