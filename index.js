@@ -1,7 +1,4 @@
 import * as s from "./seeds.json" assert {type: "json"};
-console.log(s);
-console.log(s.default);
-console.log(s.default.seeds);
 
 // Initials
 const tbody = document.getElementsByTagName("tbody")[0];
