@@ -23,6 +23,7 @@ const ET = {
     wl: 3520
 };
 const seeds = s.default.seeds;
+console.log(seeds);
 /** @type {HTMLTableRowElement[]} */
 var seedData = [];
 
