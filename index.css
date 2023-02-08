@@ -14,7 +14,7 @@ body {
     margin: 0;
     padding: 0;
     /* Font */
-    font-family: troika;
+    font-family: troika, Arial, Helvetica, sans-serif;
     font-size: 18px;
     color: black;
     background-color: #d9ffd9;
@@ -22,7 +22,7 @@ body {
 /* p */
 p {
     /* Font */
-    font-family: Oswald;
+    font-family: Oswald, Arial, Helvetica, sans-serif;
 }
 /* Select */
 select {
@@ -30,7 +30,7 @@ select {
     margin: 2px 0;
     padding: 5px;
     border-radius: 7px;
-    font-family: troika;
+    font-family: troika, Arial, Helvetica, sans-serif;
 }
 /* Button */
 button:hover { cursor: pointer; }
@@ -56,7 +56,7 @@ div.collection input[type="checkbox"] {
 }
 /* Input Amount */
 div.collection input[type="number"], div.collection select[name="order"] {
-    font-family: troika;
+    font-family: troika, Arial, Helvetica, sans-serif;
     display: none;
 }
 
@@ -99,7 +99,7 @@ table.data tbody th button {
     width: auto;
     border: 0;
     /* Font */
-    font-family: troika;
+    font-family: troika, Arial, Helvetica, sans-serif;
     font-size: 18px;
     background-color: transparent;
     color: rgb(153, 0, 255);
