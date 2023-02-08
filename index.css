@@ -1,11 +1,11 @@
 /** Fonts **/
 @font-face {
     font-family: Oswald;
-    src: url(./font/Oswald-Regular.ttf);
+    src: url(./fonts/Oswald-Regular.ttf);
 }
 @font-face {
     font-family: troika;
-    src: url(./font/troika.otf);
+    src: url(./fonts/troika.otf);
 }
 
 /** Organization **/
