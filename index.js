@@ -1,8 +1,12 @@
 import * as s from "./seeds.json" assert {type: "json"};
 
 // Initials
+const seeds = s.default.seeds;
 const tbody = document.getElementsByTagName("tbody")[0];
 const resourceFilter = document.getElementById("resourceFilter");
+// Loading and White background
+const whiteBackground = document.getElementsByClassName("whiteBackground").item(0);
+const loading = document.getElementsByClassName("lds-spinner").item(0);
 // Amount Filter
 const amountFilter = document.getElementById("amountFilter");
 const amount = document.getElementById("amount");
@@ -14,18 +18,27 @@ const worldSizeCheck = document.getElementById("worldSizeCheck");
 const resourceAmount = document.getElementById("resourceAmountFilter");
 const resourceAmountCheck = document.getElementById("resourceAmountCheck");
 
-const seeds = s.default.seeds;
 /** @type {HTMLTableRowElement[]} */
 var seedData = [];
 
 // Test any functionality
 function test() { console.log("Test"); }
 
+/**
+ * Copy text
+ * @param {PointerEvent} event 
+ */
+function copy(event) {
+    // Copy
+    navigator.clipboard.writeText(event.target.innerHTML);
+}
+
 // Put data in table
-const start = performance.now();
 seeds.forEach(seed => {
     const tr = document.createElement("tr");
     const seedTag = document.createElement("th");
+    seedTag.addEventListener("click", copy);
+    seedTag.title = "Copy";
     const seedName = Object.keys(seed)[0];
     seedTag.innerHTML = seedName;
     tr.appendChild(seedTag);
@@ -37,11 +50,11 @@ seeds.forEach(seed => {
     }
     // World Size
     const td1 = document.createElement("td");
-    td1.innerHTML = seed[seedName]["ws"];
+    td1.innerHTML = (seed[seedName]["ws"] === 1) ? "50" : (seed[seedName]["ws"] === 2) ? "75" : (seed[seedName]["ws"] === 3) ? "100" : (seed[seedName]["ws"] === 4) ? "150" : "200";
     tr.appendChild(td1);
     // Resource Amount
     const td2 = document.createElement("td");
-    td2.innerHTML = seed[seedName]["r"];
+    td2.innerHTML = (seed[seedName]["r"] === 1) ? "50" : (seed[seedName]["r"] === 2) ? "75" : (seed[seedName]["r"] === 3) ? "100" : (seed[seedName]["r"] === 4) ? "150" : "200";
     tr.appendChild(td2);
     // Resource
     const td3 = document.createElement("td");
@@ -49,8 +62,6 @@ seeds.forEach(seed => {
     tr.appendChild(td3);
     seedData.push(tr);
 });
-const end = performance.now();
-console.log(end - start);
 
 /**
  * Display data in table
@@ -104,57 +115,39 @@ function filter(resourceFilter, worldSize, resourceAmount) {
     if (Amount !== undefined) rows = rows.filter(row => parseInt(row.cells[8].innerHTML) === Amount);
     
     // Filter Resource
-    var column;
-    if (resourceFilter[0] === "Wood") column = 1;
-    else if (resourceFilter[0] === "Stone") column = 2;
-    else if (resourceFilter[0] === "Iron") column = 3;
-    else if (resourceFilter[0] === "Copper") column = 4;
-    else if (resourceFilter[0] === "Coal") column = 5;
-    else if (resourceFilter[0] === "Wolframite") column = 6;
-    else column = 9;
-    if (resourceFilter[1] === "Max") rows.sort(function (a, b) { return b.cells[column].innerHTML - a.cells[column].innerHTML; });
-    else if (resourceFilter[1] === "Min") rows.sort(function (a, b) { return a.cells[column].innerHTML - b.cells[column].innerHTML; });
-    else if (resourceFilter[1] === ">") rows = rows.filter(row => Number(row.cells[column].innerHTML) > resourceFilter[2]);
-    else if (resourceFilter[1] === "≥") rows = rows.filter(row => Number(row.cells[column].innerHTML) >= resourceFilter[2]);
-    else if (resourceFilter[1] === "=") rows = rows.filter(row => Number(row.cells[column].innerHTML) == resourceFilter[2]);
-    else if (resourceFilter[1] === "≤") rows = rows.filter(row => Number(row.cells[column].innerHTML) <= resourceFilter[2]);
-    else if (resourceFilter[1] === "<") rows = rows.filter(row => Number(row.cells[column].innerHTML) < resourceFilter[2]);
-    if (resourceFilter[3] === "Descending") rows.sort(function (a, b) { return b.cells[column].innerHTML - a.cells[column].innerHTML; });
-    else if (resourceFilter[3] === "Ascending") rows.sort(function (a, b) { return a.cells[column].innerHTML - b.cells[column].innerHTML; });
+    if (resourceFilter[1] === "Max") rows.sort((a, b) => { return b.cells[9].innerHTML - a.cells[9].innerHTML; });
+    else if (resourceFilter[1] === "Min") rows.sort((a, b) => { return a.cells[9].innerHTML - b.cells[9].innerHTML; });
+    else if (resourceFilter[1] === ">") rows = rows.filter(row => Number(row.cells[9].innerHTML) > resourceFilter[2]);
+    else if (resourceFilter[1] === "≥") rows = rows.filter(row => Number(row.cells[9].innerHTML) >= resourceFilter[2]);
+    else if (resourceFilter[1] === "=") rows = rows.filter(row => Number(row.cells[9].innerHTML) == resourceFilter[2]);
+    else if (resourceFilter[1] === "≤") rows = rows.filter(row => Number(row.cells[9].innerHTML) <= resourceFilter[2]);
+    else if (resourceFilter[1] === "<") rows = rows.filter(row => Number(row.cells[9].innerHTML) < resourceFilter[2]);
+    if (resourceFilter[3] === "Descending") rows.sort((a, b) => { return b.cells[9].innerHTML - a.cells[9].innerHTML; });
+    else if (resourceFilter[3] === "Ascending") rows.sort((a, b) => { return a.cells[9].innerHTML - b.cells[9].innerHTML; });
+
     // Put data in table
-    display(rows);
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) display(rows, 100);
+    else display(rows);
 }
 
 // Filter function
 function Filter() {
-    // [Resource, ">" || "≥" || "=" || "≤" || "<", Amount, "Ascending" || "Descending"] or [Resource, "Max" || "Min"] or ["None"]
-    var resource = (resourceFilter.selectedIndex) ? (amountFilter.selectedIndex >= 2) ? [resourceFilter.options[resourceFilter.selectedIndex].text, amountFilter.options[amountFilter.selectedIndex].text, Number(amount.value), order.value] : [resourceFilter.options[resourceFilter.selectedIndex].text, amountFilter.options[amountFilter.selectedIndex].text] : ["None"];
-    if (worldSizeCheck.checked) {
-        if (resourceAmountCheck.checked) filter(resource, worldSize.value, resourceAmount.value);
-        else filter(resource, worldSize.value, "None");
-    } else {
-        if (resourceAmountCheck.checked) filter(resource, "None", resourceAmount.value);
-        else filter(resource, "None", "None");
-    }
+    whiteBackground.style.visibility = "visible";
+    loading.style.visibility = "visible";
+    setTimeout(() => {
+        // [Resource, ">" || "≥" || "=" || "≤" || "<", Amount, "Ascending" || "Descending"] or [Resource, "Max" || "Min"] or ["None"]
+        var resource = (resourceFilter.selectedIndex) ? (amountFilter.selectedIndex >= 2) ? [resourceFilter.options[resourceFilter.selectedIndex].text, amountFilter.options[amountFilter.selectedIndex].text, Number(amount.value), order.value] : [resourceFilter.options[resourceFilter.selectedIndex].text, amountFilter.options[amountFilter.selectedIndex].text] : ["None"];
+        if (worldSizeCheck.checked) {
+            if (resourceAmountCheck.checked) filter(resource, worldSize.value, resourceAmount.value);
+            else filter(resource, worldSize.value, "None");
+        } else {
+            if (resourceAmountCheck.checked) filter(resource, "None", resourceAmount.value);
+            else filter(resource, "None", "None");
+        }
+        whiteBackground.style.visibility = "hidden";
+        loading.style.visibility = "hidden";
+    }, 10);
 }
-
-function calculateResources() {
-    console.log();
-    if (Item.items[resourceFilter.value] !== undefined) {
-        /** @type {Item} */
-        const item = Item.items[resourceFilter.value];
-        seedData.forEach(tr => tr.children.item(9).innerHTML = Math.round(item.getMaxResourceAmountInSeed({
-            woodLog: parseInt(tr.children.item(1).innerHTML),
-            stone: parseInt(tr.children.item(2).innerHTML),
-            ironOre: parseInt(tr.children.item(3).innerHTML),
-            copperOre: parseInt(tr.children.item(4).innerHTML),
-            coal: parseInt(tr.children.item(5).innerHTML),
-            wolframite: parseInt(tr.children.item(6).innerHTML)
-        }) * 1000) / 1000);
-    } else seedData.forEach(tr => tr.children.item(9).innerHTML = "0");
-    Filter();
-}
-resourceFilter.addEventListener("change", calculateResources);
 // Amount Filter
 amountFilter.addEventListener("change", Filter);
 amount.addEventListener("change", Filter);
@@ -167,6 +160,29 @@ resourceAmount.addEventListener("mouseup", Filter);
 resourceAmountCheck.addEventListener("click", Filter);
 Filter();
 
+// Calculate the resources
+function calculateResources() {
+    whiteBackground.style.visibility = "visible";
+    loading.style.visibility = "visible";
+    setTimeout(() => {
+        if (Item.items[resourceFilter.value] !== undefined) {
+            /** @type {Item} */
+            const item = Item.items[resourceFilter.value];
+            seedData.forEach(tr => tr.children.item(9).innerHTML = Math.round(item.getMaxResourceAmountInSeed({
+                woodLog: parseInt(tr.children.item(1).innerHTML),
+                stone: parseInt(tr.children.item(2).innerHTML),
+                ironOre: parseInt(tr.children.item(3).innerHTML),
+                copperOre: parseInt(tr.children.item(4).innerHTML),
+                coal: parseInt(tr.children.item(5).innerHTML),
+                wolframite: parseInt(tr.children.item(6).innerHTML)
+            }) * 1000) / 1000);
+        } else seedData.forEach(tr => tr.children.item(9).innerHTML = "0");
+    }, 10);
+    Filter();
+}
+resourceFilter.addEventListener("change", calculateResources);
+
+// Show filter options
 function amountFunction() {
     if (amountFilter.selectedIndex >= 2) {
         amount.style.display = "inline-block";

@@ -4,114 +4,132 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
-        <!-- Resource Filter -->
-        <label for="resourceFilter">Resource:</label>
-        <select name="resourceFilter" id="resourceFilter">
-            <option>None</option>
-            <optgroup label="Raw Resources">
-                <option>Wood Log</option>
-                <option>Stone</option>
-                <option>Iron Ore</option>
-                <option>Copper Ore</option>
-                <option>Coal</option>
-                <option>Wolframite</option>
-            </optgroup>
-            <option>Atomic Locator</option>
-            <option>Battery</option>
-            <option>Carbon Fiber</option>
-            <option>Computer</option>
-            <option>Concrete</option>
-            <option>Condenser Lens</option>
-            <option>Copper Ingot</option>
-            <option>Copper Wire</option>
-            <option>Coupler</option>
-            <option>Earth Token</option>
-            <option>Electric Motor</option>
-            <option>Electromagnet</option>
-            <option>Electron Microscope</option>
-            <option>Energy Cube</option>
-            <option>Glass</option>
-            <option>Graphite</option>
-            <option>Gyroscope</option>
-            <option>Heat Sink</option>
-            <option>Industrial Frame</option>
-            <option>Iron Gear</option>
-            <option>Iron Ingot</option>
-            <option>Iron Plating</option>
-            <option>Logic Circuit</option>
-            <option>Magnetic Field Generator</option>
-            <option>Matter Compressor</option>
-            <option>Matter Duplicator</option>
-            <option>Metal Frame</option>
-            <option>Nano Wire</option>
-            <option>Particle Glue</option>
-            <option>Quantum Entangler</option>
-            <option>Rotor</option>
-            <option>Sand</option>
-            <option>Steel</option>
-            <option>Steel Rod</option>
-            <option>Silicon</option>
-            <option>Tungsten Carbide</option>
-            <option>Tungsten Ore</option>
-            <option>Stabilizer</option>
-            <option>Super Computer</option>
-            <option>Tank</option>
-            <option>Turbocharge</option>
-            <option>Wood Frame</option>
-            <option>Wood Plank</option>
-        </select>
+        <!-- Loading Animation -->
+        <div class="whiteBackground"></div>
+        <div class="lds-spinner"><div></div><div></div><div></div><div>
+        </div><div></div><div></div><div></div><div></div><div></div><div>
+        </div><div></div><div></div></div>
 
-        <br>
+        <div class="collection">
+            <p>
+                Hello! Welcome to the Builderment seeds! Here you can
+                search for any seed to want! This calculator is made by
+                Space.yg with the help of Human-Crow.
+            </p>
+        </div>
 
-        <!-- Amount Filter -->
-        <label for="amountFilter">Filter:</label>
-        <select name="amountFilter" id="amountFilter">
-            <option>Max</option>
-            <option>Min</option>
-            <option>></option>
-            <option>≥</option>
-            <option>=</option>
-            <option>≤</option>
-            <option><</option>
-        </select>
-        <input type="number" min="0" placeholder="Amount" id="amount">
-        <select name="order" id="order">
-            <option>Ascending</option>
-            <option>Descending</option>
-        </select>
-
-        <br>
-
-        <!-- World Size Filter -->
-        <input type="checkbox" name="worldSize" id="worldSizeCheck">
-        <label for="range">World Size:</label>
-        <input type="range" id="worldSizeFilter" min="1" max="5">
-
-        <br>
-
-        <!-- Resource Amount Filter -->
-        <input type="checkbox" name="resourceAmount" id="resourceAmountCheck">
-        <label for="range">Resource Amount:</label>
-        <input type="range" id="resourceAmountFilter" min="1" max="5">
-
-        <!-- Table -->
-        <table>
-            <thead>
-                <th>Seed</th>
-                <th>Wood Log</th>
-                <th>Stone</th>
-                <th>Iron Ore</th>
-                <th>Copper Ore</th>
-                <th>Coal</th>
-                <th>Wolframite</th>
-                <th>World Size</th>
-                <th>Resource Amount</th>
-                <th>Resource</th>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div class="collection">
+            <!-- Resource Filter -->
+            <label for="resourceFilter">Resource:</label>
+            <select name="resourceFilter" id="resourceFilter">
+                <option>None</option>
+                <optgroup label="Raw Resources">
+                    <option>Wood Log</option>
+                    <option>Stone</option>
+                    <option>Iron Ore</option>
+                    <option>Copper Ore</option>
+                    <option>Coal</option>
+                    <option>Wolframite</option>
+                </optgroup>
+                <option>Atomic Locator</option>
+                <option>Battery</option>
+                <option>Carbon Fiber</option>
+                <option>Computer</option>
+                <option>Concrete</option>
+                <option>Condenser Lens</option>
+                <option>Copper Ingot</option>
+                <option>Copper Wire</option>
+                <option>Coupler</option>
+                <option>Earth Token</option>
+                <option>Electric Motor</option>
+                <option>Electromagnet</option>
+                <option>Electron Microscope</option>
+                <option>Energy Cube</option>
+                <option>Glass</option>
+                <option>Graphite</option>
+                <option>Gyroscope</option>
+                <option>Heat Sink</option>
+                <option>Industrial Frame</option>
+                <option>Iron Gear</option>
+                <option>Iron Ingot</option>
+                <option>Iron Plating</option>
+                <option>Logic Circuit</option>
+                <option>Magnetic Field Generator</option>
+                <option>Matter Compressor</option>
+                <option>Matter Duplicator</option>
+                <option>Metal Frame</option>
+                <option>Nano Wire</option>
+                <option>Particle Glue</option>
+                <option>Quantum Entangler</option>
+                <option>Rotor</option>
+                <option>Sand</option>
+                <option>Steel</option>
+                <option>Steel Rod</option>
+                <option>Silicon</option>
+                <option>Tungsten Carbide</option>
+                <option>Tungsten Ore</option>
+                <option>Stabilizer</option>
+                <option>Super Computer</option>
+                <option>Tank</option>
+                <option>Turbocharge</option>
+                <option>Wood Frame</option>
+                <option>Wood Plank</option>
+            </select>
+    
+            <br>
+    
+            <!-- Amount Filter -->
+            <label for="amountFilter">Filter:</label>
+            <select name="amountFilter" id="amountFilter">
+                <option>Max</option>
+                <option>Min</option>
+                <option>></option>
+                <option>≥</option>
+                <option>=</option>
+                <option>≤</option>
+                <option><</option>
+            </select>
+            <input type="number" min="0" placeholder="Amount" id="amount">
+            <select name="order" id="order">
+                <option>Ascending</option>
+                <option>Descending</option>
+            </select>
+    
+            <br>
+    
+            <!-- World Size Filter -->
+            <input type="checkbox" name="worldSize" id="worldSizeCheck">
+            <label for="range">World Size:</label>
+            <input type="range" id="worldSizeFilter" min="1" max="5">
+    
+            <br>
+    
+            <!-- Resource Amount Filter -->
+            <input type="checkbox" name="resourceAmount" id="resourceAmountCheck">
+            <label for="range">Resource Amount:</label>
+            <input type="range" id="resourceAmountFilter" min="1" max="5">
+        </div>
+        
+        <div class="collection">
+            <!-- Table -->
+            <table class="data">
+                <thead>
+                    <th>Seed</th>
+                    <th>Wood Log</th>
+                    <th>Stone</th>
+                    <th>Iron Ore</th>
+                    <th>Copper Ore</th>
+                    <th>Coal</th>
+                    <th>Wolframite</th>
+                    <th>World Size</th>
+                    <th>Resource Amount</th>
+                    <th>Resource</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </body>
-    <script src="classes.js"></script>
-    <script src="items.js"></script>
+    <script src="../builderment-classes/classes.js"></script>
+    <script src="../builderment-classes/items.js"></script>
     <script src="index.js" type="module"></script>
 </html>
