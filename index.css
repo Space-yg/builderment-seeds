@@ -109,7 +109,7 @@ table.data tbody th button {
 
 @media (pointer:none), (pointer:coarse) {
     /** General **/
-    select {
+    select, input {
         font-size: 24px;
     }
 }
