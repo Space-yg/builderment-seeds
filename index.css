@@ -31,6 +31,8 @@ select {
     padding: 5px;
     border-radius: 7px;
     font-family: troika, Arial, Helvetica, sans-serif;
+    /* Font */
+    color: black;
 }
 /* Button */
 button:hover { cursor: pointer; }
@@ -103,6 +105,13 @@ table.data tbody th button {
     font-size: 18px;
     background-color: transparent;
     color: rgb(153, 0, 255);
+}
+
+@media (pointer:none), (pointer:coarse) {
+    /** General **/
+    select {
+        font-size: 24px;
+    }
 }
 
 /** Loading **/

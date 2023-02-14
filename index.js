@@ -154,10 +154,12 @@ amountFilter.addEventListener("change", Filter);
 amount.addEventListener("change", Filter);
 order.addEventListener("change", Filter);
 // World Size Filter
-worldSize.addEventListener("mouseup", Filter);
+worldSize.addEventListener("mouseup", () => (worldSizeCheck.checked) ? Filter() : "");
+worldSize.addEventListener("touchend", () => (worldSizeCheck.checked) ? Filter() : "");
 worldSizeCheck.addEventListener("click", Filter);
 // Resource Amount
-resourceAmount.addEventListener("mouseup", Filter);
+resourceAmount.addEventListener("mouseup", () => (resourceAmountCheck.checked) ? Filter() : "");
+resourceAmount.addEventListener("touchend", () => (resourceAmountCheck.checked) ? Filter() : "");
 resourceAmountCheck.addEventListener("click", Filter);
 Filter();
 
