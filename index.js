@@ -1,7 +1,8 @@
-import * as s from "./seeds.json" assert {type: "json"};
+let s = await fetch("./seeds.json");
+s = await s.json();
 
 // Initials
-const seeds = s.default.seeds;
+const seeds = s.seeds;
 const tbody = document.getElementsByTagName("tbody")[0];
 const resourceFilter = document.getElementById("resourceFilter");
 // Loading and White background
