@@ -29,10 +29,7 @@ function test() { console.log("Test"); }
  * Copy text
  * @param {PointerEvent} event 
  */
-function copy(event) {
-    // Copy
-    navigator.clipboard.writeText(event.target.innerHTML);
-}
+function copy(event) { navigator.clipboard.writeText(event.target.innerHTML); }
 
 // Put data in table
 seeds.forEach(seed => {
@@ -59,7 +56,13 @@ seeds.forEach(seed => {
     tr.appendChild(td2);
     // Resource
     const td3 = document.createElement("td");
+    td3.title = "0";
     td3.innerHTML = "0";
+    td3.addEventListener("click", (event) => {
+        let temp = event.target.innerHTML;
+        event.target.innerHTML = event.target.title;
+        event.target.title = temp;
+    });
     tr.appendChild(td3);
     seedData.push(tr);
 });
@@ -95,10 +98,10 @@ function display(data, showLimit = 50) {
 */
 function filter(resourceFilter, worldSize, resourceAmount) {
     // Add all data to row
-    var rows = [...seedData];
+    let rows = [...seedData];
     
     // Filter World Size
-    var size;
+    let size;
     if (worldSize === "1") size = 50;
     else if (worldSize === "2") size = 75;
     else if (worldSize === "3") size = 100;
@@ -107,7 +110,7 @@ function filter(resourceFilter, worldSize, resourceAmount) {
     if (size !== undefined) rows = rows.filter(row => parseInt(row.cells[7].innerHTML) === size);
     
     // Filter Resources Amount
-    var Amount;
+    let Amount;
     if (resourceAmount === "1") Amount = 50;
     else if (resourceAmount === "2") Amount = 75;
     else if (resourceAmount === "3") Amount = 100;
@@ -116,15 +119,15 @@ function filter(resourceFilter, worldSize, resourceAmount) {
     if (Amount !== undefined) rows = rows.filter(row => parseInt(row.cells[8].innerHTML) === Amount);
     
     // Filter Resource
-    if (resourceFilter[1] === "Max") rows.sort((a, b) => { return b.cells[9].innerHTML - a.cells[9].innerHTML; });
-    else if (resourceFilter[1] === "Min") rows.sort((a, b) => { return a.cells[9].innerHTML - b.cells[9].innerHTML; });
-    else if (resourceFilter[1] === ">") rows = rows.filter(row => Number(row.cells[9].innerHTML) > resourceFilter[2]);
-    else if (resourceFilter[1] === "≥") rows = rows.filter(row => Number(row.cells[9].innerHTML) >= resourceFilter[2]);
-    else if (resourceFilter[1] === "=") rows = rows.filter(row => Number(row.cells[9].innerHTML) == resourceFilter[2]);
-    else if (resourceFilter[1] === "≤") rows = rows.filter(row => Number(row.cells[9].innerHTML) <= resourceFilter[2]);
-    else if (resourceFilter[1] === "<") rows = rows.filter(row => Number(row.cells[9].innerHTML) < resourceFilter[2]);
-    if (resourceFilter[3] === "Descending") rows.sort((a, b) => { return b.cells[9].innerHTML - a.cells[9].innerHTML; });
-    else if (resourceFilter[3] === "Ascending") rows.sort((a, b) => { return a.cells[9].innerHTML - b.cells[9].innerHTML; });
+    if (resourceFilter[1] === "Max") rows.sort((a, b) => { return (Math.round(a.cells[9].innerHTML * 1000) / 1000 === Number(a.cells[9].innerHTML)) ? (Math.round(b.cells[9].innerHTML * 1000) / 1000 === Number(b.cells[9].innerHTML)) ? b.cells[9].title - a.cells[9].title : b.cells[9].innerHTML - a.cells[9].title : b.cells[9].innerHTML - a.cells[9].innerHTML; });
+    else if (resourceFilter[1] === "Min") rows.sort((a, b) => { return (Math.round(a.cells[9].innerHTML * 1000) / 1000 === Number(a.cells[9].innerHTML)) ? (Math.round(b.cells[9].innerHTML * 1000) / 1000 === Number(b.cells[9].innerHTML)) ? a.cells[9].title - b.cells[9].title : a.cells[9].innerHTML - b.cells[9].title : a.cells[9].innerHTML - b.cells[9].innerHTML; });
+    else if (resourceFilter[1] === ">") rows = rows.filter(row => (Math.round(row.cells[9].innerHTML * 1000) / 1000 === Number(row.cells[9].innerHTML)) ? Number(row.cells[9].title) > resourceFilter[2] : Number(row.cells[9].innerHTML) > resourceFilter[2]);
+    else if (resourceFilter[1] === "≥") rows = rows.filter(row => (Math.round(row.cells[9].innerHTML * 1000) / 1000 === Number(row.cells[9].innerHTML)) ? Number(row.cells[9].title) >= resourceFilter[2] : Number(row.cells[9].innerHTML) >= resourceFilter[2]);
+    else if (resourceFilter[1] === "=") rows = rows.filter(row => (Math.round(row.cells[9].innerHTML * 1000) / 1000 === Number(row.cells[9].innerHTML)) ? Number(row.cells[9].title) == resourceFilter[2] : Number(row.cells[9].innerHTML) == resourceFilter[2]);
+    else if (resourceFilter[1] === "≤") rows = rows.filter(row => (Math.round(row.cells[9].innerHTML * 1000) / 1000 === Number(row.cells[9].innerHTML)) ? Number(row.cells[9].title) <= resourceFilter[2] : Number(row.cells[9].innerHTML) <= resourceFilter[2])
+    else if (resourceFilter[1] === "<") rows = rows.filter(row => (Math.round(row.cells[9].innerHTML * 1000) / 1000 === Number(row.cells[9].innerHTML)) ? Number(row.cells[9].title) < resourceFilter[2] : Number(row.cells[9].innerHTML) < resourceFilter[2]);
+    if (resourceFilter[3] === "Descending") rows.sort((a, b) => { return (Math.round(a.cells[9].innerHTML * 1000) / 1000 === Number(a.cells[9].innerHTML)) ? (Math.round(b.cells[9].innerHTML * 1000) / 1000 === Number(b.cells[9].innerHTML)) ? b.cells[9].title - a.cells[9].title : b.cells[9].innerHTML - a.cells[9].title : b.cells[9].innerHTML - a.cells[9].innerHTML; });
+    else if (resourceFilter[3] === "Ascending") rows.sort((a, b) => { return (Math.round(a.cells[9].innerHTML * 1000) / 1000 === Number(a.cells[9].innerHTML)) ? (Math.round(b.cells[9].innerHTML * 1000) / 1000 === Number(b.cells[9].innerHTML)) ? a.cells[9].title - b.cells[9].title : a.cells[9].innerHTML - b.cells[9].title : a.cells[9].innerHTML - b.cells[9].innerHTML; });
 
     // Put data in table
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) display(rows, 100);
@@ -137,7 +140,7 @@ function Filter() {
     loading.style.visibility = "visible";
     setTimeout(() => {
         // [Resource, ">" || "≥" || "=" || "≤" || "<", Amount, "Ascending" || "Descending"] or [Resource, "Max" || "Min"] or ["None"]
-        var resource = (resourceFilter.selectedIndex) ? (amountFilter.selectedIndex >= 2) ? [resourceFilter.options[resourceFilter.selectedIndex].text, amountFilter.options[amountFilter.selectedIndex].text, Number(amount.value), order.value] : [resourceFilter.options[resourceFilter.selectedIndex].text, amountFilter.options[amountFilter.selectedIndex].text] : ["None"];
+        let resource = (resourceFilter.selectedIndex) ? (amountFilter.selectedIndex >= 2) ? [resourceFilter.options[resourceFilter.selectedIndex].text, amountFilter.options[amountFilter.selectedIndex].text, Number(amount.value), order.value] : [resourceFilter.options[resourceFilter.selectedIndex].text, amountFilter.options[amountFilter.selectedIndex].text] : ["None"];
         if (worldSizeCheck.checked) {
             if (resourceAmountCheck.checked) filter(resource, worldSize.value, resourceAmount.value);
             else filter(resource, worldSize.value, "None");
@@ -171,14 +174,18 @@ function calculateResources() {
         if (Item.items[resourceFilter.value] !== undefined) {
             /** @type {Item} */
             const item = Item.items[resourceFilter.value];
-            seedData.forEach(tr => tr.children.item(9).innerHTML = Math.round(item.getMaxResourceAmountInSeed({
-                woodLog: parseInt(tr.children.item(1).innerHTML),
-                stone: parseInt(tr.children.item(2).innerHTML),
-                ironOre: parseInt(tr.children.item(3).innerHTML),
-                copperOre: parseInt(tr.children.item(4).innerHTML),
-                coal: parseInt(tr.children.item(5).innerHTML),
-                wolframite: parseInt(tr.children.item(6).innerHTML)
-            }) * 1000) / 1000);
+            seedData.forEach(tr => {
+                let resource = item.getMaxResourceAmountInSeed({
+                    woodLog: parseInt(tr.children.item(1).innerHTML),
+                    stone: parseInt(tr.children.item(2).innerHTML),
+                    ironOre: parseInt(tr.children.item(3).innerHTML),
+                    copperOre: parseInt(tr.children.item(4).innerHTML),
+                    coal: parseInt(tr.children.item(5).innerHTML),
+                    wolframite: parseInt(tr.children.item(6).innerHTML)
+                });
+                tr.children.item(9).innerHTML = Math.round(resource * 1000) / 1000;
+                tr.children.item(9).title = Math.round(resource * 1000000) / 1000000;
+            });
         } else seedData.forEach(tr => tr.children.item(9).innerHTML = "0");
     }, 10);
     Filter();

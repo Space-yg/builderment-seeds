@@ -21,6 +21,16 @@ body {
 }
 /* p */
 p {
+    /* Position */
+    margin: 0 0 8px 0;
+    /* Font */
+    font-family: Oswald, Arial, Helvetica, sans-serif;
+}
+ul {
+    /* Position */
+    margin: 0;
+}
+li {
     /* Font */
     font-family: Oswald, Arial, Helvetica, sans-serif;
 }
@@ -94,6 +104,8 @@ table.data tbody th {
 }
 table.data tbody th:last-child { border: 1px solid black; }
 table.data tbody th:hover { cursor: pointer; }
+/* td */
+table.data td:last-child { cursor: pointer; }
 /* Show More Button */
 table.data tbody th button {
     /* Position */
