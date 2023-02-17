@@ -120,6 +120,7 @@
             <input type="checkbox" name="worldSize" id="worldSizeCheck">
             <label for="range">World Size:</label>
             <input type="range" id="worldSizeFilter" min="1" max="5">
+            <span id="worldSizeNumber"></span>
     
             <br>
     
@@ -127,6 +128,7 @@
             <input type="checkbox" name="resourceAmount" id="resourceAmountCheck">
             <label for="range">Resource Amount:</label>
             <input type="range" id="resourceAmountFilter" min="1" max="5">
+            <span id="resourcesNumber"></span>
 
             <!-- Total Results -->
             <p id="totalResults">Total results:</p>
@@ -157,4 +159,83 @@
     <script src="classes.js"></script>
     <script src="items.js"></script>
     <script src="index.js" type="module"></script>
+    <script>
+    var w_slider = document.getElementById("worldSizeFilter");
+    var w_output = document.getElementById("worldSizeNumber");
+    var w_Val = w_slider.value;
+    // Display the default slider percent
+    if(w_Val == "1") {
+       w_output.innerHTML = "50%";
+      }
+    if(w_Val == "2") {
+       w_output.innerHTML = "75%";
+      }
+    if(w_Val == "3") {
+       w_output.innerHTML = "100%";
+      }
+    if(w_Val == "4") {
+       w_output.innerHTML = "150%";
+      }
+    if(w_Val == "5") {
+       w_output.innerHTML = "200%";
+     }
+    // Update the current slider percent
+    w_slider.oninput = function() {
+    w_Val = this.value;
+    if(w_Val == "1") {
+       w_output.innerHTML = "50%";
+      }
+    if(w_Val == "2") {
+       w_output.innerHTML = "75%";
+      }
+    if(w_Val == "3") {
+       w_output.innerHTML = "100%";
+      }
+    if(w_Val == "4") {
+       w_output.innerHTML = "150%";
+      }
+    if(w_Val == "5") {
+       w_output.innerHTML = "200%";
+     }
+    }
+    </script>
+    <script>
+    var r_slider = document.getElementById("resourceAmountFilter");
+    var r_output = document.getElementById("resourcesNumber");
+    var r_Val = r_slider.value;
+    // Display the default slider percent
+    if(r_Val == "1") {
+       r_output.innerHTML = "50%";
+      }
+    if(r_Val == "2") {
+       r_output.innerHTML = "75%";
+      }
+    if(r_Val == "3") {
+       r_output.innerHTML = "100%";
+      }
+    if(r_Val == "4") {
+       r_output.innerHTML = "150%";
+      }
+    if(r_Val == "5") {
+       r_output.innerHTML = "200%";
+     } 
+    // Update the current slider percent        
+    r_slider.oninput = function() {
+    r_Val = this.value;
+    if(r_Val == "1") {
+       r_output.innerHTML = "50%";
+      }
+    if(r_Val == "2") {
+       r_output.innerHTML = "75%";
+      }
+    if(r_Val == "3") {
+       r_output.innerHTML = "100%";
+      }
+    if(r_Val == "4") {
+       r_output.innerHTML = "150%";
+      }
+    if(r_Val == "5") {
+       r_output.innerHTML = "200%";
+     }
+    }
 </html>
