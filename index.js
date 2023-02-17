@@ -17,9 +17,11 @@ const order = document.getElementById("order");
 // World Size Filter
 const worldSize = document.getElementById("worldSizeFilter");
 const worldSizeCheck = document.getElementById("worldSizeCheck");
+const worldSizeRange = document.getElementById("worldSizeRange");
 // World Size Filter
 const resourceAmount = document.getElementById("resourceAmountFilter");
 const resourceAmountCheck = document.getElementById("resourceAmountCheck");
+const resourceAmountRange = document.getElementById("resourceAmountRange");
 // total Results
 const totalResults = document.getElementById("totalResults");
 
@@ -193,10 +195,12 @@ order.addEventListener("change", Filter);
 // World Size Filter
 worldSize.addEventListener("mouseup", () => (worldSizeCheck.checked) ? Filter() : "");
 worldSize.addEventListener("touchend", () => (worldSizeCheck.checked) ? Filter() : "");
+worldSize.addEventListener("input", () => worldSizeRange.innerHTML = (worldSize.value === "1") ? "50%" : (worldSize.value === "2") ? "75%" : (worldSize.value === "3") ? "100%" : (worldSize.value === "4") ? "150%" : "200%");
 worldSizeCheck.addEventListener("click", Filter);
 // Resource Amount
 resourceAmount.addEventListener("mouseup", () => (resourceAmountCheck.checked) ? Filter() : "");
 resourceAmount.addEventListener("touchend", () => (resourceAmountCheck.checked) ? Filter() : "");
+resourceAmount.addEventListener("input", () => resourceAmountRange.innerHTML = (resourceAmount.value === "1") ? "50%" : (resourceAmount.value === "2") ? "75%" : (resourceAmount.value === "3") ? "100%" : (resourceAmount.value === "4") ? "150%" : "200%");
 resourceAmountCheck.addEventListener("click", Filter);
 Filter();
 
