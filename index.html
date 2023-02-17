@@ -1,7 +1,8 @@
 <html>
     <head>
-        <title>Builderment Seeds</title>
         <link rel="stylesheet" href="index.css">
+        <link rel="shortcut icon" href="./Builderment Icon.jpg" type="image/x-icon">
+        <title>Builderment Seeds</title>
     </head>
     <body>
         <!-- Loading Animation -->
@@ -18,8 +19,12 @@
             </p>
             <p>Tips:</p>
             <ul>
-                <li>Click on a seed to copy</li>
-                <li>Click on a data at the resource colum to get an accurate amount</li>
+                <li>Click on a seed to copy.</li>
+                <li>Click on a number at the resource colum to get an accurate amount.</li>
+            </ul>
+            <p>Notes:</p>
+            <ul>
+                <li>When filtering a raw resource, it gets calculated from the raw resource's column. Other resources get calculated from the Resource column.</li>
             </ul>
         </div>
 
@@ -115,7 +120,7 @@
             <input type="checkbox" name="resourceAmount" id="resourceAmountCheck">
             <label for="range">Resource Amount:</label>
             <input type="range" id="resourceAmountFilter" min="1" max="5">
-            
+
             <!-- Total Results -->
             <p id="totalResults">Total results:</p>
         </div>
@@ -138,8 +143,11 @@
                 <tbody></tbody>
             </table>
         </div>
+        <footer>
+            <p>For any inquires, plz text me on discord. My username is <a href="https://discordapp.com/users/710012954736590908">Space.yg#4936</a> <3</p>
+        </footer>
     </body>
-    <script src="classes.js"></script>
-    <script src="items.js"></script>
+    <script src="../builderment-classes/classes.js"></script>
+    <script src="../builderment-classes/items.js"></script>
     <script src="index.js" type="module"></script>
 </html>

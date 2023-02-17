@@ -51,10 +51,21 @@ th, td {
     /* Position */
     border-bottom: 1px solid black;
 }
+/* Footer */
+footer {
+    /* Font */
+    text-align: center;
+    color: gray;
+}
+a {
+    /* Font */
+    color: gray;
+}
 
 /** Filters **/
 /* Div */
 div.collection {
+    /* Position */
     padding: 20px;
     border: solid 1px black;
     border-radius: 20px;
@@ -64,10 +75,12 @@ div.collection {
 }
 /* Checkbox */
 div.collection input[type="checkbox"] {
+    /* Position */
     margin: -1px;
 }
 /* Input Amount */
 div.collection input[type="number"], div.collection select[name="order"] {
+    /* Font */
     font-family: troika, Arial, Helvetica, sans-serif;
     display: none;
 }
@@ -129,6 +142,7 @@ table.data tbody th button {
 /** Loading **/
 /* White background */
 div.whiteBackground {
+    /* Position */
     top: 0;
     width: 100%;
     height: 100%;

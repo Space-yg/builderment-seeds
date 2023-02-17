@@ -131,7 +131,7 @@ function setData(data, showLimit = 50) {
 
 /**
  * Filter
- * @param {["None"] | ["Max" | "Min"] | [">" | "≥" | "=" | "≤" | "<", int, "Ascending" | "Descending"]} resourceFilter [">" || "≥" || "=" || "≤" || "<", Amount, "Ascending" || "Descending"] or ["Max" || "Min"] or ["None"]
+ * @param {["None"] | [String ,"Max" | "Min"] | [String, ">" | "≥" | "=" | "≤" | "<", int, "Ascending" | "Descending"]} resourceFilter [Resource, ">" || "≥" || "=" || "≤" || "<", Amount, "Ascending" || "Descending"] or [Resource, "Max" || "Min"] or ["None"]
  * @param {String} worldSize worldSize.value
  * @param {String} resourceAmount resourceAmount.value
 */
@@ -148,16 +148,17 @@ function filter(resourceFilter, worldSize, resourceAmount) {
     if (!isNaN(amount)) filteredSeeds = filteredSeeds.filter(seed => seed.r === amount);
 
     // Filter Resource
-    (resourceFilter[0] === "None") ? null :
-    (resourceFilter[0] === "Max") ? filteredSeeds.sort((a, b) => {return b.rf - a.rf}) :
-    (resourceFilter[0] === "Min") ? filteredSeeds.sort((a, b) => {return a.rf - b.rf}) :
-    (resourceFilter[0] === ">") ? filteredSeeds = filteredSeeds.filter(seed => seed.rf > resourceFilter[1]) :
-    (resourceFilter[0] === "≥") ? filteredSeeds = filteredSeeds.filter(seed => seed.rf >= resourceFilter[1]) :
-    (resourceFilter[0] === "=") ? filteredSeeds = filteredSeeds.filter(seed => seed.rf === resourceFilter[1]) :
-    (resourceFilter[0] === "≤") ? filteredSeeds = filteredSeeds.filter(seed => seed.rf <= resourceFilter[1]) :
-    (resourceFilter[0] === "<") ? filteredSeeds = filteredSeeds.filter(seed => seed.rf < resourceFilter[1]) : null;
-    (resourceFilter[2] === "Descending") ? filteredSeeds.sort((a, b) => { return b.rf - a.rf}) :
-    (resourceFilter[2] === "Ascending") ? filteredSeeds.sort((a, b) => { return a.rf - b.rf}) : null;
+    let resource = (resourceFilter[0] === "Wood Log") ? "wd" : (resourceFilter[0] === "Stone") ? "s" : (resourceFilter[0] === "Iron Ore") ? "i" : (resourceFilter[0] === "Copper Ore") ? "cp" : (resourceFilter[0] === "Coal") ? "cl" : (resourceFilter[0] === "Wolframite") ? "wl" : "rf";
+    (resourceFilter[1] === "None") ? null :
+    (resourceFilter[1] === "Max") ? filteredSeeds.sort((a, b) => {return b[resource] - a[resource]}) :
+    (resourceFilter[1] === "Min") ? filteredSeeds.sort((a, b) => {return a[resource] - b[resource]}) :
+    (resourceFilter[1] === ">") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] > resourceFilter[2]) :
+    (resourceFilter[1] === "≥") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] >= resourceFilter[2]) :
+    (resourceFilter[1] === "=") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] === resourceFilter[2]) :
+    (resourceFilter[1] === "≤") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] <= resourceFilter[2]) :
+    (resourceFilter[1] === "<") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] < resourceFilter[2]) : null;
+    (resourceFilter[3] === "Descending") ? filteredSeeds.sort((a, b) => { return b[resource] - a[resource]}) :
+    (resourceFilter[3] === "Ascending") ? filteredSeeds.sort((a, b) => { return a[resource] - b[resource]}) : null;
 
     // Total Results
     totalResults.innerHTML = "Total results: " + filteredSeeds.length;
@@ -172,8 +173,8 @@ function Filter() {
     whiteBackground.style.visibility = "visible";
     loading.style.visibility = "visible";
     setTimeout(() => {
-        /** @type {["None"] | ["Max" | "Min"] | [">" | "≥" | "=" | "≤" | "<", int, "Ascending" | "Descending"]} [">" || "≥" || "=" || "≤" || "<", Amount, "Ascending" || "Descending"] or ["Max" || "Min"] or ["None"] */
-        let resource = (resourceFilter.selectedIndex) ? (amountFilter.selectedIndex >= 2) ? [amountFilter.options[amountFilter.selectedIndex].text, Number(amount.value), order.value] : [amountFilter.options[amountFilter.selectedIndex].text] : ["None"];
+        /** @type {["None"] | [String, "Max" | "Min"] | [String, ">" | "≥" | "=" | "≤" | "<", int, "Ascending" | "Descending"]} [Resource, ">" || "≥" || "=" || "≤" || "<", Amount, "Ascending" || "Descending"] or [Resource, "Max" || "Min"] or ["None"] */
+        let resource = (resourceFilter.selectedIndex) ? (amountFilter.selectedIndex >= 2) ? [resourceFilter.value, amountFilter.options[amountFilter.selectedIndex].text, Number(amount.value), order.value] : [resourceFilter.value, amountFilter.options[amountFilter.selectedIndex].text] : ["None"];
         if (worldSizeCheck.checked) {
             if (resourceAmountCheck.checked) filter(resource, worldSize.value, resourceAmount.value);
             else filter(resource, worldSize.value, "None");
