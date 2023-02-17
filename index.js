@@ -1,7 +1,9 @@
+// Get the JSON file
 let s = await fetch("./seeds.json");
 s = await s.json();
 
 // Initials
+/** @type {{sd: string, wd: int, s: int, i: int, cp: int, cl: int, wl: int, ws: int, r: int}[]} */
 const seeds = s.seeds;
 const tbody = document.getElementsByTagName("tbody")[0];
 const resourceFilter = document.getElementById("resourceFilter");
@@ -18,9 +20,10 @@ const worldSizeCheck = document.getElementById("worldSizeCheck");
 // World Size Filter
 const resourceAmount = document.getElementById("resourceAmountFilter");
 const resourceAmountCheck = document.getElementById("resourceAmountCheck");
+// total Results
+const totalResults = document.getElementById("totalResults");
 
-/** @type {HTMLTableRowElement[]} */
-var seedData = [];
+var seedData = [...seeds];
 
 // Test any functionality
 function test() { console.log("Test"); }
@@ -31,107 +34,137 @@ function test() { console.log("Test"); }
  */
 function copy(event) { navigator.clipboard.writeText(event.target.innerHTML); }
 
-// Put data in table
-seeds.forEach(seed => {
+//// Add the resource filter
+// rf is resource filter
+seedData.forEach(seed => seed.rf = 0 );
+
+/**
+ * Display data in table
+ * @param {{sd: String, wd: int, s: int, i: int, cp: int, cl: int, wl: int, ws: int, r: int, rf: Number}[]} seed The seed
+ */
+function addSeedTableRow(seed) {
+    // Make new row
     const tr = document.createElement("tr");
-    const seedTag = document.createElement("th");
-    seedTag.addEventListener("click", copy);
-    seedTag.title = "Copy";
-    const seedName = Object.keys(seed)[0];
-    seedTag.innerHTML = seedName;
-    tr.appendChild(seedTag);
-    // Put Resource data in tr
-    for (const info of ["wd", "s", "i", "cp", "cl", "wl"]) {
-        const infoTag = document.createElement("td");
-        infoTag.innerHTML = seed[seedName][info];
-        tr.appendChild(infoTag);
+    // Add seed
+    const th = document.createElement("th");
+    th.innerHTML = seed.sd;
+    th.title = "Copy";
+    th.addEventListener("click", copy);
+    tr.appendChild(th);
+    // Add resources
+    for (const resource of ["wd", "s", "i", "cp", "cl", "wl"]) {
+        const td = document.createElement("td");
+        td.innerHTML = seed[resource];
+        tr.appendChild(td);
     }
-    // World Size
-    const td1 = document.createElement("td");
-    td1.innerHTML = (seed[seedName]["ws"] === 1) ? "50" : (seed[seedName]["ws"] === 2) ? "75" : (seed[seedName]["ws"] === 3) ? "100" : (seed[seedName]["ws"] === 4) ? "150" : "200";
-    tr.appendChild(td1);
-    // Resource Amount
-    const td2 = document.createElement("td");
-    td2.innerHTML = (seed[seedName]["r"] === 1) ? "50" : (seed[seedName]["r"] === 2) ? "75" : (seed[seedName]["r"] === 3) ? "100" : (seed[seedName]["r"] === 4) ? "150" : "200";
-    tr.appendChild(td2);
-    // Resource
-    const td3 = document.createElement("td");
-    td3.title = "0";
-    td3.innerHTML = "0";
-    td3.addEventListener("click", (event) => {
+    // Add World Size and Resource Amount
+    for (const setting of ["ws", "r"]) {
+        const td = document.createElement("td");
+        td.innerHTML = (seed[setting] === 1) ? 50 : (seed[setting] === 2) ? 75 : (seed[setting] === 3) ? 100 : (seed[setting] === 4) ? 150 : 200;
+        tr.appendChild(td);
+    }
+    // Add Resource Filter
+    const td = document.createElement("td");
+    td.innerHTML = Math.round(seed.rf * 1000) / 1000;
+    td.title = Math.round(seed.rf * 100000) / 100000;
+    td.addEventListener("click", event => {
         let temp = event.target.innerHTML;
         event.target.innerHTML = event.target.title;
         event.target.title = temp;
     });
-    tr.appendChild(td3);
-    seedData.push(tr);
-});
+    tr.appendChild(td);
+    // Add to table
+    tbody.appendChild(tr);
+}
 
 /**
- * Display data in table
- * @param {HTMLTableRowElement[]} data The data of the seeds
+ * Add Show More button
+ * @param {{sd: String, wd: int, s: int, i: int, cp: int, cl: int, wl: int, ws: int, r: int, rf: Number}[]} data The data of the seeds
+ * @param {int} lastIndex The last index of the last seed
+ */
+function addShowMoreButton(data, lastIndex) {
+    const tr = document.createElement("tr");
+    const th = document.createElement("th");
+    const button = document.createElement("button");
+    button.setAttribute("class", "showMore");
+    button.addEventListener("click", () => { addData(data, lastIndex, 50); });
+    button.innerHTML = "Show more";
+    th.setAttribute("colspan", "10");
+    th.style.textAlign = "center";
+    th.appendChild(button);
+    tr.appendChild(th);
+    tbody.appendChild(tr);
+}
+
+/**
+ * Add data to table
+ * @param {{sd: String, wd: int, s: int, i: int, cp: int, cl: int, wl: int, ws: int, r: int, rf: Number}[]} data The data of the seeds
+ * @param {int} lastIndex The last index of the last seed
+ * @param {int} amount The amount MORE to add
+ */
+function addData(data, lastIndex, amount) {
+    // Remove Show More Button
+    tbody.lastChild.remove();
+
+    // Add data to table
+    for (let i = lastIndex; i < Math.min(lastIndex + amount, data.length); i++) addSeedTableRow(data[i]);
+
+    // Add Show More button
+    if (data.length > lastIndex + amount) addShowMoreButton(data, lastIndex + amount);
+}
+
+/**
+ * Reset data in table
+ * @param {{sd: String, wd: int, s: int, i: int, cp: int, cl: int, wl: int, ws: int, r: int, rf: Number}[]} data The data of the seeds
  * @param {int} showLimit The limit of how many seeds to show
  */
-function display(data, showLimit = 50) {
+function setData(data, showLimit = 50) {
+    // Clear All data
     tbody.innerHTML = "";
-    for (let i = 0; i < data.length && i < showLimit; i++) tbody.appendChild(data[i]);
-    if (data.length >= showLimit) {
-        const tr = document.createElement("tr");
-        const th = document.createElement("th");
-        const button = document.createElement("button");
-        button.setAttribute("class", "showMore");
-        button.addEventListener("click", () => { display(data, showLimit + 50); });
-        button.innerHTML = "Show more";
-        th.setAttribute("colspan", "10");
-        th.style.textAlign = "center";
-        th.appendChild(button);
-        tr.appendChild(th);
-        tbody.appendChild(tr);
-    }
+
+    // Add data to table
+    for (let i = 0; i < Math.min(showLimit, data.length); i++) addSeedTableRow(data[i]);
+
+    // Add Show More button
+    if (data.length > showLimit) addShowMoreButton(data, showLimit);
 }
 
 /**
  * Filter
- * @param {String[]} resourceFilter [Resource, ">" || "≥" || "=" || "≤" || "<", Amount, "Ascending" || "Descending"] or [Resource, "Max" || "Min"] or ["None"]
+ * @param {["None"] | ["Max" | "Min"] | [">" | "≥" | "=" | "≤" | "<", int, "Ascending" | "Descending"]} resourceFilter [">" || "≥" || "=" || "≤" || "<", Amount, "Ascending" || "Descending"] or ["Max" || "Min"] or ["None"]
  * @param {String} worldSize worldSize.value
  * @param {String} resourceAmount resourceAmount.value
 */
 function filter(resourceFilter, worldSize, resourceAmount) {
     // Add all data to row
-    let rows = [...seedData];
-    
-    // Filter World Size
-    let size;
-    if (worldSize === "1") size = 50;
-    else if (worldSize === "2") size = 75;
-    else if (worldSize === "3") size = 100;
-    else if (worldSize === "4") size = 150;
-    else if (worldSize === "5") size = 200;
-    if (size !== undefined) rows = rows.filter(row => parseInt(row.cells[7].innerHTML) === size);
-    
-    // Filter Resources Amount
-    let Amount;
-    if (resourceAmount === "1") Amount = 50;
-    else if (resourceAmount === "2") Amount = 75;
-    else if (resourceAmount === "3") Amount = 100;
-    else if (resourceAmount === "4") Amount = 150;
-    else if (resourceAmount === "5") Amount = 200;
-    if (Amount !== undefined) rows = rows.filter(row => parseInt(row.cells[8].innerHTML) === Amount);
-    
-    // Filter Resource
-    if (resourceFilter[1] === "Max") rows.sort((a, b) => { return (Math.round(a.cells[9].innerHTML * 1000) / 1000 === Number(a.cells[9].innerHTML)) ? (Math.round(b.cells[9].innerHTML * 1000) / 1000 === Number(b.cells[9].innerHTML)) ? b.cells[9].title - a.cells[9].title : b.cells[9].innerHTML - a.cells[9].title : b.cells[9].innerHTML - a.cells[9].innerHTML; });
-    else if (resourceFilter[1] === "Min") rows.sort((a, b) => { return (Math.round(a.cells[9].innerHTML * 1000) / 1000 === Number(a.cells[9].innerHTML)) ? (Math.round(b.cells[9].innerHTML * 1000) / 1000 === Number(b.cells[9].innerHTML)) ? a.cells[9].title - b.cells[9].title : a.cells[9].innerHTML - b.cells[9].title : a.cells[9].innerHTML - b.cells[9].innerHTML; });
-    else if (resourceFilter[1] === ">") rows = rows.filter(row => (Math.round(row.cells[9].innerHTML * 1000) / 1000 === Number(row.cells[9].innerHTML)) ? Number(row.cells[9].title) > resourceFilter[2] : Number(row.cells[9].innerHTML) > resourceFilter[2]);
-    else if (resourceFilter[1] === "≥") rows = rows.filter(row => (Math.round(row.cells[9].innerHTML * 1000) / 1000 === Number(row.cells[9].innerHTML)) ? Number(row.cells[9].title) >= resourceFilter[2] : Number(row.cells[9].innerHTML) >= resourceFilter[2]);
-    else if (resourceFilter[1] === "=") rows = rows.filter(row => (Math.round(row.cells[9].innerHTML * 1000) / 1000 === Number(row.cells[9].innerHTML)) ? Number(row.cells[9].title) == resourceFilter[2] : Number(row.cells[9].innerHTML) == resourceFilter[2]);
-    else if (resourceFilter[1] === "≤") rows = rows.filter(row => (Math.round(row.cells[9].innerHTML * 1000) / 1000 === Number(row.cells[9].innerHTML)) ? Number(row.cells[9].title) <= resourceFilter[2] : Number(row.cells[9].innerHTML) <= resourceFilter[2])
-    else if (resourceFilter[1] === "<") rows = rows.filter(row => (Math.round(row.cells[9].innerHTML * 1000) / 1000 === Number(row.cells[9].innerHTML)) ? Number(row.cells[9].title) < resourceFilter[2] : Number(row.cells[9].innerHTML) < resourceFilter[2]);
-    if (resourceFilter[3] === "Descending") rows.sort((a, b) => { return (Math.round(a.cells[9].innerHTML * 1000) / 1000 === Number(a.cells[9].innerHTML)) ? (Math.round(b.cells[9].innerHTML * 1000) / 1000 === Number(b.cells[9].innerHTML)) ? b.cells[9].title - a.cells[9].title : b.cells[9].innerHTML - a.cells[9].title : b.cells[9].innerHTML - a.cells[9].innerHTML; });
-    else if (resourceFilter[3] === "Ascending") rows.sort((a, b) => { return (Math.round(a.cells[9].innerHTML * 1000) / 1000 === Number(a.cells[9].innerHTML)) ? (Math.round(b.cells[9].innerHTML * 1000) / 1000 === Number(b.cells[9].innerHTML)) ? a.cells[9].title - b.cells[9].title : a.cells[9].innerHTML - b.cells[9].title : a.cells[9].innerHTML - b.cells[9].innerHTML; });
+    let filteredSeeds = [...seedData];
 
+    // Filter World Size
+    let size = parseInt(worldSize);
+    if (!isNaN(size)) filteredSeeds = filteredSeeds.filter(seed => {return seed.ws === size});
+
+    // Filter World Size
+    let amount = parseInt(resourceAmount);
+    if (!isNaN(amount)) filteredSeeds = filteredSeeds.filter(seed => seed.r === amount);
+
+    // Filter Resource
+    (resourceFilter[0] === "None") ? null :
+    (resourceFilter[0] === "Max") ? filteredSeeds.sort((a, b) => {return b.rf - a.rf}) :
+    (resourceFilter[0] === "Min") ? filteredSeeds.sort((a, b) => {return a.rf - b.rf}) :
+    (resourceFilter[0] === ">") ? filteredSeeds = filteredSeeds.filter(seed => seed.rf > resourceFilter[1]) :
+    (resourceFilter[0] === "≥") ? filteredSeeds = filteredSeeds.filter(seed => seed.rf >= resourceFilter[1]) :
+    (resourceFilter[0] === "=") ? filteredSeeds = filteredSeeds.filter(seed => seed.rf === resourceFilter[1]) :
+    (resourceFilter[0] === "≤") ? filteredSeeds = filteredSeeds.filter(seed => seed.rf <= resourceFilter[1]) :
+    (resourceFilter[0] === "<") ? filteredSeeds = filteredSeeds.filter(seed => seed.rf < resourceFilter[1]) : null;
+    (resourceFilter[2] === "Descending") ? filteredSeeds.sort((a, b) => { return b.rf - a.rf}) :
+    (resourceFilter[2] === "Ascending") ? filteredSeeds.sort((a, b) => { return a.rf - b.rf}) : null;
+
+    // Total Results
+    totalResults.innerHTML = "Total results: " + filteredSeeds.length;
+    
     // Put data in table
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) display(rows, 100);
-    else display(rows);
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) setData(filteredSeeds, 100);
+    else setData(filteredSeeds);
 }
 
 // Filter function
@@ -139,8 +172,8 @@ function Filter() {
     whiteBackground.style.visibility = "visible";
     loading.style.visibility = "visible";
     setTimeout(() => {
-        // [Resource, ">" || "≥" || "=" || "≤" || "<", Amount, "Ascending" || "Descending"] or [Resource, "Max" || "Min"] or ["None"]
-        let resource = (resourceFilter.selectedIndex) ? (amountFilter.selectedIndex >= 2) ? [resourceFilter.options[resourceFilter.selectedIndex].text, amountFilter.options[amountFilter.selectedIndex].text, Number(amount.value), order.value] : [resourceFilter.options[resourceFilter.selectedIndex].text, amountFilter.options[amountFilter.selectedIndex].text] : ["None"];
+        /** @type {["None"] | ["Max" | "Min"] | [">" | "≥" | "=" | "≤" | "<", int, "Ascending" | "Descending"]} [">" || "≥" || "=" || "≤" || "<", Amount, "Ascending" || "Descending"] or ["Max" || "Min"] or ["None"] */
+        let resource = (resourceFilter.selectedIndex) ? (amountFilter.selectedIndex >= 2) ? [amountFilter.options[amountFilter.selectedIndex].text, Number(amount.value), order.value] : [amountFilter.options[amountFilter.selectedIndex].text] : ["None"];
         if (worldSizeCheck.checked) {
             if (resourceAmountCheck.checked) filter(resource, worldSize.value, resourceAmount.value);
             else filter(resource, worldSize.value, "None");
@@ -174,19 +207,18 @@ function calculateResources() {
         if (Item.items[resourceFilter.value] !== undefined) {
             /** @type {Item} */
             const item = Item.items[resourceFilter.value];
-            seedData.forEach(tr => {
-                let resource = item.getMaxResourceAmountInSeed({
-                    woodLog: parseInt(tr.children.item(1).innerHTML),
-                    stone: parseInt(tr.children.item(2).innerHTML),
-                    ironOre: parseInt(tr.children.item(3).innerHTML),
-                    copperOre: parseInt(tr.children.item(4).innerHTML),
-                    coal: parseInt(tr.children.item(5).innerHTML),
-                    wolframite: parseInt(tr.children.item(6).innerHTML)
+            // Calculate resource
+            seedData.forEach(seed => {
+                seed.rf = item.getMaxResourceAmountInSeed({
+                    woodLog: seed.wd,
+                    stone: seed.s,
+                    ironOre: seed.i,
+                    copperOre: seed.cp,
+                    coal: seed.cl,
+                    wolframite: seed.wl
                 });
-                tr.children.item(9).innerHTML = Math.round(resource * 1000) / 1000;
-                tr.children.item(9).title = Math.round(resource * 1000000) / 1000000;
             });
-        } else seedData.forEach(tr => tr.children.item(9).innerHTML = "0");
+        } else seedData.forEach(seed => seed.tr = 0);
     }, 10);
     Filter();
 }
