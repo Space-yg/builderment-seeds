@@ -47,14 +47,9 @@ seedData.forEach(seed => seed.rf = 0 );
 function addSeedTableRow(seed) {
     // Make new row
     const tr = document.createElement("tr");
-    // Add seed
-    const th = document.createElement("th");
-    th.innerHTML = seed.sd;
-    th.title = "Copy";
-    th.addEventListener("click", copy);
-    tr.appendChild(th);
-    // Add resources, world size, and resource amount
-    tr.innerHTML += `<td>${seed.wd}</td>
+    // Add seed, resources, world size, and resource amount
+    tr.innerHTML += `<th onclick="navigator.clipboard.writeText(event.target.innerHTML);">${seed.sd}</th>
+    <td>${seed.wd}</td>
     <td>${seed.s}</td>
     <td>${seed.i}</td>
     <td>${seed.cp}</td>
