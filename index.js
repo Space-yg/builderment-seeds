@@ -43,7 +43,7 @@ seedData.forEach(seed => seed.rf = 0 );
 /**
  * Display data in table
  * @param {{sd: String, wd: int, s: int, i: int, cp: int, cl: int, wl: int, ws: int, r: int, rf: Number}[]} seed The seed
- */
+*/
 function addSeedTableRow(seed) {
     // Make new row
     const tr = document.createElement("tr");
@@ -53,18 +53,15 @@ function addSeedTableRow(seed) {
     th.title = "Copy";
     th.addEventListener("click", copy);
     tr.appendChild(th);
-    // Add resources
-    for (const resource of ["wd", "s", "i", "cp", "cl", "wl"]) {
-        const td = document.createElement("td");
-        td.innerHTML = seed[resource];
-        tr.appendChild(td);
-    }
-    // Add World Size and Resource Amount
-    for (const setting of ["ws", "r"]) {
-        const td = document.createElement("td");
-        td.innerHTML = (seed[setting] === 1) ? 50 : (seed[setting] === 2) ? 75 : (seed[setting] === 3) ? 100 : (seed[setting] === 4) ? 150 : 200;
-        tr.appendChild(td);
-    }
+    // Add resources, world size, and resource amount
+    tr.innerHTML += `<td>${seed.wd}</td>
+    <td>${seed.s}</td>
+    <td>${seed.i}</td>
+    <td>${seed.cp}</td>
+    <td>${seed.cl}</td>
+    <td>${seed.wl}</td>
+    <td>${(seed.ws === 1) ? 50 : (seed.ws === 2) ? 75 : (seed.ws === 3) ? 100 : (seed.ws === 4) ? 150 : 200}</td>
+    <td>${(seed.r === 1) ? 50 : (seed.r === 2) ? 75 : (seed.r === 3) ? 100 : (seed.r === 4) ? 150 : 200}</td>`;
     // Add Resource Filter
     const td = document.createElement("td");
     td.innerHTML = Math.round(seed.rf * 1000) / 1000;

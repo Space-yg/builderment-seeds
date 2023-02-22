@@ -26,6 +26,23 @@ p {
     /* Font */
     font-family: Oswald, Arial, Helvetica, sans-serif;
 }
+a {
+    color: black;
+}
+/* hs */
+h1 {
+    /* Position */
+    margin: 0;
+    /* Font */
+    text-align: center;
+}
+h2 {
+    /* Font */
+    color: gray;
+    text-decoration: underline;
+    font-family: Oswald, Arial, Helvetica, sans-serif;
+}
+/* Lists */
 ul {
     /* Position */
     margin: 0;
@@ -57,7 +74,7 @@ footer {
     text-align: center;
     color: gray;
 }
-a {
+footer a {
     /* Font */
     color: gray;
 }
@@ -132,6 +149,7 @@ table.data tbody th button {
     color: rgb(153, 0, 255);
 }
 
+/** Mobile **/
 @media (pointer:none), (pointer:coarse) {
     /** General **/
     select, input {
