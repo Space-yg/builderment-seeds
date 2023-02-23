@@ -1,14 +1,14 @@
 <html>
     <head>
         <link rel="stylesheet" href="index.css">
-        <link rel="shortcut icon" href="./favicon.jpeg" type="image/x-icon">
+        <link rel="shortcut icon" href="./images/favicon.jpeg" type="image/x-icon">
         <title>Builderment Seeds</title>
         
         <!-- Discord Embed Settings -->
         <meta content="Builderment Seeds" property="og:title" />
         <meta content="Welcome to the Builderment Seeds! Here you can search for any seed to want!" property="og:description" />
         <meta content="https://space-yg.github.io/builderment-seeds/" property="og:url" />
-        <meta content="https://space-yg.github.io/builderment-seeds/favicon.jpeg" property="og:image" />
+        <meta content="https://space-yg.github.io/builderment-seeds/images/favicon.jpeg" property="og:image" />
         <meta content="#7deb66" data-react-helmet="true" name="theme-color" />
     </head>
     <body>
@@ -158,12 +158,18 @@
                 <tbody></tbody>
             </table>
         </div>
-        <footer>
-            <p>For any inquires, plz text me on discord. My username is <a href="https://discordapp.com/users/710012954736590908" target="_blank">Space.yg#4936</a> <3</p>
-            <p><a href="./versions.html">V1.0.2</a></p>
-        </footer>
     </body>
-    <script src="classes.js"></script>
-    <script src="items.js"></script>
-    <script src="index.js" type="module"></script>
+    <script src="../builderment-classes/classes.js"></script>
+    <script src="../builderment-classes/items.js"></script>
+    <script src="./pages/index/index.js" type="module"></script>
+    <!-- Version -->
+    <script type="module">
+        const path = "./pages/versions/versions.html";
+        const file = await fetch(path);
+        const text = await file.text();
+        document.body.innerHTML += `<footer>
+        <p>For any inquires, text me on discord. My username is <a href="https://discordapp.com/users/710012954736590908" target="_blank">Space.yg#4936</a> <3</p>
+        <p><a href="${path}">${new DOMParser().parseFromString(text, 'text/html').getElementsByTagName("h2").item(0).innerHTML}</a></p>
+        </footer>`;
+    </script>
 </html>
