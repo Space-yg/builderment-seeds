@@ -398,16 +398,3 @@ class Seed {
 // Extractors
 const extractor = new Factory("Extractor", 0, 5, [10, 200, 1000, 5000, 20000]);
 const uraniumExtractor = new Factory("Uranium Extractor", 0, 1, [23500]);
-
-// Base resources
-const coal = new Item("Coal", 1, extractor, [], 7.5);
-
-// Uranium Stuff
-const uranium = new Item("Uranium", 10, uraniumExtractor, [], 10);
-const enrichedUranium = new Item("Enriched Uranium", 1000, furnace, [new Input(uranium, 30, 30)], 1);
-const emptyFuelCell = new Item("Empty Fuel Cell", 70, machineShop, [new Input(tungstenCarbide, 3, 12), new Input(glass, 5, 20)], 4);
-const nuclearFuelCell = new Item("Nuclear Fuel Cell", 1200, industrialFactory, [new Input(emptyFuelCell, 1, 2), new Input(steelRod, 1, 2), new Input(enrichedUranium, 1, 2)], 2);
-
-// Power Plants
-const coalPowerPlant = new PowerPlant("Coal Power Plant", new Input(coal, 5, 20), 2000, 1.2, 15);
-const nuclearPowerPlant = new PowerPlant("Nuclear Power Plant", new Input(nuclearFuelCell, 1, 1), 500000, 1.2, 60);
