@@ -15,7 +15,6 @@ const woodLog = new Item("Wood Log", 1, extractor, [], 7.5);
 const stone = new Item("Stone", 1, extractor, [], 7.5);
 const ironOre = new Item("Iron Ore", 1, extractor, [], 7.5);
 const copperOre = new Item("Copper Ore", 1, extractor, [], 7.5);
-const coal = new Item("Coal", 1, extractor, [], 7.5);
 const wolframite = new Item("Wolframite", 1, extractor, [], 7.5);
 
 // Resources made from base resources only
