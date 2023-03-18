@@ -15,6 +15,7 @@ const woodLog = new Item("Wood Log", 1, extractor, [], 7.5);
 const stone = new Item("Stone", 1, extractor, [], 7.5);
 const ironOre = new Item("Iron Ore", 1, extractor, [], 7.5);
 const copperOre = new Item("Copper Ore", 1, extractor, [], 7.5);
+const coal = new Item("Coal", 1, extractor, [], 7.5);
 const wolframite = new Item("Wolframite", 1, extractor, [], 7.5);
 
 // Resources made from base resources only
@@ -63,3 +64,9 @@ const superComputer = new Item("Super Computer", 500, manufacturer, [new Input(c
 const atomicLocator = new Item("Atomic Locator", 2500, manufacturer, [new Input(superComputer, 2, 4), new Input(electronMicroscope, 2, 4), new Input(concrete, 24, 48), new Input(copperWire, 50, 100)], 2);
 const matterDuplicator = new Item("Matter Duplicator", 32000, manufacturer, [new Input(atomicLocator, 4, 8 / 3), new Input(quantumEntangler, 2, 4 / 3), new Input(energyCube, 5, 10 / 3), new Input(particleGlue, 100, 200 / 3)], 2 / 3);
 const earthToken = new Item("Earth Token", 32000, earthTeleporter, [new Input(matterDuplicator, 1, 60 / 42)], 60 / 42);
+
+// Uranium Stuff
+const uranium = new Item("Uranium", 10, uraniumExtractor, [], 10);
+const enrichedUranium = new Item("Enriched Uranium", 1000, furnace, [new Input(uranium, 30, 30)], 1);
+const emptyFuelCell = new Item("Empty Fuel Cell", 70, machineShop, [new Input(tungstenCarbide, 3, 12), new Input(glass, 5, 20)], 4);
+const nuclearFuelCell = new Item("Nuclear Fuel Cell", 1200, industrialFactory, [new Input(emptyFuelCell, 1, 2), new Input(steelRod, 1, 2), new Input(enrichedUranium, 1, 2)], 2);
