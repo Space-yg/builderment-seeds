@@ -213,7 +213,7 @@ table.data tbody th span {
 /** Mobile **/
 @media (pointer:none), (pointer:coarse) {
     /** General **/
-    select, input {
+    select, input, label {
         font-size: 24px;
     }
     /* hs */
