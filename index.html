@@ -5,11 +5,11 @@
         <title>Builderment Seeds</title>
         
         <!-- Discord Embed Settings -->
-        <meta content="Builderment Seeds" property="og:title" />
-        <meta content="Welcome to the Builderment Seeds! Here you can search for any seed to want!" property="og:description" />
-        <meta content="https://space-yg.github.io/builderment-seeds/" property="og:url" />
-        <meta content="https://space-yg.github.io/builderment-seeds/images/favicon.jpeg" property="og:image" />
-        <meta content="#7deb66" data-react-helmet="true" name="theme-color" />
+        <meta property="og:title" content="Builderment Seeds" />
+        <meta property="og:description" content="Welcome to the Builderment Seeds! Here you can search for any seed to want!" />
+        <meta property="og:url" content="./" />
+        <meta property="og:image" content="https://space-yg.github.io/builderment-seeds/images/favicon.jpeg" />
+        <meta name="theme-color" content="#7deb66" data-react-helmet="true" />
     </head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJBGE52HFP"></script>
@@ -26,6 +26,7 @@
         </div><div></div><div></div><div></div><div></div><div></div><div>
         </div><div></div><div></div></div>
 
+        <!-- Title -->
         <div class="collection">
             <h1>Builderment Seeds</h1>
             <p>
@@ -44,11 +45,13 @@
             <p>Notes:</p>
             <ul>
                 <li>The World Size and Resource Amount are available only to people with advanced world settings. if you do not have advanced world settings, the default for both is 100.</li>
+                <li>To use the World Size and Resource Amount filters, tap on the checkbox to the left od the name of the filter.</li>
                 <li>Choose the resource and it will calculate the maximum amount of that resource at the Resource column.</li>
                 <li>When filtering a raw resource, it gets calculated from the raw resource's column. Other resources get calculated from the Resource column.</li>
             </ul>
         </div>
 
+        <!-- Filters -->
         <div class="collection">
             <!-- Resource Filter -->
             <label for="resourceFilter">Resource:</label>
@@ -61,6 +64,7 @@
                     <option>Copper Ore</option>
                     <option>Coal</option>
                     <option>Wolframite</option>
+                    <option>Uranium</option>
                 </optgroup>
                 <optgroup label="Other">
                     <option>Atomic Locator</option>
@@ -76,7 +80,9 @@
                     <option>Electric Motor</option>
                     <option>Electromagnet</option>
                     <option>Electron Microscope</option>
+                    <option>Empty Fuel Cell</option>
                     <option>Energy Cube</option>
+                    <option>Enriched Uranium</option>
                     <option>Glass</option>
                     <option>Graphite</option>
                     <option>Gyroscope</option>
@@ -91,6 +97,7 @@
                     <option>Matter Duplicator</option>
                     <option>Metal Frame</option>
                     <option>Nano Wire</option>
+                    <option>Nuclear Fuel Cell</option>
                     <option>Particle Glue</option>
                     <option>Quantum Entangler</option>
                     <option>Rotor</option>
@@ -131,16 +138,20 @@
             <br>
     
             <!-- World Size Filter -->
-            <input type="checkbox" name="worldSize" id="worldSizeCheck">
-            <label for="range">World Size:</label>
+            <label>World Size:
+                <input type="checkbox" name="worldSize" id="worldSizeCheck">
+                <span class="checkbox"></span>
+            </label>
             <input type="range" id="worldSizeFilter" min="1" max="5">
             <span id="worldSizeRange">100%</span>
-    
+
             <br>
     
             <!-- Resource Amount Filter -->
-            <input type="checkbox" name="resourceAmount" id="resourceAmountCheck">
-            <label for="range">Resource Amount:</label>
+            <label>Resource Amount:
+                <input type="checkbox" name="resourceAmount" id="resourceAmountCheck">
+                <span class="checkbox"></span>
+            </label>
             <input type="range" id="resourceAmountFilter" min="1" max="5">
             <span id="resourceAmountRange">100%</span>
 
@@ -148,8 +159,8 @@
             <p id="totalResults">Total results:</p>
         </div>
         
+        <!-- Table -->
         <div class="collection">
-            <!-- Table -->
             <table class="data">
                 <thead>
                     <th>Seed</th>
@@ -159,6 +170,7 @@
                     <th>Copper Ore</th>
                     <th>Coal</th>
                     <th>Wolframite</th>
+                    <th>Uranium</th>
                     <th>World Size</th>
                     <th>Resource Amount</th>
                     <th>Resource</th>
@@ -167,17 +179,9 @@
             </table>
         </div>
     </body>
-    <script src="./pages/index/classes.js"></script>
-    <script src="./pages/index/items.js"></script>
-    <script src="./pages/index/index.js" type="module"></script>
-    <!-- Version -->
-    <script type="module">
-        const path = "./pages/versions/versions.html";
-        const file = await fetch(path);
-        const text = await file.text();
-        document.body.innerHTML += `<footer>
-        <p>For any inquires, text me on discord. My username is <a href="https://discordapp.com/users/710012954736590908" target="_blank">Space.yg#4936</a> <3</p>
-        <p><a href="${path}">${new DOMParser().parseFromString(text, 'text/html').getElementsByTagName("h2").item(0).innerHTML}</a></p>
-        </footer>`;
-    </script>
+    <script src="../builderment-classes/classes.js"></script>
+    <script src="../builderment-classes/items.js"></script>
+    <script src="./pages/main/main.js" type="module"></script>
+    <!-- Footer -->
+    <script src="./index.js" type="module"></script>
 </html>

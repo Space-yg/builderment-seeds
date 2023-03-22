@@ -61,8 +61,6 @@ select {
     /* Font */
     color: black;
 }
-/* Button */
-button:hover { cursor: pointer; }
 /* th and td */
 th, td {
     /* Position */
@@ -90,11 +88,74 @@ div.collection {
     width: 1000px;
     margin: 20px auto;
 }
-/* Checkbox */
-div.collection input[type="checkbox"] {
+/** Checkbox **/
+/* Edit container that has input */
+label:has(input[type="checkbox"]) {
     /* Position */
-    margin: -1px;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 3px;
+    padding-left: 20px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
+/* Remove default */
+label:has(input[type="checkbox"]) input[type="checkbox"] {
+    /* Position */
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    /* Cursor */
+    cursor: pointer;
+}
+/* Add new checkbox */
+span.checkbox {
+    /* Position */
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: rgb(225, 225, 225);
+    border: 1px solid darkgray;
+    border-radius: 4px;
+}
+label:has(input[type="checkbox"]):hover input[type="checkbox"] ~ span.checkbox {
+    /* Position */
+    background-color: rgb(200, 200, 200);
+}
+label:has(input[type="checkbox"]) input[type="checkbox"]:checked ~ span.checkbox {
+    /* Position */
+    background-color: #2196F3;
+}
+/* Check mark */
+span.checkbox:after {
+    /* Position */
+    content: "";
+    position: absolute;
+    display: none;
+}
+label:has(input[type="checkbox"]) input[type="checkbox"]:checked ~ span.checkbox:after {
+    /* Position */
+    display: block;
+}
+label:has(input[type="checkbox"]) span.checkbox:after {
+    /* Position */
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
 /* Input Amount */
 div.collection input[type="number"], div.collection select[name="order"] {
     /* Font */
@@ -137,7 +198,7 @@ table.data tbody th:hover { cursor: pointer; }
 /* td */
 table.data td:last-child { cursor: pointer; }
 /* Show More Button */
-table.data tbody th button {
+table.data tbody th span {
     /* Position */
     margin: 0;
     width: auto;

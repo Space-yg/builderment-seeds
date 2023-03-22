@@ -5,11 +5,11 @@
         <title>Versions</title>
         
         <!-- Discord Embed Settings -->
-        <meta content="Builderment Seeds" property="og:title" />
-        <meta content="Welcome to the Builderment Seeds! Here you can find the versions of the Builderment Seeds website!" property="og:description" />
-        <meta content="https://space-yg.github.io/builderment-seeds/pages/versions.html" property="og:url" />
-        <meta content="https://space-yg.github.io/builderment-seeds/images/favicon.jpeg" property="og:image" />
-        <meta content="#7deb66" data-react-helmet="true" name="theme-color" />
+        <meta property="og:title" content="Builderment Seeds" />
+        <meta property="og:description" content="Welcome to the Builderment Seeds! Here you can find the versions of the Builderment Seeds website!" />
+        <meta property="og:url" content="./" />
+        <meta property="og:image" content="https://space-yg.github.io/builderment-seeds/images/favicon.jpeg" />
+        <meta name="theme-color" content="#7deb66" data-react-helmet="true" />
     </head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJBGE52HFP"></script>
@@ -23,6 +23,13 @@
         <div class="collection">
             <h1>Versions</h1>
             <p>Here are the versions of the Builderment Seeds website! Click <a href="../../index.html">here</a> to go back to the main page.</p>
+            <h2>V1.1.0</h2>
+            <ul>
+                <li>Added Uranium!</li>
+                <li>Added Uranium, Enriched Uranium, Empty Fuel Cell, and Nuclear Fuel Cell to the filter resource options.</li>
+                <li>Made the checkbox a bit more clear.</li>
+                <li>Added a new note to Notes.</li>
+            </ul>
             <h2>V1.0.3</h2>
             <ul>
                 <li>Fixed header boldness on mobile.</li>
@@ -47,13 +54,6 @@
             </ul>
         </div>
     </body>
-    <!-- Version -->
-    <script type="module">
-        const file = await fetch("./versions.html");
-        const text = await file.text();
-        document.body.innerHTML += `<footer>
-        <p>For any inquires, text me on discord. My username is <a href="https://discordapp.com/users/710012954736590908" target="_blank">Space.yg#4936</a> <3</p>
-        <p><a href="./versions.html">${new DOMParser().parseFromString(text, 'text/html').getElementsByTagName("h2").item(0).innerHTML}</a></p>
-        </footer>`;
-    </script>
+    <!-- Footer -->
+    <script src="../../index.js" type="module"></script>
 </html>
