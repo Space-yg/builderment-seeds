@@ -163,16 +163,16 @@ class Item {
     }
 
     // TESTING
-
+    /*
     /**
      * Get the maximum amount you can get of this item in a seed
      * @param {{woodLog: Number, stone: Number, ironOre: Number, copperOre: Number, coal: Number, wolframite: Number, uranium: Number} | Seed} resources The resources in the world
      * @returns the maximum amount you can get of this item
-     */
+     /
     getMaxResourceAmountInSeedWithPowerPlants(resources) {
         const maxOutput = extractor.tier.getMaxOutput() * 7.5;
         const uraniumMaxOutput = uraniumExtractor.tier.getMaxOutput() * 10;
-        /** @type {{woodLog: Number, stone: Number, ironOre: Number, copperOre: Number, coal: Number, wolframite: Number, uranium: Number}} */
+        /** @type {{woodLog: Number, stone: Number, ironOre: Number, copperOre: Number, coal: Number, wolframite: Number, uranium: Number}} /
         const calculatedResources = {};
         const itemToResource = {
             "Wood Log": "woodLog",
@@ -187,7 +187,7 @@ class Item {
         var lowestName, secondLowestName;
         var previousLowest;
         // Get the max resource output
-        /** @type {{woodLog: Number, stone: Number, ironOre: Number, copperOre: Number, coal: Number, wolframite: Number, uranium: Number}} */
+        /** @type {{woodLog: Number, stone: Number, ironOre: Number, copperOre: Number, coal: Number, wolframite: Number, uranium: Number}} /
         const maxResourceOutput = {};
         for (const name in resources) maxResourceOutput[name] = resources[itemToResource[name]] * ((name === "Uranium") ? uraniumMaxOutput : maxOutput);
         // Max out the uranium from the coal power plants
@@ -211,6 +211,7 @@ class Item {
 
         return lowest;
     }
+    */
 }
 
 /** Set a tier */
