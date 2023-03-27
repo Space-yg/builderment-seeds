@@ -51,6 +51,10 @@ li {
     /* Font */
     font-family: Oswald, Arial, Helvetica, sans-serif;
 }
+.important {
+    /* Font */
+    color: red;
+}
 /* Select */
 select {
     /* Position */
@@ -213,8 +217,11 @@ table.data tbody th span {
 /** Mobile **/
 @media (pointer:none), (pointer:coarse) {
     /** General **/
-    select, input, label {
+    select, input {
         font-size: 24px;
+    }
+    label {
+        font-size: 32px;
     }
     /* hs */
     h1, h2 {
