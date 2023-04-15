@@ -1,3 +1,5 @@
+import { Item } from "../../../builderment-classes/index.js";
+
 // Get the JSON file
 let s = await fetch("./pages/main/seeds.json");
 s = await s.json();
@@ -214,11 +216,11 @@ function calculateResources() {
                     copperOre: seed.cp,
                     coal: seed.cl,
                     wolframite: seed.wl,
-                    uranium: seed.u,
+                    uraniumOre: seed.u,
                 });
             });
-        } else seedData.forEach(seed => seed.tr = 0);
-    }, 10);
+        } else seedData.forEach(seed => seed.rf = 0);
+    });
     Filter();
 }
 resourceFilter.addEventListener("change", calculateResources);
