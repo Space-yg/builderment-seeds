@@ -228,6 +228,26 @@ table.data tbody th span {
         /* Font */
         font-weight: normal;
     }
+
+    /** Checkbox **/
+    /* Edit container */
+    label:has(input[type="checkbox"]) {
+        /* Position */
+        padding-left: 40px;
+    }
+    /* Edit checkbox*/
+    span.checkbox {
+        width: 30px;
+        height: 30px;
+    }
+    label:has(input[type="checkbox"]) span.checkbox:after {
+        /* Position */
+        left: 7px;
+        top: 2px;
+        width: 10px;
+        height: 15px;
+        border-width: 0 5px 5px 0;
+    }
 }
 
 /** Loading **/
@@ -323,4 +343,4 @@ div.whiteBackground {
     100% {
         opacity: 0;
     }
-}  
+}
