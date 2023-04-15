@@ -1,3 +1,6 @@
 [submodule "classes"]
 	path = classes
 	url = https://github.com/Space-yg/builderment-classes.git
+[submodule "builderment-classes"]
+	path = builderment-classes
+	url = https://github.com/Space-yg/builderment-classes.git
