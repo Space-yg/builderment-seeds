@@ -1,4 +1,4 @@
-import { Item } from "../../../../builderment-classes/index.js"
+import { Item } from "../../../../builderment-classes/dir/index.js"
 
 // // Get the JSON file
 // let s = await fetch("./pages/main/seeds.json")
