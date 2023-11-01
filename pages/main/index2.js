@@ -9,7 +9,7 @@ import { Item } from "../../builderment-classes/index.js"
 let s = await fetch("./pages/main/seeds.txt");
 s = await s.text();
 const seeds = [];
-for (const line of s.match(/.{1,4}/g))
+for (const line of s.match(/.{1,28}/g))
     seeds.push({
         sd: line.substring(0, 6).replace(" ", ""),
         ws: parseInt(line[6]),
