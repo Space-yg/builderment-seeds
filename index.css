@@ -81,8 +81,7 @@ footer a {
     color: gray;
 }
 
-/** Filters **/
-/* Div */
+/** Collection **/
 .collection {
     /* Position */
     padding: 20px;
@@ -92,6 +91,8 @@ footer a {
     width: 1000px;
     margin: 20px auto;
 }
+
+/*** Filters ***/
 /** Checkbox **/
 /* Edit container that has input */
 label:has(input[type="checkbox"]) {
@@ -217,6 +218,9 @@ table.data tbody th span {
 /** Mobile **/
 @media (pointer:none), (pointer:coarse) {
     /** General **/
+    select {
+        font-size: 18px;
+    }
     /* hs */
     h1, h2 {
         /* Font */
@@ -230,29 +234,22 @@ table.data tbody th span {
     }
 
     /** Checkbox **/
-    /* Edit container */
-    label:has(input[type="checkbox"]) {
-        /* Position */
-        padding-left: 40px;
-    }
-    /* Edit checkbox*/
+    /* Edit checkbox */
     span.checkbox {
-        width: 30px;
-        height: 30px;
+        width: 15px;
+        height: 15px;
     }
+    /* Edit check */
     label:has(input[type="checkbox"]) span.checkbox:after {
         /* Position */
-        left: 7px;
+        left: 5px;
         top: 2px;
-        width: 10px;
-        height: 15px;
-        border-width: 0 5px 5px 0;
+        width: 2.5px;
+        height: 7px;
     }
 
     /** Table **/
     table.data {
-        font-size: 24px;
-
         /* Horizontal Scroll */
         display: block;
         overflow: auto;

@@ -104,10 +104,7 @@ import { Item } from "../../builderment-classes/dir/index.js";
         (resourceFilter[3] === "Descending") ? filteredSeeds.sort((a, b) => { return b[resource] - a[resource]; }) :
             (resourceFilter[3] === "Ascending") ? filteredSeeds.sort((a, b) => { return a[resource] - b[resource]; }) : null;
         totalResults.innerHTML = "Total results: " + filteredSeeds.length;
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-            setData(filteredSeeds, 100);
-        else
-            setData(filteredSeeds);
+        setData(filteredSeeds);
     }
     function Filter() {
         whiteBackground.style.visibility = "visible";

@@ -217,8 +217,7 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
         totalResults.innerHTML = "Total results: " + filteredSeeds.length
         
         // Put data in table
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) setData(filteredSeeds, 100)
-        else setData(filteredSeeds)
+        setData(filteredSeeds)
     }
 
     // Filter function
