@@ -2,3 +2,5 @@
 	path = builderment-classes
 	url = https://github.com/Space-yg/builderment-classes.git
 	branch = main
+[submodule "https://github.com/Space-yg/builderment-classes.git"]
+	branch = main
