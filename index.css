@@ -259,6 +259,12 @@ table.data tbody th span {
         text-wrap: wrap;
         padding: 0 10px;
     }
+
+    /** Loading **/
+    .lds-spinner {
+        position: absolute;
+        transform: translate(-50%, 25%);
+    }
 }
 
 /** Loading **/
