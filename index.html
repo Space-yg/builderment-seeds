@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <link rel="shortcut icon" href="./images/favicon.jpeg" type="image/x-icon">
+        <title>Builderment Seeds</title>
+        
+        <!-- Meta Info -->
+        <meta charset="UTF-8">
+        <meta name="description" content="Welcome to the Builderment Seeds! Here you can search for any seed you want!">
+        <meta name="keywords" content="Builderment Seeds, Builderment, Seeds">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Space.yg and Human-Crow">
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="Builderment Seeds">
+        <meta property="og:description" content="Welcome to the Builderment Seeds! Here you can search for any seed you want!">
+        <meta property="og:url" content="./">
+        <meta property="og:image" content="https://space-yg.github.io/builderment-seeds/images/favicon.jpeg">
+        <meta name="theme-color" content="#7deb66" data-react-helmet="true">
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@Space.yag">
+        <meta name="twitter:creator" content="@Space.yag">
+    </head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJBGE52HFP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZJBGE52HFP');
+    </script>
+
+    <body>
+        <!-- Loading Animation -->
+        <div class="whiteBackground"></div>
+        <div class="lds-spinner"><div></div><div></div><div></div><div>
+        </div><div></div><div></div><div></div><div></div><div></div><div>
+        </div><div></div><div></div></div>
+
+        <!-- Title -->
+        <header class="collection">
+            <h1>Builderment Seeds</h1>
+            <p>
+                Hello! Welcome to the Builderment Seeds! Here you can
+                search for any seed you want! This website is made by
+                <a href="https://discordapp.com/users/710012954736590908" target="_blank">
+                Space.yg</a> with the help of
+                <a href="https://discordapp.com/users/947807205028139018" target="_blank">
+                Human-Crow</a>.
+            </p>
+
+            <p>Tips:</p>
+            <ul>
+                <li>Click on a seed to copy.</li>
+                <li>Click on a number at the Resource column to get an accurate amount.</li>
+            </ul>
+
+            <p>Notes:</p>
+            <ul>
+                <li>The World Size and Resource Amount are available only to people with advanced world settings. if you do not have advanced world settings, the default for both is 100%.</li>
+                <li>Choose the resource and it will calculate the maximum amount of that resource at the Resource column.</li>
+                <li>When filtering a raw resource, it gets calculated from that raw resource's column. Other resources get calculated from all the resources.</li>
+            </ul>
+        </header>
+
+        <!-- Filters -->
+        <div class="collection">
+            <!-- Resource Filter -->
+            <label for="resourceFilter">Resource:</label>
+            <select name="resourceFilter" id="resourceFilter">
+                <option>None</option>
+                <optgroup label="Raw Resources">
+                    <option>Wood Log</option>
+                    <option>Stone</option>
+                    <option>Iron Ore</option>
+                    <option>Copper Ore</option>
+                    <option>Coal</option>
+                    <option>Wolframite</option>
+                    <option>Uranium Ore</option>
+                </optgroup>
+                <optgroup label="Other">
+                    <option>Atomic Locator</option>
+                    <option>Battery</option>
+                    <option>Carbon Fiber</option>
+                    <option>Computer</option>
+                    <option>Concrete</option>
+                    <option>Condenser Lens</option>
+                    <option>Copper Ingot</option>
+                    <option>Copper Wire</option>
+                    <option>Coupler</option>
+                    <option>Earth Token</option>
+                    <option>Electric Motor</option>
+                    <option>Electromagnet</option>
+                    <option>Electron Microscope</option>
+                    <option>Empty Fuel Cell</option>
+                    <option>Energy Cube</option>
+                    <option>Enriched Uranium</option>
+                    <option>Glass</option>
+                    <option>Graphite</option>
+                    <option>Gyroscope</option>
+                    <option>Heat Sink</option>
+                    <option>Industrial Frame</option>
+                    <option>Iron Gear</option>
+                    <option>Iron Ingot</option>
+                    <option>Iron Plating</option>
+                    <option>Logic Circuit</option>
+                    <option>Magnetic Field Generator</option>
+                    <option>Matter Compressor</option>
+                    <option>Matter Duplicator</option>
+                    <option>Metal Frame</option>
+                    <option>Nano Wire</option>
+                    <option>Nuclear Fuel Cell</option>
+                    <option>Particle Glue</option>
+                    <option>Quantum Entangler</option>
+                    <option>Rotor</option>
+                    <option>Sand</option>
+                    <option>Steel</option>
+                    <option>Steel Rod</option>
+                    <option>Silicon</option>
+                    <option>Tungsten Carbide</option>
+                    <option>Tungsten Ore</option>
+                    <option>Stabilizer</option>
+                    <option>Super Computer</option>
+                    <option>Tank</option>
+                    <option>Turbocharger</option>
+                    <option>Wood Frame</option>
+                    <option>Wood Plank</option>
+                </optgroup>
+            </select>
+            <br>
+    
+            <!-- Amount Filter -->
+            <label for="amountFilter">Filter:</label>
+            <select name="amountFilter" id="amountFilter">
+                <option>Max</option>
+                <option>Min</option>
+                <option>></option>
+                <option>≥</option>
+                <option>=</option>
+                <option>≤</option>
+                <option><</option>
+            </select>
+            <input type="number" min="0" placeholder="Amount" id="amount">
+            <select name="order" id="order">
+                <option>Ascending</option>
+                <option>Descending</option>
+            </select>
+            <br>
+    
+            <!-- World Size Filter -->
+            <label>World Size:
+                <input type="checkbox" name="worldSize" id="worldSizeCheck" checked>
+                <span class="checkbox"></span>
+            </label>
+            <input type="range" id="worldSizeFilter" min="1" max="5" value="3">
+            <span id="worldSizeRange">100%</span>
+            <br>
+    
+            <!-- Resource Amount Filter -->
+            <label>Resource Amount:
+                <input type="checkbox" name="resourceAmount" id="resourceAmountCheck" checked>
+                <span class="checkbox"></span>
+            </label>
+            <input type="range" id="resourceAmountFilter" min="1" max="5" value="3">
+            <span id="resourceAmountRange">100%</span>
+
+            <!-- Total Results -->
+            <p id="totalResults">Total results:</p>
+        </div>
+        
+        <!-- Table -->
+        <main class="collection">
+            <div class="data">
+                <table class="data">
+                    <thead>
+                        <th>Seed</th>
+                        <th>Wood Log</th>
+                        <th>Stone</th>
+                        <th>Iron Ore</th>
+                        <th>Copper Ore</th>
+                        <th>Coal</th>
+                        <th>Wolframite</th>
+                        <th>Uranium</th>
+                        <th>World Size</th>
+                        <th>Resource Amount</th>
+                        <th>Resource</th>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </main>
+    </body>
+
+    <!-- Scripts -->
+    <script src="./pages/main/index.js" type="module"></script>
+    
+    <!-- Footer -->
+    <script src="./pages/footer.js" type="module"></script>
+</html>

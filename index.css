@@ -1,0 +1,372 @@
+/** Fonts **/
+@font-face {
+    font-family: Oswald;
+    src: url(./fonts/Oswald-Regular.ttf);
+}
+@font-face {
+    font-family: troika;
+    src: url(./fonts/troika.otf);
+}
+
+/** Organization **/
+body {
+    /* Position */
+    margin: 0;
+    padding: 0;
+    /* Font */
+    font-family: troika, Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: black;
+    background-color: #d9ffd9;
+}
+/* p */
+p {
+    /* Position */
+    margin: 0 0 8px 0;
+    /* Font */
+    font-family: Oswald, Arial, Helvetica, sans-serif;
+}
+a {
+    color: black;
+}
+/* hs */
+h1 {
+    /* Position */
+    margin: 0;
+    /* Font */
+    text-align: center;
+}
+h2 {
+    /* Font */
+    color: gray;
+    text-decoration: underline;
+    font-family: Oswald, Arial, Helvetica, sans-serif;
+}
+/* Lists */
+ul {
+    /* Position */
+    margin: 0;
+}
+li {
+    /* Font */
+    font-family: Oswald, Arial, Helvetica, sans-serif;
+}
+.important {
+    /* Font */
+    color: red;
+}
+/* Select */
+select {
+    /* Position */
+    margin: 2px 0;
+    padding: 5px;
+    border-radius: 7px;
+    font-family: troika, Arial, Helvetica, sans-serif;
+    /* Font */
+    color: black;
+}
+/* th and td */
+th, td {
+    /* Position */
+    border-bottom: 1px solid black;
+}
+/* Footer */
+footer {
+    /* Font */
+    text-align: center;
+    color: gray;
+}
+footer a {
+    /* Font */
+    color: gray;
+}
+
+/** Filters **/
+/* Div */
+.collection {
+    /* Position */
+    padding: 20px;
+    border: solid 1px black;
+    border-radius: 20px;
+    background-color: white;
+    width: 1000px;
+    margin: 20px auto;
+}
+/** Checkbox **/
+/* Edit container that has input */
+label:has(input[type="checkbox"]) {
+    /* Position */
+    position: relative;
+    display: inline-block;
+    margin-bottom: 3px;
+    padding-left: 20px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* Remove default */
+label:has(input[type="checkbox"]) input[type="checkbox"] {
+    /* Position */
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    /* Cursor */
+    cursor: pointer;
+}
+/* Add new checkbox */
+span.checkbox {
+    /* Position */
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: rgb(225, 225, 225);
+    border: 1px solid darkgray;
+    border-radius: 4px;
+}
+label:has(input[type="checkbox"]):hover input[type="checkbox"] ~ span.checkbox {
+    /* Position */
+    background-color: rgb(200, 200, 200);
+}
+label:has(input[type="checkbox"]) input[type="checkbox"]:checked ~ span.checkbox {
+    /* Position */
+    background-color: #2196F3;
+}
+/* Check mark */
+span.checkbox:after {
+    /* Position */
+    content: "";
+    position: absolute;
+    display: none;
+}
+label:has(input[type="checkbox"]) input[type="checkbox"]:checked ~ span.checkbox:after {
+    /* Position */
+    display: block;
+}
+label:has(input[type="checkbox"]) span.checkbox:after {
+    /* Position */
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* Input Amount */
+.collection input[type="number"], .collection select[name="order"] {
+    /* Font */
+    font-family: troika, Arial, Helvetica, sans-serif;
+    display: none;
+}
+
+/** Data **/
+/* Table */
+table.data {
+    /* Position */
+    width: 100%;
+    margin: 0;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid black;
+    /* Font */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    text-align: center;
+}
+/* thead and tbody */
+table.data thead {
+    /* Position */
+    position: -webkit-sticky;
+    position: sticky;
+    top: -1px;
+    left: 1px;
+    border: 1px solid black;
+    /* Color */
+    background-color: white;
+}
+/* th */
+table.data tbody th {
+    /* Font */
+    text-align: left;
+}
+table.data tbody th:last-child { border: 1px solid black; }
+table.data tbody th:hover { cursor: pointer; }
+/* td */
+table.data td:last-child { cursor: pointer; }
+/* Show More Button */
+table.data tbody th span {
+    /* Position */
+    margin: 0;
+    width: auto;
+    border: 0;
+    /* Font */
+    font-family: troika, Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    background-color: transparent;
+    color: rgb(153, 0, 255);
+}
+
+/** Mobile **/
+@media (pointer:none), (pointer:coarse) {
+    /** General **/
+    body {
+        font-size: 24px;
+    }
+    select, input {
+        font-size: 24px;
+    }
+    label, span {
+        font-size: 32px;
+    }
+    h1 {
+        font-size: 60px;
+    }
+    /* hs */
+    h1, h2 {
+        /* Font */
+        font-weight: normal;
+    }
+
+    /** Collection **/
+    .collection {
+        width: 87.5%;
+        padding: 30px;
+    }
+
+    /** Checkbox **/
+    /* Edit container */
+    label:has(input[type="checkbox"]) {
+        /* Position */
+        padding-left: 40px;
+    }
+    /* Edit checkbox*/
+    span.checkbox {
+        width: 30px;
+        height: 30px;
+    }
+    label:has(input[type="checkbox"]) span.checkbox:after {
+        /* Position */
+        left: 7px;
+        top: 2px;
+        width: 10px;
+        height: 15px;
+        border-width: 0 5px 5px 0;
+    }
+
+    /** Table **/
+    table.data {
+        font-size: 36px;
+
+        /* Horizontal Scroll */
+        display: block;
+        overflow: auto;
+        white-space: nowrap;
+    }
+    table.data th {
+        text-wrap: wrap;
+        padding: 0 10px;
+    }
+}
+
+/** Loading **/
+/* White background */
+div.whiteBackground {
+    /* Position */
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, .9);
+    position: fixed;
+    z-index: 1;
+}
+/* Loading Animation */
+.lds-spinner {
+    position: fixed;
+    left: 50%;
+    bottom: 50%;
+    z-index: 1;
+    
+    color: official;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+.lds-spinner div {
+    transform-origin: 40px 40px;
+    animation: lds-spinner 1.2s linear infinite;
+}
+.lds-spinner div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 37px;
+    width: 6px;
+    height: 18px;
+    border-radius: 20%;
+    background: rgb(0, 0, 0);
+}
+.lds-spinner div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -1.1s;
+}
+.lds-spinner div:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -1s;
+}
+.lds-spinner div:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.9s;
+}
+.lds-spinner div:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.8s;
+}
+.lds-spinner div:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.7s;
+}
+.lds-spinner div:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.6s;
+}
+.lds-spinner div:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.5s;
+}
+.lds-spinner div:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.4s;
+}
+.lds-spinner div:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.3s;
+}
+.lds-spinner div:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.2s;
+}
+.lds-spinner div:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.1s;
+}
+.lds-spinner div:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+}
+@keyframes lds-spinner {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
