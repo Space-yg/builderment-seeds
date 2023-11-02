@@ -88,7 +88,7 @@ import { Item } from "../../builderment-classes/dir/index.js";
         let filteredSeeds = [...seedData];
         let size = parseInt(worldSize);
         if (!isNaN(size))
-            filteredSeeds = filteredSeeds.filter(seed => { return seed.ws === size; });
+            filteredSeeds = filteredSeeds.filter(seed => seed.ws === size);
         let amount = parseInt(resourceAmount);
         if (!isNaN(amount))
             filteredSeeds = filteredSeeds.filter(seed => seed.r === amount);

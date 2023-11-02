@@ -217,18 +217,6 @@ table.data tbody th span {
 /** Mobile **/
 @media (pointer:none), (pointer:coarse) {
     /** General **/
-    body {
-        font-size: 24px;
-    }
-    select, input {
-        font-size: 24px;
-    }
-    label, span {
-        font-size: 32px;
-    }
-    h1 {
-        font-size: 60px;
-    }
     /* hs */
     h1, h2 {
         /* Font */
@@ -237,7 +225,7 @@ table.data tbody th span {
 
     /** Collection **/
     .collection {
-        width: 87.5%;
+        width: 80%;
         padding: 30px;
     }
 
@@ -263,7 +251,7 @@ table.data tbody th span {
 
     /** Table **/
     table.data {
-        font-size: 36px;
+        font-size: 24px;
 
         /* Horizontal Scroll */
         display: block;

@@ -194,7 +194,7 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
 
         // Filter World Size
         let size = parseInt(worldSize)
-        if (!isNaN(size)) filteredSeeds = filteredSeeds.filter(seed => {return seed.ws === size})
+        if (!isNaN(size)) filteredSeeds = filteredSeeds.filter(seed => seed.ws === size)
 
         // Filter World Size
         let amount = parseInt(resourceAmount)
