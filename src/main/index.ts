@@ -6,19 +6,6 @@
 // For deployment
 import { Item } from "../../builderment-classes/dir/index.js"
 
-// class Item {
-//     static items: {[name: string]: Item} = {}
-//     getMaxResourceAmountInSeed(seed: {
-//         "Wood Log": number,
-//         Stone: number,
-//         "Iron Ore": number,
-//         "Copper Ore": number,
-//         Coal: number,
-//         Wolframite: number,
-//         "Uranium Ore": number,
-//     }): number { return 0; }
-// }
-
 /** A seed */
 interface Seed {
     /** Seed */
