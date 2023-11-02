@@ -83,7 +83,7 @@ footer a {
 
 /** Filters **/
 /* Div */
-div.collection {
+.collection {
     /* Position */
     padding: 20px;
     border: solid 1px black;
@@ -161,7 +161,7 @@ label:has(input[type="checkbox"]) span.checkbox:after {
 }
 
 /* Input Amount */
-div.collection input[type="number"], div.collection select[name="order"] {
+.collection input[type="number"], .collection select[name="order"] {
     /* Font */
     font-family: troika, Arial, Helvetica, sans-serif;
     display: none;
@@ -217,16 +217,28 @@ table.data tbody th span {
 /** Mobile **/
 @media (pointer:none), (pointer:coarse) {
     /** General **/
+    body {
+        font-size: 24px;
+    }
     select, input {
         font-size: 24px;
     }
-    label {
+    label, span {
         font-size: 32px;
+    }
+    h1 {
+        font-size: 60px;
     }
     /* hs */
     h1, h2 {
         /* Font */
         font-weight: normal;
+    }
+
+    /** Collection **/
+    .collection {
+        width: 87.5%;
+        padding: 30px;
     }
 
     /** Checkbox **/
@@ -247,6 +259,20 @@ table.data tbody th span {
         width: 10px;
         height: 15px;
         border-width: 0 5px 5px 0;
+    }
+
+    /** Table **/
+    table.data {
+        font-size: 36px;
+
+        /* Horizontal Scroll */
+        display: block;
+        overflow: auto;
+        white-space: nowrap;
+    }
+    table.data th {
+        text-wrap: wrap;
+        padding: 0 10px;
     }
 }
 
