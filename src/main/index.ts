@@ -88,8 +88,6 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
     
     //// Table
     // Table data
-    const tbody = document.getElementsByTagName("tbody")[0]
-
     const tableData = <HTMLDivElement> document.getElementById("data")!
     // Add all resources to resourcesDivs
     const resourcesDivs: {[name: string]: HTMLDivElement} = {}
@@ -111,10 +109,7 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
     /** Test any functionality */
     function test() { console.log("Test") }
 
-    /**
-     * Copy text
-     * @param {PoNumbererEvent} event 
-     */
+    /** Copy text */
     function copy(event: MouseEvent) { navigator.clipboard.writeText((<HTMLTableCellElement> event.target!).innerHTML) }
 
     /**
@@ -128,36 +123,6 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
             if (key == "rf") resourcesDivs[key].innerHTML += `<div class="entry" onclick="let t=event.target.innerHTML;event.target.innerHTML=event.target.title;event.target.title=t" title="${Math.round(seed.rf * 100000) / 100000}">${Math.round(seed.rf * 1000) / 1000}</div>`
             else resourcesDivs[key].innerHTML += `<div class="entry">${seed[key]}</div>`
         }
-
-        // //// Old Format
-        // // Make new row
-        // const tr = document.createElement("tr")
-
-        // // Add seed, resources, world size, and resource amount
-        // tr.innerHTML += `<th onclick="navigator.clipboard.writeText(event.target.innerHTML)">${seed.sd}</th>
-        // <td>${seed.wd}</td>
-        // <td>${seed.s}</td>
-        // <td>${seed.i}</td>
-        // <td>${seed.cp}</td>
-        // <td>${seed.cl}</td>
-        // <td>${seed.wl}</td>
-        // <td>${(seed.u) ? seed.u : "unknown"}</td>
-        // <td>${sliderValueToSize[seed.ws]}</td>
-        // <td>${sliderValueToSize[seed.r]}</td>`
-
-        // // Add Resource Filter
-        // const td = document.createElement("td")
-        // td.innerHTML = (Math.round(seed.rf * 1000) / 1000).toString()
-        // td.title = (Math.round(seed.rf * 100000) / 100000).toString()
-        // td.addEventListener("click", event => {
-        //     let temp = (<HTMLTableCellElement> event.target!).innerHTML;
-        //     (<HTMLTableCellElement> event.target!).innerHTML = (<HTMLTableCellElement> event.target!).title;
-        //     (<HTMLTableCellElement> event.target!).title = temp
-        // })
-        // tr.appendChild(td)
-
-        // // Add to table
-        // tbody.appendChild(tr)
     }
 
     /**
@@ -197,7 +162,6 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
 
         // Clear All data
         for (const name in resourcesDivs) resourcesDivs[name].innerHTML = ""
-        // tbody.innerHTML = ""
 
         // Add data to table
         for (let i = 0; i < Math.min(showLimit, data.length); i++) addSeedTableRow(data[i])
@@ -208,7 +172,7 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
     }
 
     /**
-     * Filter
+     * Filter seed data then set it to the table
      * @param resourceFilter [Resource, ">" || "≥" || "=" || "≤" || "<", Amount, "Ascending" || "Descending"] or [Resource, "Max" || "Min"] or ["None"]
      * @param worldSize worldSize.value
      * @param resourceAmount resourceAmount.value
@@ -282,7 +246,7 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
     resourceAmountCheck.addEventListener("click", Filter)
     Filter()
 
-    // Calculate the resources
+    /** Calculate the resources */
     function calculateResources() {
         whiteBackground.style.visibility = "visible"
         loading.style.visibility = "visible"
@@ -309,7 +273,7 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
     resourceFilter.addEventListener("change", calculateResources)
     calculateResources()
 
-    // Show filter options
+    /** Show filter options */
     function amountFunction() {
         if (amountFilter.selectedIndex >= 2) {
             amount.style.display = "inline-block"

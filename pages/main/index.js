@@ -30,7 +30,6 @@ import { Item } from "../../builderment-classes/dir/index.js";
     const resourceAmountCheck = document.getElementById("resourceAmountCheck");
     const resourceAmountRange = document.getElementById("resourceAmountRange");
     const totalResults = document.getElementById("totalResults");
-    const tbody = document.getElementsByTagName("tbody")[0];
     const tableData = document.getElementById("data");
     const resourcesDivs = {};
     for (const resourceDiv of tableData.children)

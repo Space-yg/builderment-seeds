@@ -8,6 +8,14 @@
     src: url(./fonts/troika.otf);
 }
 
+/** Highlight **/
+::selection {
+    /* Change highlight background color to black */
+    background: rgb(10, 149, 42);
+    /* Change highlight text color to red */
+    color: #ffffff;
+}
+
 /** Organization **/
 body {
     /* Position */
@@ -26,8 +34,18 @@ p {
     /* Font */
     font-family: Oswald, Arial, Helvetica, sans-serif;
 }
+/* a */
 a {
     color: black;
+    text-decoration: none;
+    background-image: linear-gradient(rgb(121, 223, 121), rgb(121, 223, 121));
+    background-repeat: no-repeat;
+    background-size: auto 6px;
+    background-position: 0 80%;
+}
+a:hover {
+    transition: all .1s;
+    background-size: auto 2px;
 }
 /* hs */
 h1 {
@@ -50,10 +68,6 @@ ul {
 li {
     /* Font */
     font-family: Oswald, Arial, Helvetica, sans-serif;
-}
-.important {
-    /* Font */
-    color: red;
 }
 /* Select */
 select {
@@ -79,6 +93,22 @@ footer {
 footer a {
     /* Font */
     color: gray;
+}
+
+/** Other **/
+.important {
+    /* Font */
+    color: red;
+}
+
+/** Version Date **/
+h2:has(+ time.date) {
+    display: inline-block;
+}
+time.date {
+    /* float: unset; */
+    color: rgb(186, 186, 186);
+    font-size: 15px;
 }
 
 /** Collection **/
@@ -168,111 +198,6 @@ label:has(input[type="checkbox"]) span.checkbox:after {
     display: none;
 }
 
-/** Data **/
-/* Table */
-table.data {
-    /* Position */
-    width: 100%;
-    margin: 0;
-    table-layout: fixed;
-    border-collapse: collapse;
-    border: 1px solid black;
-    /* Font */
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 18px;
-    text-align: center;
-}
-/* Head */
-table.data thead {
-    /* Position */
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    border: 1px solid black;
-    /* Color */
-    background-color: white;
-}
-table.data thead th {
-    padding: auto;
-}
-/* Body */
-table.data tbody th {
-    /* Font */
-    text-align: left;
-}
-table.data tbody th:last-child { border: 1px solid black; }
-table.data tbody th:hover { cursor: pointer; }
-
-/** Show More Button **/
-div.showMore {
-    /* Position */
-    border: solid 1px black;
-    border-top: 0;
-    text-align: center;
-    /* Font */
-    font-family: troika, Arial, Helvetica, sans-serif;
-    font-size: 18px;
-    background-color: transparent;
-    color: rgb(153, 0, 255);
-    /* Mouse */
-    cursor: pointer;
-}
-
-/** Mobile **/
-@media (pointer:none), (pointer:coarse) {
-    /** General **/
-    select {
-        font-size: 18px;
-    }
-    /* hs */
-    h1, h2 {
-        /* Font */
-        font-weight: normal;
-    }
-
-    /** Collection **/
-    .collection {
-        width: 80%;
-        padding: 30px;
-    }
-
-    /** Checkbox **/
-    /* Edit checkbox */
-    span.checkbox {
-        width: 15px;
-        height: 15px;
-    }
-    /* Edit check */
-    label:has(input[type="checkbox"]) span.checkbox:after {
-        /* Position */
-        left: 5px;
-        top: 2px;
-        width: 2.5px;
-        height: 7px;
-    }
-
-    /** Table **/
-    table.data {
-        /* Horizontal Scroll */
-        display: block;
-        overflow: auto;
-    }
-    table.data thead {
-        position: sticky;
-        /* overflow: auto; */
-    }
-    table.data thead th {
-        text-wrap: wrap;
-        padding: 0 10px;
-    }
-
-    /** Loading **/
-    .lds-spinner {
-        position: absolute;
-        transform: translate(-50%, 25%);
-    }
-}
-
 /** Table Data **/
 body {
     overflow-x: hidden;
@@ -290,7 +215,7 @@ body {
     top: 0;
     position: -webkit-sticky;
     position: sticky;
-    z-index: .5;
+    z-index: 1;
 
     background-color: white;
     border-bottom: 1px solid black;
@@ -371,6 +296,70 @@ body {
     }
 }
 
+/** Show More Button **/
+div.showMore {
+    /* Position */
+    border: solid 1px black;
+    border-top: 0;
+    text-align: center;
+    /* Font */
+    font-family: troika, Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    background-color: transparent;
+    color: rgb(153, 0, 255);
+    /* Mouse */
+    cursor: pointer;
+}
+
+/** Mobile View **/
+@media (pointer:none), (pointer:coarse) {
+    /** General **/
+    select {
+        font-size: 18px;
+    }
+    /* hs */
+    h1, h2 {
+        /* Font */
+        font-weight: normal;
+    }
+
+    /** Collection **/
+    .collection {
+        width: 80%;
+        padding: 30px;
+    }
+
+    /** Checkbox **/
+    /* Edit checkbox */
+    span.checkbox {
+        width: 15px;
+        height: 15px;
+    }
+    /* Edit check */
+    label:has(input[type="checkbox"]) span.checkbox:after {
+        /* Position */
+        left: 5px;
+        top: 2px;
+        width: 2.5px;
+        height: 7px;
+    }
+
+    /** Table **/
+    table.data {
+        /* Horizontal Scroll */
+        display: block;
+        overflow: auto;
+    }
+    table.data thead {
+        position: sticky;
+        /* overflow: auto; */
+    }
+    table.data thead th {
+        text-wrap: wrap;
+        padding: 0 10px;
+    }
+}
+
 /** Loading **/
 /* White background */
 div.whiteBackground {
@@ -380,14 +369,15 @@ div.whiteBackground {
     height: 100%;
     background-color: rgba(255, 255, 255, .9);
     position: fixed;
-    z-index: 1;
+    z-index: 2;
 }
 /* Loading Animation */
 .lds-spinner {
     position: fixed;
     left: 50%;
     bottom: 50%;
-    z-index: 1;
+    z-index: 2;
+    transform: translate(-50%, 25%);
     
     color: official;
     display: inline-block;
