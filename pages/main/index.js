@@ -17,10 +17,9 @@ import { Item } from "../../builderment-classes/dir/index.js";
             u: parseInt(line.substring(26, 28)),
             rf: 0,
         });
-    const tbody = document.getElementsByTagName("tbody")[0];
-    const resourceFilter = document.getElementById("resourceFilter");
     const whiteBackground = document.getElementsByClassName("whiteBackground").item(0);
     const loading = document.getElementsByClassName("lds-spinner").item(0);
+    const resourceFilter = document.getElementById("resourceFilter");
     const amountFilter = document.getElementById("amountFilter");
     const amount = document.getElementById("amount");
     const order = document.getElementById("order");
@@ -31,58 +30,54 @@ import { Item } from "../../builderment-classes/dir/index.js";
     const resourceAmountCheck = document.getElementById("resourceAmountCheck");
     const resourceAmountRange = document.getElementById("resourceAmountRange");
     const totalResults = document.getElementById("totalResults");
+    const tbody = document.getElementsByTagName("tbody")[0];
+    const tableData = document.getElementById("data");
+    const resourcesDivs = {};
+    for (const resourceDiv of tableData.children)
+        resourcesDivs[resourceDiv.dataset["name"]] = resourceDiv;
+    const showMore = document.getElementById("showMore");
+    const sliderValueToSize = {
+        "1": "50",
+        "2": "75",
+        "3": "100",
+        "4": "150",
+        "5": "200",
+    };
     var seedData = [...seeds];
     function test() { console.log("Test"); }
     function copy(event) { navigator.clipboard.writeText(event.target.innerHTML); }
     function addSeedTableRow(seed) {
-        const tr = document.createElement("tr");
-        tr.innerHTML += `<th onclick="navigator.clipboard.writeText(event.target.innerHTML)">${seed.sd}</th>
-        <td>${seed.wd}</td>
-        <td>${seed.s}</td>
-        <td>${seed.i}</td>
-        <td>${seed.cp}</td>
-        <td>${seed.cl}</td>
-        <td>${seed.wl}</td>
-        <td>${(seed.u) ? seed.u : "unknown"}</td>
-        <td>${(seed.ws === 1) ? 50 : (seed.ws === 2) ? 75 : (seed.ws === 3) ? 100 : (seed.ws === 4) ? 150 : 200}</td>
-        <td>${(seed.r === 1) ? 50 : (seed.r === 2) ? 75 : (seed.r === 3) ? 100 : (seed.r === 4) ? 150 : 200}</td>`;
-        const td = document.createElement("td");
-        td.innerHTML = (Math.round(seed.rf * 1000) / 1000).toString();
-        td.title = (Math.round(seed.rf * 100000) / 100000).toString();
-        td.addEventListener("click", event => {
-            let temp = event.target.innerHTML;
-            event.target.innerHTML = event.target.title;
-            event.target.title = temp;
-        });
-        tr.appendChild(td);
-        tbody.appendChild(tr);
+        for (const k in seed) {
+            const key = k;
+            if (key == "rf")
+                resourcesDivs[key].innerHTML += `<div class="entry" onclick="let t=event.target.innerHTML;event.target.innerHTML=event.target.title;event.target.title=t" title="${Math.round(seed.rf * 100000) / 100000}">${Math.round(seed.rf * 1000) / 1000}</div>`;
+            else
+                resourcesDivs[key].innerHTML += `<div class="entry">${seed[key]}</div>`;
+        }
     }
     function addShowMoreButton(data, lastIndex) {
-        const tr = document.createElement("tr");
-        tr.addEventListener("click", () => addData(data, lastIndex, 50));
-        const th = document.createElement("th");
-        const span = document.createElement("span");
-        span.setAttribute("class", "showMore");
-        span.innerHTML = "Show more";
-        th.setAttribute("colspan", "11");
-        th.style.textAlign = "center";
-        th.appendChild(span);
-        tr.appendChild(th);
-        tbody.appendChild(tr);
+        showMore.hidden = false;
+        showMore.onclick = () => addData(data, lastIndex, 50);
     }
     function addData(data, lastIndex, amount) {
-        tbody.lastChild.remove();
+        showMore.onclick = null;
         for (let i = lastIndex; i < Math.min(lastIndex + amount, data.length); i++)
             addSeedTableRow(data[i]);
         if (data.length > lastIndex + amount)
             addShowMoreButton(data, lastIndex + amount);
+        else
+            showMore.hidden = true;
     }
     function setData(data, showLimit = 50) {
-        tbody.innerHTML = "";
+        showMore.onclick = null;
+        for (const name in resourcesDivs)
+            resourcesDivs[name].innerHTML = "";
         for (let i = 0; i < Math.min(showLimit, data.length); i++)
             addSeedTableRow(data[i]);
         if (data.length > showLimit)
             addShowMoreButton(data, showLimit);
+        else
+            showMore.hidden = true;
     }
     function filter(resourceFilter, worldSize, resourceAmount) {
         let filteredSeeds = [...seedData];
@@ -133,13 +128,13 @@ import { Item } from "../../builderment-classes/dir/index.js";
     amountFilter.addEventListener("change", Filter);
     amount.addEventListener("change", Filter);
     order.addEventListener("change", Filter);
-    worldSize.addEventListener("mouseup", () => (worldSizeCheck.checked) ? Filter() : "");
-    worldSize.addEventListener("touchend", () => (worldSizeCheck.checked) ? Filter() : "");
-    worldSize.addEventListener("input", () => worldSizeRange.innerHTML = (worldSize.value === "1") ? "50%" : (worldSize.value === "2") ? "75%" : (worldSize.value === "3") ? "100%" : (worldSize.value === "4") ? "150%" : "200%");
+    worldSize.addEventListener("mouseup", () => (worldSizeCheck.checked) ? Filter() : null);
+    worldSize.addEventListener("touchend", () => (worldSizeCheck.checked) ? Filter() : null);
+    worldSize.addEventListener("input", () => worldSizeRange.innerHTML = sliderValueToSize[worldSize.value] + "%");
     worldSizeCheck.addEventListener("click", Filter);
     resourceAmount.addEventListener("mouseup", () => (resourceAmountCheck.checked) ? Filter() : "");
     resourceAmount.addEventListener("touchend", () => (resourceAmountCheck.checked) ? Filter() : "");
-    resourceAmount.addEventListener("input", () => resourceAmountRange.innerHTML = (resourceAmount.value === "1") ? "50%" : (resourceAmount.value === "2") ? "75%" : (resourceAmount.value === "3") ? "100%" : (resourceAmount.value === "4") ? "150%" : "200%");
+    resourceAmount.addEventListener("input", () => resourceAmountRange.innerHTML = sliderValueToSize[resourceAmount.value] + "%");
     resourceAmountCheck.addEventListener("click", Filter);
     Filter();
     function calculateResources() {
@@ -166,6 +161,7 @@ import { Item } from "../../builderment-classes/dir/index.js";
         Filter();
     }
     resourceFilter.addEventListener("change", calculateResources);
+    calculateResources();
     function amountFunction() {
         if (amountFilter.selectedIndex >= 2) {
             amount.style.display = "inline-block";

@@ -10,10 +10,6 @@ import { Item } from "../../builderment-classes/dir/index.js"
 interface Seed {
     /** Seed */
     sd: string
-    /** World Size */
-    ws: number
-    /** Resource Amount */
-    r: number
     /** Wood Log */
     wd: number
     /** Stone */
@@ -28,6 +24,10 @@ interface Seed {
     wl: number
     /** Uranium */
     u: number
+    /** World Size */
+    ws: number
+    /** Resource Amount */
+    r: number
     /** Resource Filter */
     rf: number
 }
@@ -64,11 +64,13 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
         rf: 0,
     } as Seed)
 
-    const tbody = document.getElementsByTagName("tbody")[0]
-    const resourceFilter = <HTMLSelectElement> document.getElementById("resourceFilter")
-    // Loading and White background
+    //// Loading
     const whiteBackground = <HTMLDivElement> document.getElementsByClassName("whiteBackground").item(0)
     const loading = <HTMLDivElement> document.getElementsByClassName("lds-spinner").item(0)
+    
+    //// Filters
+    // Resource Filter
+    const resourceFilter = <HTMLSelectElement> document.getElementById("resourceFilter")
     // Amount Filter
     const amountFilter = <HTMLSelectElement> document.getElementById("amountFilter")
     const amount = <HTMLInputElement> document.getElementById("amount")
@@ -77,16 +79,36 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
     const worldSize = <HTMLInputElement> document.getElementById("worldSizeFilter")
     const worldSizeCheck = <HTMLInputElement> document.getElementById("worldSizeCheck")
     const worldSizeRange = <HTMLSpanElement> document.getElementById("worldSizeRange")
-    // World Size Filter
+    // Resource Amount Filter
     const resourceAmount = <HTMLInputElement> document.getElementById("resourceAmountFilter")
     const resourceAmountCheck = <HTMLInputElement> document.getElementById("resourceAmountCheck")
     const resourceAmountRange = <HTMLSpanElement> document.getElementById("resourceAmountRange")
     // total Results
-    const totalResults = document.getElementById("totalResults")!
+    const totalResults = <HTMLParagraphElement> document.getElementById("totalResults")!
+    
+    //// Table
+    // Table data
+    const tbody = document.getElementsByTagName("tbody")[0]
+
+    const tableData = <HTMLDivElement> document.getElementById("data")!
+    // Add all resources to resourcesDivs
+    const resourcesDivs: {[name: string]: HTMLDivElement} = {}
+    for (const resourceDiv of <HTMLCollectionOf<HTMLDivElement>> tableData.children) resourcesDivs[resourceDiv.dataset["name"]!] = resourceDiv
+
+    // Show More Button
+    const showMore = <HTMLDivElement> document.getElementById("showMore")!
+
+    const sliderValueToSize: {[values: string]: string} = {
+        "1": "50",
+        "2": "75",
+        "3": "100",
+        "4": "150",
+        "5": "200",
+    }
 
     var seedData = [...seeds]
 
-    // Test any functionality
+    /** Test any functionality */
     function test() { console.log("Test") }
 
     /**
@@ -100,34 +122,42 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
      * @param seed The seed to add
      */
     function addSeedTableRow(seed: Seed) {
-        // Make new row
-        const tr = document.createElement("tr")
+        //// New Format
+        for (const k in seed) {
+            const key = k as keyof Seed
+            if (key == "rf") resourcesDivs[key].innerHTML += `<div class="entry" onclick="let t=event.target.innerHTML;event.target.innerHTML=event.target.title;event.target.title=t" title="${Math.round(seed.rf * 100000) / 100000}">${Math.round(seed.rf * 1000) / 1000}</div>`
+            else resourcesDivs[key].innerHTML += `<div class="entry">${seed[key]}</div>`
+        }
 
-        // Add seed, resources, world size, and resource amount
-        tr.innerHTML += `<th onclick="navigator.clipboard.writeText(event.target.innerHTML)">${seed.sd}</th>
-        <td>${seed.wd}</td>
-        <td>${seed.s}</td>
-        <td>${seed.i}</td>
-        <td>${seed.cp}</td>
-        <td>${seed.cl}</td>
-        <td>${seed.wl}</td>
-        <td>${(seed.u) ? seed.u : "unknown"}</td>
-        <td>${(seed.ws === 1) ? 50 : (seed.ws === 2) ? 75 : (seed.ws === 3) ? 100 : (seed.ws === 4) ? 150 : 200}</td>
-        <td>${(seed.r === 1) ? 50 : (seed.r === 2) ? 75 : (seed.r === 3) ? 100 : (seed.r === 4) ? 150 : 200}</td>`
+        // //// Old Format
+        // // Make new row
+        // const tr = document.createElement("tr")
 
-        // Add Resource Filter
-        const td = document.createElement("td")
-        td.innerHTML = (Math.round(seed.rf * 1000) / 1000).toString()
-        td.title = (Math.round(seed.rf * 100000) / 100000).toString()
-        td.addEventListener("click", event => {
-            let temp = (<HTMLTableCellElement> event.target!).innerHTML;
-            (<HTMLTableCellElement> event.target!).innerHTML = (<HTMLTableCellElement> event.target!).title;
-            (<HTMLTableCellElement> event.target!).title = temp
-        })
-        tr.appendChild(td)
+        // // Add seed, resources, world size, and resource amount
+        // tr.innerHTML += `<th onclick="navigator.clipboard.writeText(event.target.innerHTML)">${seed.sd}</th>
+        // <td>${seed.wd}</td>
+        // <td>${seed.s}</td>
+        // <td>${seed.i}</td>
+        // <td>${seed.cp}</td>
+        // <td>${seed.cl}</td>
+        // <td>${seed.wl}</td>
+        // <td>${(seed.u) ? seed.u : "unknown"}</td>
+        // <td>${sliderValueToSize[seed.ws]}</td>
+        // <td>${sliderValueToSize[seed.r]}</td>`
 
-        // Add to table
-        tbody.appendChild(tr)
+        // // Add Resource Filter
+        // const td = document.createElement("td")
+        // td.innerHTML = (Math.round(seed.rf * 1000) / 1000).toString()
+        // td.title = (Math.round(seed.rf * 100000) / 100000).toString()
+        // td.addEventListener("click", event => {
+        //     let temp = (<HTMLTableCellElement> event.target!).innerHTML;
+        //     (<HTMLTableCellElement> event.target!).innerHTML = (<HTMLTableCellElement> event.target!).title;
+        //     (<HTMLTableCellElement> event.target!).title = temp
+        // })
+        // tr.appendChild(td)
+
+        // // Add to table
+        // tbody.appendChild(tr)
     }
 
     /**
@@ -136,17 +166,8 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
      * @param lastIndex The last index of the last seed
      */
     function addShowMoreButton(data: Seed[], lastIndex: number) {
-        const tr = document.createElement("tr")
-        tr.addEventListener("click", () => addData(data, lastIndex, 50))
-        const th = document.createElement("th")
-        const span = document.createElement("span")
-        span.setAttribute("class", "showMore")
-        span.innerHTML = "Show more"
-        th.setAttribute("colspan", "11")
-        th.style.textAlign = "center"
-        th.appendChild(span)
-        tr.appendChild(th)
-        tbody.appendChild(tr)
+        showMore.hidden = false
+        showMore.onclick = () => addData(data, lastIndex, 50)
     }
 
     /**
@@ -156,14 +177,14 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
      * @param amount The amount MORE to add
      */
     function addData(data: Seed[], lastIndex: number, amount: number) {
-        // Remove Show More Button
-        tbody.lastChild!.remove()
+        showMore.onclick = null
 
         // Add data to table
         for (let i = lastIndex; i < Math.min(lastIndex + amount, data.length); i++) addSeedTableRow(data[i])
 
         // Add Show More button
         if (data.length > lastIndex + amount) addShowMoreButton(data, lastIndex + amount)
+        else showMore.hidden = true
     }
 
     /**
@@ -172,14 +193,18 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
      * @param showLimit The limit of how many seeds to show
      */
     function setData(data: Seed[], showLimit: number = 50) {
+        showMore.onclick = null
+
         // Clear All data
-        tbody.innerHTML = ""
+        for (const name in resourcesDivs) resourcesDivs[name].innerHTML = ""
+        // tbody.innerHTML = ""
 
         // Add data to table
         for (let i = 0; i < Math.min(showLimit, data.length); i++) addSeedTableRow(data[i])
 
         // Add Show More button
         if (data.length > showLimit) addShowMoreButton(data, showLimit)
+        else showMore.hidden = true
     }
 
     /**
@@ -187,7 +212,7 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
      * @param resourceFilter [Resource, ">" || "≥" || "=" || "≤" || "<", Amount, "Ascending" || "Descending"] or [Resource, "Max" || "Min"] or ["None"]
      * @param worldSize worldSize.value
      * @param resourceAmount resourceAmount.value
-    */
+     */
     function filter(resourceFilter: ResourceFilter, worldSize: string, resourceAmount: string) {
         // Add all data to row
         let filteredSeeds = [...seedData]
@@ -220,7 +245,7 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
         setData(filteredSeeds)
     }
 
-    // Filter function
+    /** Main Filter function */
     function Filter() {
         whiteBackground.style.visibility = "visible"
         loading.style.visibility = "visible"
@@ -246,14 +271,14 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
     amount.addEventListener("change", Filter)
     order.addEventListener("change", Filter)
     // World Size Filter
-    worldSize.addEventListener("mouseup", () => (worldSizeCheck.checked) ? Filter() : "")
-    worldSize.addEventListener("touchend", () => (worldSizeCheck.checked) ? Filter() : "")
-    worldSize.addEventListener("input", () => worldSizeRange.innerHTML = (worldSize.value === "1") ? "50%" : (worldSize.value === "2") ? "75%" : (worldSize.value === "3") ? "100%" : (worldSize.value === "4") ? "150%" : "200%")
+    worldSize.addEventListener("mouseup", () => (worldSizeCheck.checked) ? Filter() : null)
+    worldSize.addEventListener("touchend", () => (worldSizeCheck.checked) ? Filter() : null)
+    worldSize.addEventListener("input", () => worldSizeRange.innerHTML = sliderValueToSize[worldSize.value] + "%")
     worldSizeCheck.addEventListener("click", Filter)
     // Resource Amount
     resourceAmount.addEventListener("mouseup", () => (resourceAmountCheck.checked) ? Filter() : "")
     resourceAmount.addEventListener("touchend", () => (resourceAmountCheck.checked) ? Filter() : "")
-    resourceAmount.addEventListener("input", () => resourceAmountRange.innerHTML = (resourceAmount.value === "1") ? "50%" : (resourceAmount.value === "2") ? "75%" : (resourceAmount.value === "3") ? "100%" : (resourceAmount.value === "4") ? "150%" : "200%")
+    resourceAmount.addEventListener("input", () => resourceAmountRange.innerHTML = sliderValueToSize[resourceAmount.value] + "%")
     resourceAmountCheck.addEventListener("click", Filter)
     Filter()
 
@@ -282,6 +307,7 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
         Filter()
     }
     resourceFilter.addEventListener("change", calculateResources)
+    calculateResources()
 
     // Show filter options
     function amountFunction() {

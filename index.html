@@ -92,7 +92,7 @@
                     <option>Copper Ingot</option>
                     <option>Copper Wire</option>
                     <option>Coupler</option>
-                    <option>Earth Token</option>
+                    <option selected>Earth Token</option>
                     <option>Electric Motor</option>
                     <option>Electromagnet</option>
                     <option>Electron Microscope</option>
@@ -174,30 +174,45 @@
         
         <!-- Table -->
         <main class="collection">
-            <div class="data">
-                <table class="data">
-                    <thead>
-                        <th>Seed</th>
-                        <th>Wood Log</th>
-                        <th>Stone</th>
-                        <th>Iron Ore</th>
-                        <th>Copper Ore</th>
-                        <th>Coal</th>
-                        <th>Wolframite</th>
-                        <th>Uranium</th>
-                        <th>World Size</th>
-                        <th>Resource Amount</th>
-                        <th>Resource</th>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <!-- Table Data -->
+            <div class="wrap">
+                <div class="headers">
+                    <div class="scroller syncscroll" name="myElements">
+                        <div class="track"><div class="heading">Seed</div></div>
+                        <div class="track"><div class="heading">Wood Log</div></div>
+                        <div class="track"><div class="heading">Stone</div></div>
+                        <div class="track"><div class="heading">Iron Ore</div></div>
+                        <div class="track"><div class="heading">Copper Ore</div></div>
+                        <div class="track"><div class="heading">Coal</div></div>
+                        <div class="track"><div class="heading">Wolframite</div></div>
+                        <div class="track"><div class="heading">Uranium</div></div>
+                        <div class="track"><div class="heading">World Size</div></div>
+                        <div class="track"><div class="heading">Resource Amount</div></div>
+                        <div class="track"><div class="heading">Resource</div></div>
+                    </div>
+                </div>
+                <div class="tracks syncscroll" id="data" name="myElements">
+                    <div class="track" data-name="sd"></div>
+                    <div class="track" data-name="wd"></div>
+                    <div class="track" data-name="s"></div>
+                    <div class="track" data-name="i"></div>
+                    <div class="track" data-name="cp"></div>
+                    <div class="track" data-name="cl"></div>
+                    <div class="track" data-name="wl"></div>
+                    <div class="track" data-name="u"></div>
+                    <div class="track" data-name="ws"></div>
+                    <div class="track" data-name="r"></div>
+                    <div class="track" data-name="rf"></div>
+                </div>
             </div>
+
+            <!-- Show More Button -->
+            <div class="showMore" id="showMore">Show More</div>
         </main>
     </body>
 
     <!-- Scripts -->
-    <script src="./pages/main/index.js" type="module"></script>
-    
-    <!-- Footer -->
-    <script src="./pages/footer.js" type="module"></script>
+    <script src="./pages/main/index.js" type="module"></script>             <!-- To add the data to the table -->
+    <script src="http://asvd.github.io/syncscroll/syncscroll.js"></script>  <!-- For Scroll Synchronization between table head and body -->
+    <script src="./pages/footer.js" type="module"></script>                 <!-- To generate the footer -->
 </html>
