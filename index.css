@@ -136,7 +136,7 @@ nav.languages {
     background-color: white;
     /* Position */
     position: absolute;
-    right: 10px;
+    right: 0;
     top: 55px;
     text-align: center;
     padding: 10px;
@@ -156,7 +156,7 @@ nav.languages > ul > li {
 button.languages {
     /* Position */
     position: absolute;
-    right: 30px;
+    right: 34px;
     top: 30px;
     border: 0;
     padding: 0;

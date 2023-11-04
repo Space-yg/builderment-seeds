@@ -117,11 +117,14 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
      * @param seed The seed to add
      */
     function addSeedTableRow(seed: Seed) {
-        //// New Format
         for (const k in seed) {
             const key = k as keyof Seed
+
+            // Resource Filter
             if (key == "rf") resourcesDivs[key].innerHTML += `<div class="entry" onclick="let t=event.target.innerHTML;event.target.innerHTML=event.target.title;event.target.title=t" title="${Math.round(seed.rf * 100000) / 100000}">${Math.round(seed.rf * 1000) / 1000}</div>`
+            // World Size and Resource Amount
             else if (key == "ws" || key == "r") resourcesDivs[key].innerHTML += `<div class="entry">${sliderValueToSize[seed[key]]}</div>`
+            // Other
             else resourcesDivs[key].innerHTML += `<div class="entry">${seed[key]}</div>`
         }
     }
@@ -181,27 +184,39 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
     function filter(resourceFilter: ResourceFilter, worldSize: string, resourceAmount: string) {
         // Add all data to row
         let filteredSeeds = [...seedData]
-
+        
         // Filter World Size
         let size = parseInt(worldSize)
         if (!isNaN(size)) filteredSeeds = filteredSeeds.filter(seed => seed.ws === size)
-
+        
         // Filter World Size
         let amount = parseInt(resourceAmount)
         if (!isNaN(amount)) filteredSeeds = filteredSeeds.filter(seed => seed.r === amount)
 
-        // Filter Resource
+        // Calculate Resources if it is Max or Min
+        if (resourceFilter.length == 2) calculateResources(filteredSeeds)
+
+        // Get resource to filter
         let resource: keyof Omit<Seed, "sd"> = (resourceFilter[0] === "Wood Log") ? "wd" : (resourceFilter[0] === "Stone") ? "s" : (resourceFilter[0] === "Iron Ore") ? "i" : (resourceFilter[0] === "Copper Ore") ? "cp" : (resourceFilter[0] === "Coal") ? "cl" : (resourceFilter[0] === "Wolframite") ? "wl" : (resourceFilter[0] === "Uranium Ore") ? "u" : "rf";
+
+        // Sort or Filter resources
         (resourceFilter[0] === "None") ? null :
-        (resourceFilter[1] === "Max") ? filteredSeeds.sort((a, b) => {return b[resource] - a[resource]}) :
-        (resourceFilter[1] === "Min") ? filteredSeeds.sort((a, b) => {return a[resource] - b[resource]}) :
+        (resourceFilter[1] === "Max") ? filteredSeeds.sort((a, b) => b[resource] - a[resource]) :
+        (resourceFilter[1] === "Min") ? filteredSeeds.sort((a, b) => a[resource] - b[resource]) :
         (resourceFilter[1] === ">") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] > resourceFilter[2]) :
         (resourceFilter[1] === "≥") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] >= resourceFilter[2]) :
         (resourceFilter[1] === "=") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] === resourceFilter[2]) :
         (resourceFilter[1] === "≤") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] <= resourceFilter[2]) :
         (resourceFilter[1] === "<") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] < resourceFilter[2]) : null;
-        (resourceFilter[3] === "Descending") ? filteredSeeds.sort((a, b) => { return b[resource] - a[resource]}) :
-        (resourceFilter[3] === "Ascending") ? filteredSeeds.sort((a, b) => { return a[resource] - b[resource]}) : null
+
+        // Calculate Resources if it is NOT Max or Min
+        if (resourceFilter.length != 2) calculateResources(filteredSeeds);
+
+        // Filter Order
+        if (resourceFilter.length == 4) {
+            (resourceFilter[3] === "Descending") ? filteredSeeds.sort((a, b) => b[resource] - a[resource]) :
+            (resourceFilter[3] === "Ascending") ? filteredSeeds.sort((a, b) => a[resource] - b[resource]) : null;
+        }
 
         // Total Results
         totalResults.innerHTML = filteredSeeds.length.toString()
@@ -212,21 +227,29 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
 
     /** Main Filter function */
     function Filter() {
+        // Show Loading
         whiteBackground.style.visibility = "visible"
         loading.style.visibility = "visible"
+
         setTimeout(() => {
             let resource: ResourceFilter =
                 (resourceFilter.selectedIndex) ?
                     (amountFilter.selectedIndex >= 2) ? [resourceFilter.value, amountFilter.options[amountFilter.selectedIndex].text as FilterSigns, parseFloat(amount.value), order.value as FilterOrder] :
                     [resourceFilter.value, amountFilter.options[amountFilter.selectedIndex].text as FilterMinMax] :
                 ["None"]
+            
+            // World Size
             if (worldSizeCheck.checked) {
+                // Resource Amount
                 if (resourceAmountCheck.checked) filter(resource, worldSize.value, resourceAmount.value)
                 else filter(resource, worldSize.value, "None")
             } else {
+                // Resource Amount
                 if (resourceAmountCheck.checked) filter(resource, "None", resourceAmount.value)
                 else filter(resource, "None", "None")
             }
+
+            // Hide Loading
             whiteBackground.style.visibility = "hidden"
             loading.style.visibility = "hidden"
         }, 10)
@@ -248,31 +271,25 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
     Filter()
 
     /** Calculate the resources */
-    function calculateResources() {
-        whiteBackground.style.visibility = "visible"
-        loading.style.visibility = "visible"
-        setTimeout(() => {
-            if (Item.items[resourceFilter.value] !== undefined) {
-                const item: Item = Item.items[resourceFilter.value]
-                
-                // Calculate resource
-                seedData.forEach(seed => {
-                    seed.rf = item.getMaxResourceAmountInSeed({
-                        "Wood Log": seed.wd,
-                        Stone: seed.s,
-                        "Iron Ore": seed.i,
-                        "Copper Ore": seed.cp,
-                        Coal: seed.cl,
-                        Wolframite: seed.wl,
-                        "Uranium Ore": seed.u,
-                    });
-                })
-            } else seedData.forEach(seed => seed.rf = 0)
-        })
-        Filter()
+    function calculateResources(seeds: Seed[]) {
+        if (Item.items[resourceFilter.value] !== undefined) {
+            const item: Item = Item.items[resourceFilter.value]
+            
+            // Calculate resources
+            seeds.forEach(seed => {
+                seed.rf = item.getMaxResourceAmountInSeed({
+                    "Wood Log": seed.wd,
+                    Stone: seed.s,
+                    "Iron Ore": seed.i,
+                    "Copper Ore": seed.cp,
+                    Coal: seed.cl,
+                    Wolframite: seed.wl,
+                    "Uranium Ore": seed.u,
+                });
+            })
+        } else seeds.forEach(seed => seed.rf = 0)
     }
-    resourceFilter.addEventListener("change", calculateResources)
-    calculateResources()
+    resourceFilter.addEventListener("change", Filter)
 
     /** Show filter options */
     function amountFunction() {

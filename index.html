@@ -52,8 +52,8 @@
                     <button class="languages"><img width="25" height="25" src="https://img.icons8.com/ios/100/globe--v1.png" alt="Globe"></button>
                     <nav class="languages">
                         <ul>
-                            <li><a href="?lang=en">English</a></li>
-                            <li><a href="?lang=nl">Dutch</a></li>
+                            <li><a href="./">English</a></li>
+                            <li><a href="?lang=nl">Nederlands</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -204,14 +204,14 @@
             </div>
 
             <!-- Show More Button -->
-            <div class="showMore" id="showMore">Show More</div>
+            <div class="showMore" id="showMore" hidden>Show More</div>
         </main>
     </body>
     
     <!-- Scripts -->
     <script src="./pages/footer.js" type="module"></script>                                         <!-- Generate the footer -->
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.2/dist/markdown-it.min.js"></script> <!-- MarkdownIt -->
-    <script async type="module" defer>
+    <script async type="module">
         //// Redirect to main page if language is english
         const langFromURL = new URLSearchParams(location.search).get("lang")
         if (langFromURL == "en") window.location.replace("./")
@@ -320,7 +320,7 @@
             document.getElementsByTagName("footer")[0].innerHTML += '<p><a href="https://icons8.com/icon/3685/globe"><img width="15" height="15" src="https://img.icons8.com/ios/100/globe--v1.png" alt="Globe"></a> icon by <a href="https://icons8.com">Icons8</a></p>'
         })
     </script>
-    <script src="./pages/index.js"></script>                                <!-- Script that runs on all pages -->
-    <script src="./pages/main/index.js" type="module"></script>             <!-- Add the data to the table -->
-    <script src="https://asvd.github.io/syncscroll/syncscroll.js"></script> <!-- For Scroll Synchronization between table head and body -->
+    <script src="./pages/index.js" defer></script>                                <!-- Script that runs on all pages -->
+    <script src="https://asvd.github.io/syncscroll/syncscroll.js" defer></script> <!-- For Scroll Synchronization between table head and body -->
+    <script src="./pages/main/index.js" type="module" defer></script>             <!-- Add the data to the table -->
 </html>

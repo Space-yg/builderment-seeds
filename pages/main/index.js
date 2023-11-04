@@ -88,17 +88,23 @@ import { Item } from "../../builderment-classes/dir/index.js";
         let amount = parseInt(resourceAmount);
         if (!isNaN(amount))
             filteredSeeds = filteredSeeds.filter(seed => seed.r === amount);
+        if (resourceFilter.length == 2)
+            calculateResources(filteredSeeds);
         let resource = (resourceFilter[0] === "Wood Log") ? "wd" : (resourceFilter[0] === "Stone") ? "s" : (resourceFilter[0] === "Iron Ore") ? "i" : (resourceFilter[0] === "Copper Ore") ? "cp" : (resourceFilter[0] === "Coal") ? "cl" : (resourceFilter[0] === "Wolframite") ? "wl" : (resourceFilter[0] === "Uranium Ore") ? "u" : "rf";
         (resourceFilter[0] === "None") ? null :
-            (resourceFilter[1] === "Max") ? filteredSeeds.sort((a, b) => { return b[resource] - a[resource]; }) :
-                (resourceFilter[1] === "Min") ? filteredSeeds.sort((a, b) => { return a[resource] - b[resource]; }) :
+            (resourceFilter[1] === "Max") ? filteredSeeds.sort((a, b) => b[resource] - a[resource]) :
+                (resourceFilter[1] === "Min") ? filteredSeeds.sort((a, b) => a[resource] - b[resource]) :
                     (resourceFilter[1] === ">") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] > resourceFilter[2]) :
                         (resourceFilter[1] === "≥") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] >= resourceFilter[2]) :
                             (resourceFilter[1] === "=") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] === resourceFilter[2]) :
                                 (resourceFilter[1] === "≤") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] <= resourceFilter[2]) :
                                     (resourceFilter[1] === "<") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] < resourceFilter[2]) : null;
-        (resourceFilter[3] === "Descending") ? filteredSeeds.sort((a, b) => { return b[resource] - a[resource]; }) :
-            (resourceFilter[3] === "Ascending") ? filteredSeeds.sort((a, b) => { return a[resource] - b[resource]; }) : null;
+        if (resourceFilter.length != 2)
+            calculateResources(filteredSeeds);
+        if (resourceFilter.length == 4) {
+            (resourceFilter[3] === "Descending") ? filteredSeeds.sort((a, b) => b[resource] - a[resource]) :
+                (resourceFilter[3] === "Ascending") ? filteredSeeds.sort((a, b) => a[resource] - b[resource]) : null;
+        }
         totalResults.innerHTML = filteredSeeds.length.toString();
         setData(filteredSeeds);
     }
@@ -138,31 +144,25 @@ import { Item } from "../../builderment-classes/dir/index.js";
     resourceAmount.addEventListener("input", () => resourceAmountRange.innerHTML = sliderValueToSize[resourceAmount.value] + "%");
     resourceAmountCheck.addEventListener("click", Filter);
     Filter();
-    function calculateResources() {
-        whiteBackground.style.visibility = "visible";
-        loading.style.visibility = "visible";
-        setTimeout(() => {
-            if (Item.items[resourceFilter.value] !== undefined) {
-                const item = Item.items[resourceFilter.value];
-                seedData.forEach(seed => {
-                    seed.rf = item.getMaxResourceAmountInSeed({
-                        "Wood Log": seed.wd,
-                        Stone: seed.s,
-                        "Iron Ore": seed.i,
-                        "Copper Ore": seed.cp,
-                        Coal: seed.cl,
-                        Wolframite: seed.wl,
-                        "Uranium Ore": seed.u,
-                    });
+    function calculateResources(seeds) {
+        if (Item.items[resourceFilter.value] !== undefined) {
+            const item = Item.items[resourceFilter.value];
+            seeds.forEach(seed => {
+                seed.rf = item.getMaxResourceAmountInSeed({
+                    "Wood Log": seed.wd,
+                    Stone: seed.s,
+                    "Iron Ore": seed.i,
+                    "Copper Ore": seed.cp,
+                    Coal: seed.cl,
+                    Wolframite: seed.wl,
+                    "Uranium Ore": seed.u,
                 });
-            }
-            else
-                seedData.forEach(seed => seed.rf = 0);
-        });
-        Filter();
+            });
+        }
+        else
+            seeds.forEach(seed => seed.rf = 0);
     }
-    resourceFilter.addEventListener("change", calculateResources);
-    calculateResources();
+    resourceFilter.addEventListener("change", Filter);
     function amountFunction() {
         if (amountFilter.selectedIndex >= 2) {
             amount.style.display = "inline-block";
