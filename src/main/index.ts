@@ -83,8 +83,8 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
     const resourceAmount = <HTMLInputElement> document.getElementById("resourceAmountFilter")
     const resourceAmountCheck = <HTMLInputElement> document.getElementById("resourceAmountCheck")
     const resourceAmountRange = <HTMLSpanElement> document.getElementById("resourceAmountRange")
-    // total Results
-    const totalResults = <HTMLParagraphElement> document.getElementById("totalResults")!
+    // Total Results
+    const totalResults = <HTMLSpanElement> document.getElementById("totalResults")!
     
     //// Table
     // Table data
@@ -121,6 +121,7 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
         for (const k in seed) {
             const key = k as keyof Seed
             if (key == "rf") resourcesDivs[key].innerHTML += `<div class="entry" onclick="let t=event.target.innerHTML;event.target.innerHTML=event.target.title;event.target.title=t" title="${Math.round(seed.rf * 100000) / 100000}">${Math.round(seed.rf * 1000) / 1000}</div>`
+            else if (key == "ws" || key == "r") resourcesDivs[key].innerHTML += `<div class="entry">${sliderValueToSize[seed[key]]}</div>`
             else resourcesDivs[key].innerHTML += `<div class="entry">${seed[key]}</div>`
         }
     }
@@ -203,7 +204,7 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
         (resourceFilter[3] === "Ascending") ? filteredSeeds.sort((a, b) => { return a[resource] - b[resource]}) : null
 
         // Total Results
-        totalResults.innerHTML = "Total results: " + filteredSeeds.length
+        totalResults.innerHTML = filteredSeeds.length.toString()
         
         // Put data in table
         setData(filteredSeeds)

@@ -16,6 +16,20 @@
     color: #ffffff;
 }
 
+/** Scrollbar **/
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+::-webkit-scrollbar-thumb {
+    background: #bbb; 
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #999; 
+}
+
 /** Organization **/
 body {
     /* Position */
@@ -46,6 +60,9 @@ a {
 a:hover {
     transition: all .1s;
     background-size: auto 2px;
+}
+a:has(img) {
+    background: none;
 }
 /* hs */
 h1 {
@@ -99,6 +116,59 @@ footer a {
 .important {
     /* Font */
     color: red;
+}
+
+/** Grid **/
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+.grid h1 {
+    text-wrap: wrap;
+}
+
+/** Languages **/
+header {
+    /* Position */
+    position: relative;
+}
+nav.languages {
+    background-color: white;
+    /* Position */
+    position: absolute;
+    right: 10px;
+    top: 55px;
+    text-align: center;
+    padding: 10px;
+    /* Transition */
+    transition: all .4s;
+    opacity: 0;
+    visibility: hidden;
+}
+nav.languages > ul {
+    list-style-type: none;
+    /* Position */
+    padding: 0;
+}
+nav.languages > ul > li {
+    cursor: pointer;
+}
+button.languages {
+    /* Position */
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    border: 0;
+    padding: 0;
+    /* Other */
+    background-color: transparent;
+    cursor: pointer;
+}
+button.languages:hover + nav.languages, nav.languages:hover {
+    /* Transition */
+    transition: all .4s;
+    opacity: 1;
+    visibility: visible;
 }
 
 /** Version Date **/
@@ -273,7 +343,7 @@ body {
     top: 0;
     z-index: 1;
 
-    padding: 10px;
+    padding: 5px;
     text-wrap: wrap;
     justify-content: center;
     font-family: troika, Arial, Helvetica, sans-serif;
@@ -292,7 +362,7 @@ body {
 
 @media (max-width: 1000px) {
     .track {
-        flex: 1 0 95px;
+        flex: 1 0 120px;
     }
 }
 

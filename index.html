@@ -3,7 +3,7 @@
     <head>
         <link rel="stylesheet" href="index.css">
         <link rel="shortcut icon" href="./images/favicon.jpeg" type="image/x-icon">
-        <title>Builderment Seeds</title>
+        <title class="siteName">Builderment Seeds</title>
         
         <!-- Meta Info -->
         <meta charset="UTF-8">
@@ -43,28 +43,22 @@
 
         <!-- Title -->
         <header class="collection">
-            <h1>Builderment Seeds</h1>
-            <p>
-                Hello! Welcome to the Builderment Seeds! Here you can
-                search for any seed you want! This website is made by
-                <a href="https://discordapp.com/users/710012954736590908" target="_blank">
-                Space.yg</a> with the help of
-                <a href="https://discordapp.com/users/947807205028139018" target="_blank">
-                Human-Crow</a>.
-            </p>
-
-            <p>Tips:</p>
-            <ul>
-                <li>Click on a seed to copy.</li>
-                <li>Click on a number at the Resource column to get an accurate amount.</li>
-            </ul>
-
-            <p>Notes:</p>
-            <ul>
-                <li>The World Size and Resource Amount are available only to people with advanced world settings. if you do not have advanced world settings, the default for both is 100%.</li>
-                <li>Choose the resource and it will calculate the maximum amount of that resource at the Resource column.</li>
-                <li>When filtering a raw resource, it gets calculated from that raw resource's column. Other resources get calculated from all the resources.</li>
-            </ul>
+            <div class="grid">
+                <div></div>
+                <div>
+                    <h1 class="siteName"></h1>
+                </div>
+                <div>
+                    <button class="languages"><img width="25" height="25" src="https://img.icons8.com/ios/100/globe--v1.png" alt="Globe"></button>
+                    <nav class="languages">
+                        <ul>
+                            <li><a href="?lang=en">English</a></li>
+                            <li><a href="?lang=nl">Dutch</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <br>
         </header>
 
         <!-- Filters -->
@@ -72,63 +66,63 @@
             <!-- Resource Filter -->
             <label for="resourceFilter">Resource:</label>
             <select name="resourceFilter" id="resourceFilter">
-                <option>None</option>
+                <option value="None"></option>
                 <optgroup label="Raw Resources">
-                    <option>Wood Log</option>
-                    <option>Stone</option>
-                    <option>Iron Ore</option>
-                    <option>Copper Ore</option>
-                    <option>Coal</option>
-                    <option>Wolframite</option>
-                    <option>Uranium Ore</option>
+                    <option value="Wood Log"></option>
+                    <option value="Stone"></option>
+                    <option value="Iron Ore"></option>
+                    <option value="Copper Ore"></option>
+                    <option value="Coal"></option>
+                    <option value="Wolframite"></option>
+                    <option value="Uranium Ore"></option>
                 </optgroup>
                 <optgroup label="Other">
-                    <option>Atomic Locator</option>
-                    <option>Battery</option>
-                    <option>Carbon Fiber</option>
-                    <option>Computer</option>
-                    <option>Concrete</option>
-                    <option>Condenser Lens</option>
-                    <option>Copper Ingot</option>
-                    <option>Copper Wire</option>
-                    <option>Coupler</option>
-                    <option selected>Earth Token</option>
-                    <option>Electric Motor</option>
-                    <option>Electromagnet</option>
-                    <option>Electron Microscope</option>
-                    <option>Empty Fuel Cell</option>
-                    <option>Energy Cube</option>
-                    <option>Enriched Uranium</option>
-                    <option>Glass</option>
-                    <option>Graphite</option>
-                    <option>Gyroscope</option>
-                    <option>Heat Sink</option>
-                    <option>Industrial Frame</option>
-                    <option>Iron Gear</option>
-                    <option>Iron Ingot</option>
-                    <option>Iron Plating</option>
-                    <option>Logic Circuit</option>
-                    <option>Magnetic Field Generator</option>
-                    <option>Matter Compressor</option>
-                    <option>Matter Duplicator</option>
-                    <option>Metal Frame</option>
-                    <option>Nano Wire</option>
-                    <option>Nuclear Fuel Cell</option>
-                    <option>Particle Glue</option>
-                    <option>Quantum Entangler</option>
-                    <option>Rotor</option>
-                    <option>Sand</option>
-                    <option>Steel</option>
-                    <option>Steel Rod</option>
-                    <option>Silicon</option>
-                    <option>Tungsten Carbide</option>
-                    <option>Tungsten Ore</option>
-                    <option>Stabilizer</option>
-                    <option>Super Computer</option>
-                    <option>Tank</option>
-                    <option>Turbocharger</option>
-                    <option>Wood Frame</option>
-                    <option>Wood Plank</option>
+                    <option value="Atomic Locator"></option>
+                    <option value="Battery"></option>
+                    <option value="Carbon Fiber"></option>
+                    <option value="Computer"></option>
+                    <option value="Concrete"></option>
+                    <option value="Condenser Lens"></option>
+                    <option value="Copper Ingot"></option>
+                    <option value="Copper Wire"></option>
+                    <option value="Coupler"></option>
+                    <option value="Earth Token" selected></option>
+                    <option value="Electric Motor"></option>
+                    <option value="Electromagnet"></option>
+                    <option value="Electron Microscope"></option>
+                    <option value="Empty Fuel Cell"></option>
+                    <option value="Energy Cube"></option>
+                    <option value="Enriched Uranium"></option>
+                    <option value="Glass"></option>
+                    <option value="Graphite"></option>
+                    <option value="Gyroscope"></option>
+                    <option value="Heat Sink"></option>
+                    <option value="Industrial Frame"></option>
+                    <option value="Iron Gear"></option>
+                    <option value="Iron Ingot"></option>
+                    <option value="Iron Plating"></option>
+                    <option value="Logic Circuit"></option>
+                    <option value="Magnetic Field Generator"></option>
+                    <option value="Matter Compressor"></option>
+                    <option value="Matter Duplicator"></option>
+                    <option value="Metal Frame"></option>
+                    <option value="Nano Wire"></option>
+                    <option value="Nuclear Fuel Cell"></option>
+                    <option value="Particle Glue"></option>
+                    <option value="Quantum Entangler"></option>
+                    <option value="Rotor"></option>
+                    <option value="Sand"></option>
+                    <option value="Steel"></option>
+                    <option value="Steel Rod"></option>
+                    <option value="Silicon"></option>
+                    <option value="Tungsten Carbide"></option>
+                    <option value="Tungsten Ore"></option>
+                    <option value="Stabilizer"></option>
+                    <option value="Super Computer"></option>
+                    <option value="Tank"></option>
+                    <option value="Turbocharger"></option>
+                    <option value="Wood Frame"></option>
+                    <option value="Wood Plank"></option>
                 </optgroup>
             </select>
             <br>
@@ -136,23 +130,24 @@
             <!-- Amount Filter -->
             <label for="amountFilter">Filter:</label>
             <select name="amountFilter" id="amountFilter">
-                <option>Max</option>
-                <option>Min</option>
-                <option>></option>
-                <option>≥</option>
-                <option>=</option>
-                <option>≤</option>
-                <option><</option>
+                <option value="Max"></option>
+                <option value="Min"></option>
+                <option value=">">></option>
+                <option value="≥">≥</option>
+                <option value="=">=</option>
+                <option value="≤">≤</option>
+                <option value="<"><</option>
             </select>
             <input type="number" min="0" placeholder="Amount" id="amount">
             <select name="order" id="order">
-                <option>Ascending</option>
-                <option>Descending</option>
+                <option value="Ascending"></option>
+                <option value="Descending"></option>
             </select>
             <br>
     
             <!-- World Size Filter -->
-            <label>World Size:
+            <label>
+                <span id="worldSizeCheckName">World Size</span>:
                 <input type="checkbox" name="worldSize" id="worldSizeCheck" checked>
                 <span class="checkbox"></span>
             </label>
@@ -161,7 +156,8 @@
             <br>
     
             <!-- Resource Amount Filter -->
-            <label>Resource Amount:
+            <label>
+                <span id="resourceAmountCheckName">Resource Amount</span>:
                 <input type="checkbox" name="resourceAmount" id="resourceAmountCheck" checked>
                 <span class="checkbox"></span>
             </label>
@@ -169,15 +165,16 @@
             <span id="resourceAmountRange">100%</span>
 
             <!-- Total Results -->
-            <p id="totalResults">Total results:</p>
+            <p><span id="totalResultsName">Total results</span>: <span id="totalResults">0</span></p>
         </div>
         
         <!-- Table -->
         <main class="collection">
             <!-- Table Data -->
+            <!-- Credits to Dannie Vinther for the table structure! (https://uxdesign.cc/position-stuck-96c9f55d9526)  -->
             <div class="wrap">
                 <div class="headers">
-                    <div class="scroller syncscroll" name="myElements">
+                    <div class="scroller syncscroll" name="myElements" id="dataHeader">
                         <div class="track"><div class="heading">Seed</div></div>
                         <div class="track"><div class="heading">Wood Log</div></div>
                         <div class="track"><div class="heading">Stone</div></div>
@@ -210,10 +207,120 @@
             <div class="showMore" id="showMore">Show More</div>
         </main>
     </body>
-
+    
     <!-- Scripts -->
-    <script src="./pages/index.js"></script>                                     <!-- Script that runs on all pages -->
-    <script src="./pages/main/index.js" type="module"></script>             <!-- To add the data to the table -->
-    <script src="https://asvd.github.io/syncscroll/syncscroll.js"></script>  <!-- For Scroll Synchronization between table head and body -->
-    <script src="./pages/footer.js" type="module"></script>                 <!-- To generate the footer -->
+    <script src="./pages/footer.js" type="module"></script>                                         <!-- Generate the footer -->
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.2/dist/markdown-it.min.js"></script> <!-- MarkdownIt -->
+    <script async type="module" defer>
+        //// Redirect to main page if language is english
+        const langFromURL = new URLSearchParams(location.search).get("lang")
+        if (langFromURL == "en") window.location.replace("./")
+
+        //// Convert markdown file to HTML
+        let language = langFromURL || navigator.language.substring(0, 2) || "en"
+        let text = await fetch(`./pages/main/languages/${language}/main.md`)
+        if (!text.ok) {
+            language = "en"
+            text = await fetch("./pages/main/languages/en/main.md")
+        }
+        let json = await fetch(`./pages/main/languages/${language}/words.json`)
+        json = await json.json()
+
+        // Site Name
+        for (const element of document.getElementsByClassName("siteName")) element.innerHTML = json.other["Builderment Seeds"]
+        
+        // Main text
+        await (async () => {
+            text = await text.text()
+            document.getElementsByTagName("html")[0].lang = language
+            document.querySelector("header.collection").innerHTML += window.markdownit({html: true}).render(text)
+        })();
+
+        // Resources
+        const dataHeader = document.getElementById("dataHeader");
+        (() => {
+            const resourceFilter = document.getElementById("resourceFilter")
+
+            // None
+            resourceFilter.children[0].innerHTML = json.other["None"]
+
+            // Raw Resources
+            resourceFilter.children[1].label = json.other["Raw Resources"]
+            for (const option of resourceFilter.children[1].children) option.innerHTML = json.resources[option.value]
+            
+            // Other Resources
+            const otherResourcesArr = []
+            resourceFilter.children[2].label = json.other["Other"]
+            for (const option of resourceFilter.children[2].children) {
+                option.innerHTML = json.resources[option.value]
+                otherResourcesArr.push(option)
+            }
+            otherResourcesArr.sort((a, b) => {
+                if (a.innerHTML == b.innerHTML) return 0
+                return a.innerHTML > b.innerHTML ? 1 : -1
+            })
+            resourceFilter.children[2].innerHTML = ""
+            for (const option of otherResourcesArr) resourceFilter.children[2].appendChild(option)
+        })();
+
+        // Filter
+        (() => {
+            // Resources Filter
+            const resourceFilterName = document.querySelector('label[for="resourceFilter"]')
+            resourceFilterName.innerHTML = json.filter["Resource"] + ":"
+            
+            // Amount Filter
+            const amountFilterName = document.querySelector('label[for="amountFilter"]')
+            amountFilterName.innerHTML = json.filter["Filter"] + ":"
+            const amountFilter = document.getElementById("amountFilter")
+            amountFilter.children[0].innerHTML = json.filter["Max"]
+            amountFilter.children[1].innerHTML = json.filter["Min"]
+            const amountFilterOrder = document.getElementById("order")
+            amountFilterOrder.children[0].innerHTML = json.filter["Ascending"]
+            amountFilterOrder.children[1].innerHTML = json.filter["Descending"]
+            
+            // World Size Filter
+            const worldSize = document.getElementById("worldSizeCheckName")
+            worldSize.innerHTML = json.filter["World Size"]
+            
+            // Resource Amount Filter
+            const resourceAmount = document.getElementById("resourceAmountCheckName")
+            resourceAmount.innerHTML = json.filter["Resource Amount"]
+            
+            // Total Results
+            const totalResults = document.getElementById("totalResultsName")
+            totalResults.innerHTML = json.filter["Total Results"]
+        })();
+        
+        // Table Data
+        (() => {
+            dataHeader.children[0].firstChild.innerHTML = json.other["Seed"]
+            dataHeader.children[1].firstChild.innerHTML = json.resources["Wood Log"]
+            dataHeader.children[2].firstChild.innerHTML = json.resources["Stone"]
+            dataHeader.children[3].firstChild.innerHTML = json.resources["Iron Ore"]
+            dataHeader.children[4].firstChild.innerHTML = json.resources["Copper Ore"]
+            dataHeader.children[5].firstChild.innerHTML = json.resources["Coal"]
+            dataHeader.children[6].firstChild.innerHTML = json.resources["Wolframite"]
+            dataHeader.children[7].firstChild.innerHTML = json.resources["Uranium Ore"]
+            dataHeader.children[8].firstChild.innerHTML = json.filter["World Size"]
+            dataHeader.children[9].firstChild.innerHTML = json.filter["Resource Amount"]
+            dataHeader.children[10].firstChild.innerHTML = json.filter["Resource"]
+        })();
+
+        // Footer
+        await (async () => {
+            let text = await fetch(`./pages/main/languages/${language}/footer.md`)
+            text = await text.text()
+            const footerText = document.getElementById("footerText")
+            footerText.innerHTML = text
+        })();
+
+        //// Footer
+        window.addEventListener("DOMContentLoaded", () => {
+            document.getElementsByTagName("footer")[0].innerHTML += '<p><a href="https://icons8.com/icon/3685/globe"><img width="15" height="15" src="https://img.icons8.com/ios/100/globe--v1.png" alt="Globe"></a> icon by <a href="https://icons8.com">Icons8</a></p>'
+        })
+    </script>
+    <script src="./pages/index.js"></script>                                <!-- Script that runs on all pages -->
+    <script src="./pages/main/index.js" type="module"></script>             <!-- Add the data to the table -->
+    <script src="https://asvd.github.io/syncscroll/syncscroll.js"></script> <!-- For Scroll Synchronization between table head and body -->
 </html>

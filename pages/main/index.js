@@ -50,6 +50,8 @@ import { Item } from "../../builderment-classes/dir/index.js";
             const key = k;
             if (key == "rf")
                 resourcesDivs[key].innerHTML += `<div class="entry" onclick="let t=event.target.innerHTML;event.target.innerHTML=event.target.title;event.target.title=t" title="${Math.round(seed.rf * 100000) / 100000}">${Math.round(seed.rf * 1000) / 1000}</div>`;
+            else if (key == "ws" || key == "r")
+                resourcesDivs[key].innerHTML += `<div class="entry">${sliderValueToSize[seed[key]]}</div>`;
             else
                 resourcesDivs[key].innerHTML += `<div class="entry">${seed[key]}</div>`;
         }
@@ -97,7 +99,7 @@ import { Item } from "../../builderment-classes/dir/index.js";
                                     (resourceFilter[1] === "<") ? filteredSeeds = filteredSeeds.filter(seed => seed[resource] < resourceFilter[2]) : null;
         (resourceFilter[3] === "Descending") ? filteredSeeds.sort((a, b) => { return b[resource] - a[resource]; }) :
             (resourceFilter[3] === "Ascending") ? filteredSeeds.sort((a, b) => { return a[resource] - b[resource]; }) : null;
-        totalResults.innerHTML = "Total results: " + filteredSeeds.length;
+        totalResults.innerHTML = filteredSeeds.length.toString();
         setData(filteredSeeds);
     }
     function Filter() {
