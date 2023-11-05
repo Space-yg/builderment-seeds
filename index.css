@@ -172,11 +172,10 @@ button.languages:hover + nav.languages, nav.languages:hover {
 }
 
 /** Version Date **/
-h2:has(+ time.date) {
+h2:has(+ time.headerDate) {
     display: inline-block;
 }
-time.date {
-    /* float: unset; */
+time.headerDate {
     color: rgb(186, 186, 186);
     font-size: 15px;
 }
