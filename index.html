@@ -52,7 +52,7 @@
                     <button class="languages"><img width="25" height="25" src="https://img.icons8.com/ios/100/globe--v1.png" alt="Globe"></button>
                     <nav class="languages">
                         <ul>
-                            <li><a href="./">English</a></li>
+                            <li><a href="?lang=en">English</a></li>
                             <li><a href="?lang=nl">Nederlands</a></li>
                         </ul>
                     </nav>
@@ -212,12 +212,8 @@
     <script src="./pages/footer.js" type="module"></script>                                         <!-- Generate the footer -->
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.2/dist/markdown-it.min.js"></script> <!-- MarkdownIt -->
     <script async type="module">
-        //// Redirect to main page if language is english
-        const langFromURL = new URLSearchParams(location.search).get("lang")
-        if (langFromURL == "en") window.location.replace("./")
-
         //// Convert markdown file to HTML
-        let language = langFromURL || navigator.language.substring(0, 2) || "en"
+        let language = new URLSearchParams(location.search).get("lang") || navigator.language.substring(0, 2) || "en"
         let text = await fetch(`./pages/main/languages/${language}/main.md`)
         if (!text.ok) {
             language = "en"
