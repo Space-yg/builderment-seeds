@@ -1,6 +1,6 @@
 // Footer
 (async () => {
-    const path = (!!document.getElementsByClassName("filterGrid")) ? "./pages/versions/index.html" : "../versions/index.html"
+    const path = (document.getElementsByClassName("filterGrid").length) ? "./pages/versions/index.html" : "../versions/index.html"
     const file = await fetch(path)
     const text = await file.text()
     const d = document.createElement("div")
