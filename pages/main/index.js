@@ -53,7 +53,8 @@ import { Item } from "../../../builderment-classes/dir/index.js";
                 case "rf":
                     resourcesDivs[key].innerHTML += `<div class="entry" onclick="s(event)" title="${Math.round(seed.rf * 100000) / 100000}">${Math.round(seed.rf * 1000) / 1000}</div>`;
                     break;
-                case "ws" || "r":
+                case "ws":
+                case "r":
                     resourcesDivs[key].innerHTML += `<div class="entry">${sliderValueToSize[seed[key]]}</div>`;
                     break;
                 case "sd":

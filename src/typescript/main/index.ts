@@ -128,7 +128,7 @@ type ResourceFilter = ["None"] | [string, FilterMinMax] | [string, FilterSigns, 
                 // Resource Filter
                 case "rf": resourcesDivs[key].innerHTML += `<div class="entry" onclick="s(event)" title="${Math.round(seed.rf * 100000) / 100000}">${Math.round(seed.rf * 1000) / 1000}</div>`; break
                 // World Size and Resource Amount
-                case "ws" || "r": resourcesDivs[key].innerHTML += `<div class="entry">${sliderValueToSize[seed[key]]}</div>`; break
+                case "ws": case "r": resourcesDivs[key].innerHTML += `<div class="entry">${sliderValueToSize[seed[key]]}</div>`; break
                 // Seed
                 case "sd": resourcesDivs[key].innerHTML += `<div class="entry" onclick="c(event)">${seed[key]}</div>`; break
                 // Other
