@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="index.css">
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="styles/index.css">
+        <link rel="stylesheet" href="styles/fonts.css">
+        <link rel="stylesheet" href="styles/filters.css">
+        <link rel="stylesheet" href="styles/loading.css">
+        <link rel="stylesheet" href="styles/table-data.css">
         <link rel="shortcut icon" href="./images/favicon.jpeg" type="image/x-icon">
         <title class="siteName">Builderment Seeds</title>
         
@@ -10,7 +15,7 @@
         <meta name="description" content="Welcome to the Builderment Seeds! Here you can search for any seed you want!">
         <meta name="keywords" content="Builderment Seeds, Builderment, Seeds">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Space.yg and Human-Crow">
+        <meta name="author" content="Space.yg, Human-Crow">
 
         <!-- Open Graph -->
         <meta property="og:title" content="Builderment Seeds">
@@ -35,6 +40,9 @@
     </script>
 
     <body>
+        <!-- 🇵🇸 -->
+        <div class="disclaimer"><img width="30px" src="https://emojigraph.org/media/apple/flag-palestinian-territories_1f1f5-1f1f8.png" alt="Palestine Flag"><p id="freePalestineText">Free Palestine.</p>&nbsp;<a href="./pages/disclaimer/index.html" id="disclaimerText">Disclaimer</a></div>
+
         <!-- Loading Animation -->
         <div class="whiteBackground"></div>
         <div class="lds-spinner"><div></div><div></div><div></div><div>
@@ -43,13 +51,13 @@
 
         <!-- Title -->
         <header class="collection">
-            <div class="grid">
+            <div class="headerGrid">
                 <div></div>
                 <div>
                     <h1 class="siteName"></h1>
                 </div>
                 <div>
-                    <button class="languages"><img width="25" height="25" src="https://img.icons8.com/ios/100/globe--v1.png" alt="Globe"></button>
+                    <button class="languages"><img width="25" height="25" src="https://img.icons8.com/ios/100/globe--v1.png" alt="Language"></button>
                     <nav class="languages">
                         <ul>
                             <li><a href="?lang=en">English</a></li>
@@ -58,118 +66,145 @@
                     </nav>
                 </div>
             </div>
-            <br>
         </header>
 
-        <!-- Filters -->
-        <div class="collection">
-            <!-- Resource Filter -->
-            <label for="resourceFilter">Resource:</label>
-            <select name="resourceFilter" id="resourceFilter">
-                <option value="None"></option>
-                <optgroup label="Raw Resources">
-                    <option value="Wood Log"></option>
-                    <option value="Stone"></option>
-                    <option value="Iron Ore"></option>
-                    <option value="Copper Ore"></option>
-                    <option value="Coal"></option>
-                    <option value="Wolframite"></option>
-                    <option value="Uranium Ore"></option>
-                </optgroup>
-                <optgroup label="Other">
-                    <option value="Atomic Locator"></option>
-                    <option value="Battery"></option>
-                    <option value="Carbon Fiber"></option>
-                    <option value="Computer"></option>
-                    <option value="Concrete"></option>
-                    <option value="Condenser Lens"></option>
-                    <option value="Copper Ingot"></option>
-                    <option value="Copper Wire"></option>
-                    <option value="Coupler"></option>
-                    <option value="Earth Token" selected></option>
-                    <option value="Electric Motor"></option>
-                    <option value="Electromagnet"></option>
-                    <option value="Electron Microscope"></option>
-                    <option value="Empty Fuel Cell"></option>
-                    <option value="Energy Cube"></option>
-                    <option value="Enriched Uranium"></option>
-                    <option value="Glass"></option>
-                    <option value="Graphite"></option>
-                    <option value="Gyroscope"></option>
-                    <option value="Heat Sink"></option>
-                    <option value="Industrial Frame"></option>
-                    <option value="Iron Gear"></option>
-                    <option value="Iron Ingot"></option>
-                    <option value="Iron Plating"></option>
-                    <option value="Logic Circuit"></option>
-                    <option value="Magnetic Field Generator"></option>
-                    <option value="Matter Compressor"></option>
-                    <option value="Matter Duplicator"></option>
-                    <option value="Metal Frame"></option>
-                    <option value="Nano Wire"></option>
-                    <option value="Nuclear Fuel Cell"></option>
-                    <option value="Particle Glue"></option>
-                    <option value="Quantum Entangler"></option>
-                    <option value="Rotor"></option>
-                    <option value="Sand"></option>
-                    <option value="Steel"></option>
-                    <option value="Steel Rod"></option>
-                    <option value="Silicon"></option>
-                    <option value="Tungsten Carbide"></option>
-                    <option value="Tungsten Ore"></option>
-                    <option value="Stabilizer"></option>
-                    <option value="Super Computer"></option>
-                    <option value="Tank"></option>
-                    <option value="Turbocharger"></option>
-                    <option value="Wood Frame"></option>
-                    <option value="Wood Plank"></option>
-                </optgroup>
-            </select>
-            <br>
-    
-            <!-- Amount Filter -->
-            <label for="amountFilter">Filter:</label>
-            <select name="amountFilter" id="amountFilter">
-                <option value="Max"></option>
-                <option value="Min"></option>
-                <option value=">">></option>
-                <option value="≥">≥</option>
-                <option value="=">=</option>
-                <option value="≤">≤</option>
-                <option value="<"><</option>
-            </select>
-            <input type="number" min="0" placeholder="Amount" id="amount">
-            <select name="order" id="order">
-                <option value="Ascending"></option>
-                <option value="Descending"></option>
-            </select>
-            <br>
-    
-            <!-- World Size Filter -->
-            <label>
-                <span id="worldSizeCheckName">World Size</span>:
-                <input type="checkbox" name="worldSize" id="worldSizeCheck" checked>
-                <span class="checkbox"></span>
-            </label>
-            <input type="range" id="worldSizeFilter" min="1" max="5" value="3">
-            <span id="worldSizeRange">100%</span>
-            <br>
-    
-            <!-- Resource Amount Filter -->
-            <label>
-                <span id="resourceAmountCheckName">Resource Amount</span>:
-                <input type="checkbox" name="resourceAmount" id="resourceAmountCheck" checked>
-                <span class="checkbox"></span>
-            </label>
-            <input type="range" id="resourceAmountFilter" min="1" max="5" value="3">
-            <span id="resourceAmountRange">100%</span>
+        <section class="collection">
+            <!-- Filters -->
+            <div class="filterGrid">
+                <!-- Select Filters -->
+                <div class="selectFilters">
+                    <!-- Resource Filter -->
+                    <span id="resource">Resource</span>
+                    <select name="resourceFilter" id="resourceFilter">
+                        <option value="None"></option>
+                        <optgroup label="Raw Resources">
+                            <option value="Wood Log"></option>
+                            <option value="Stone"></option>
+                            <option value="Iron Ore"></option>
+                            <option value="Copper Ore"></option>
+                            <option value="Coal"></option>
+                            <option value="Wolframite"></option>
+                            <option value="Uranium Ore"></option>
+                        </optgroup>
+                        <optgroup label="Other">
+                            <option value="Atomic Locator"></option>
+                            <option value="Battery"></option>
+                            <option value="Carbon Fiber"></option>
+                            <option value="Computer"></option>
+                            <option value="Concrete"></option>
+                            <option value="Condenser Lens"></option>
+                            <option value="Copper Ingot"></option>
+                            <option value="Copper Wire"></option>
+                            <option value="Coupler"></option>
+                            <option value="Earth Token" selected></option>
+                            <option value="Electric Motor"></option>
+                            <option value="Electromagnet"></option>
+                            <option value="Electron Microscope"></option>
+                            <option value="Empty Fuel Cell"></option>
+                            <option value="Energy Cube"></option>
+                            <option value="Enriched Uranium"></option>
+                            <option value="Glass"></option>
+                            <option value="Graphite"></option>
+                            <option value="Gyroscope"></option>
+                            <option value="Heat Sink"></option>
+                            <option value="Industrial Frame"></option>
+                            <option value="Iron Gear"></option>
+                            <option value="Iron Ingot"></option>
+                            <option value="Iron Plating"></option>
+                            <option value="Logic Circuit"></option>
+                            <option value="Magnetic Field Generator"></option>
+                            <option value="Matter Compressor"></option>
+                            <option value="Matter Duplicator"></option>
+                            <option value="Metal Frame"></option>
+                            <option value="Nano Wire"></option>
+                            <option value="Nuclear Fuel Cell"></option>
+                            <option value="Particle Glue"></option>
+                            <option value="Quantum Entangler"></option>
+                            <option value="Rotor"></option>
+                            <option value="Sand"></option>
+                            <option value="Steel"></option>
+                            <option value="Steel Rod"></option>
+                            <option value="Silicon"></option>
+                            <option value="Tungsten Carbide"></option>
+                            <option value="Tungsten Ore"></option>
+                            <option value="Stabilizer"></option>
+                            <option value="Super Computer"></option>
+                            <option value="Tank"></option>
+                            <option value="Turbocharger"></option>
+                            <option value="Wood Frame"></option>
+                            <option value="Wood Plank"></option>
+                        </optgroup>
+                    </select>
+                    <br>
+
+                    <!-- Amount Filter -->
+                    <span id="filter">Filter</span>
+                    <select name="amountFilter" id="amountFilter">
+                        <option value="Max"></option>
+                        <option value="Min"></option>
+                        <option value=">">></option>
+                        <option value="≥">≥</option>
+                        <option value="=">=</option>
+                        <option value="≤">≤</option>
+                        <option value="<"><</option>
+                    </select>
+                    <input type="number" min="0" placeholder="Amount" id="amount">
+                    <select name="order" id="order">
+                        <option value="Ascending"></option>
+                        <option value="Descending"></option>
+                    </select>
+                </div>
+                
+                <!-- Sliders Filters -->
+                <div class="sliderFilters">
+                    <!-- World Size Filter -->
+                    <label>
+                        <span id="worldSizeCheckName">World Size</span>
+                        <input type="checkbox" name="worldSize" id="worldSizeCheck" checked>
+                        <span class="checkbox"></span>
+                    </label>
+                    <input type="range" id="worldSizeFilter" min="1" max="5" value="3">
+                    <span id="worldSizeRange">100%</span>
+                    <br>
+
+                    <!-- Resource Amount Filter -->
+                    <label>
+                        <span id="resourceAmountCheckName">Resource Amount</span>
+                        <input type="checkbox" name="resourceAmount" id="resourceAmountCheck" checked>
+                        <span class="checkbox"></span>
+                    </label>
+                    <input type="range" id="resourceAmountFilter" min="1" max="5" value="3">
+                    <span id="resourceAmountRange">100%</span>
+                    <br>
+
+                    <label>
+                        <span id="withPowerPlantsCheckName">Calculate with Power Plants</span>
+                        <input type="checkbox" name="withPowerPlants" id="withPowerPlantsCheck">
+                        <span class="checkbox"></span>
+                    </label>
+                </div>
+            </div>
 
             <!-- Total Results -->
             <p><span id="totalResultsName">Total results</span>: <span id="totalResults">0</span></p>
-        </div>
+        </section>
         
         <!-- Table -->
         <main class="collection">
+            <!-- This has to be here for it to work. -->
+            <script>
+                // Copy Seed
+                function c(event) {
+                    navigator.clipboard.writeText(event.target.innerHTML)
+                }
+                // Switch between high and low decimal precision for resource
+                function s(event) {
+                    let t = event.target.innerHTML;
+                    event.target.innerHTML = event.target.title;
+                    event.target.title = t
+                }
+            </script>
+
             <!-- Table Data -->
             <!-- Credits to Dannie Vinther for the table structure! (https://uxdesign.cc/position-stuck-96c9f55d9526)  -->
             <div class="wrap">
@@ -224,6 +259,10 @@
 
         // Site Name
         for (const element of document.getElementsByClassName("siteName")) element.innerHTML = json.other["Builderment Seeds"]
+
+        // Free Palestine
+        document.getElementById("freePalestineText").innerHTML = json.other["Free Palestine"] + "."
+        document.getElementById("disclaimerText").innerHTML = json.other["Disclaimer"]
         
         // Main text
         await (async () => {
@@ -262,12 +301,10 @@
         // Filter
         (() => {
             // Resources Filter
-            const resourceFilterName = document.querySelector('label[for="resourceFilter"]')
-            resourceFilterName.innerHTML = json.filter["Resource"] + ":"
+            document.getElementById("resource").innerHTML = json.filter["Resource"]
             
             // Amount Filter
-            const amountFilterName = document.querySelector('label[for="amountFilter"]')
-            amountFilterName.innerHTML = json.filter["Filter"] + ":"
+            document.getElementById("filter").innerHTML = json.filter["Filter"]
             const amountFilter = document.getElementById("amountFilter")
             amountFilter.children[0].innerHTML = json.filter["Max"]
             amountFilter.children[1].innerHTML = json.filter["Min"]
@@ -276,16 +313,16 @@
             amountFilterOrder.children[1].innerHTML = json.filter["Descending"]
             
             // World Size Filter
-            const worldSize = document.getElementById("worldSizeCheckName")
-            worldSize.innerHTML = json.filter["World Size"]
+            document.getElementById("worldSizeCheckName").innerHTML = json.filter["World Size"]
             
             // Resource Amount Filter
-            const resourceAmount = document.getElementById("resourceAmountCheckName")
-            resourceAmount.innerHTML = json.filter["Resource Amount"]
+            document.getElementById("resourceAmountCheckName").innerHTML = json.filter["Resource Amount"]
+
+            // Calculate with Power Plants
+            document.getElementById("withPowerPlantsCheckName").innerHTML = json.filter["Calculate with Power Plants"]
             
             // Total Results
-            const totalResults = document.getElementById("totalResultsName")
-            totalResults.innerHTML = json.filter["Total Results"]
+            document.getElementById("totalResultsName").innerHTML = json.filter["Total Results"]
         })();
         
         // Table Data

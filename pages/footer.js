@@ -1,6 +1,6 @@
 "use strict";
 (async () => {
-    const path = (window.location.pathname.split("/").pop() === "index.html" || window.location.pathname.split("/").pop() === "") ? "./pages/versions/versions.html" : "../versions/versions.html";
+    const path = (window.location.pathname.split("/").length === 2) ? "./pages/versions/index.html" : "../versions/index.html";
     const file = await fetch(path);
     const text = await file.text();
     const d = document.createElement("div");

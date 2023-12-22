@@ -1,0 +1,32 @@
+{
+  "name": "builderment-seeds",
+  "version": "1.5.0",
+  "description": "Filter through Builderment seeds!",
+  "browser": "index.js",
+  "scripts": {
+    "watch-ts": "tsc --watch",
+    "watch-scss": "sass --watch src/styles:styles",
+    "watch-sass": "npm run watch-scss",
+    "watch": "npm run watch-ts & npm run watch-scss"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Space-yg/builderment-seeds.git"
+  },
+  "keywords": [
+    "Builderment",
+    "Builderment Seed",
+    "Builderment Seeds",
+    "Seed",
+    "Seeds"
+  ],
+  "author": "Space.yg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Space-yg/builderment-seeds/issues"
+  },
+  "homepage": "https://github.com/Space-yg/builderment-seeds#readme",
+  "dependencies": {
+    "builderment-classes": "git+https://github.com/Space-yg/builderment-classes.git"
+  }
+}

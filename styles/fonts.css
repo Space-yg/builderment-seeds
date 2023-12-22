@@ -1,0 +1,12 @@
+/* Thin font */
+@font-face {
+  font-family: Oswald;
+  src: url(../fonts/Oswald-Regular.ttf);
+}
+/* Bold CAPITAL font */
+@font-face {
+  font-family: troika;
+  src: url(../fonts/troika.otf);
+}
+
+/*# sourceMappingURL=fonts.css.map */

@@ -1,0 +1,13 @@
+@use "fonts.scss";
+
+/** Version Date **/
+h2:has(+ time.headerDate) {
+    display: inline-block;
+    @include fonts.Oswald;
+    font-weight: bold;
+}
+time.headerDate {
+    color: rgb(186, 186, 186);
+    font-size: 15px;
+    @include fonts.troika;
+}

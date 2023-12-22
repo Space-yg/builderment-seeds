@@ -4,7 +4,9 @@
         "Raw Resources": "Ruwe Grondstoffen",
         "Other": "Andere",
         "Seed": "Seed",
-        "Builderment Seeds": "Builderment Seeds"
+        "Builderment Seeds": "Builderment Seeds",
+        "Free Palestine": "Bevrijd Palestina",
+        "Disclaimer": "Vrijwaring"
     },
     "filter": {
         "Resource": "Grondstof",
@@ -15,6 +17,7 @@
         "Descending": "Aflopend",
         "World Size": "Wereld Grootte",
         "Resource Amount": "Grondstof Hoeveelheid",
+        "Calculate with Power Plants": "Bereken met Energie Centrale",
         "Total Results": "Aantal Resultaten"
     },
     "resources": {

@@ -1,0 +1,104 @@
+body {
+  overflow-x: hidden;
+}
+
+.wrap {
+  position: relative;
+  overscroll-behavior: contain;
+  border: 1px solid black;
+}
+
+.headers {
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 1;
+  background-color: white;
+  border-bottom: 1px solid black;
+}
+
+.heading {
+  display: flex;
+  text-align: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 5px;
+  text-wrap: wrap;
+  justify-content: center;
+  font-family: troika, Arial, Helvetica, sans-serif;
+}
+
+.scroller {
+  overflow-x: hidden;
+}
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.tracks {
+  overflow: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.tracks, .scroller {
+  display: flex;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.track {
+  flex: 1 0;
+  scroll-snap-align: start;
+  margin: auto;
+  font-family: Oswald, Arial, Helvetica, sans-serif;
+}
+@media (max-width: 1000px) {
+  html:lang(en) .track {
+    flex: 1 0 90px;
+  }
+}
+@media (max-width: 1140px) {
+  html:lang(nl) .track {
+    flex: 1 0 90px;
+  }
+}
+.track:first-child {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  margin: auto;
+}
+.track:first-child .entry {
+  display: flex;
+  align-items: center;
+}
+.track:first-child .entry:hover {
+  cursor: pointer;
+}
+.track:last-child .entry {
+  cursor: pointer;
+}
+
+.entry {
+  border-top: 1px solid black;
+  background-color: white;
+  height: 25px;
+}
+.entry:first-child {
+  border: 0;
+  margin: auto;
+}
+
+div.showMore {
+  border: solid 1px black;
+  border-top: 0;
+  text-align: center;
+  font-family: troika, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  background-color: transparent;
+  color: rgb(153, 0, 255);
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=table-data.css.map */

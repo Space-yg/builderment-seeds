@@ -1,0 +1,25 @@
+/* Thin font */
+@font-face {
+  font-family: Oswald;
+  src: url(../fonts/Oswald-Regular.ttf);
+}
+/* Bold CAPITAL font */
+@font-face {
+  font-family: troika;
+  src: url(../fonts/troika.otf);
+}
+/** Version Date **/
+h2:has(+ time.headerDate) {
+  display: inline-block;
+  font-family: Oswald, Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+time.headerDate {
+  color: rgb(186, 186, 186);
+  font-size: 15px;
+  font-family: troika, Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}
+
+/*# sourceMappingURL=versions.css.map */

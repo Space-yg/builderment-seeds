@@ -1,0 +1,156 @@
+/* Thin font */
+@font-face {
+  font-family: Oswald;
+  src: url(../fonts/Oswald-Regular.ttf);
+}
+/* Bold CAPITAL font */
+@font-face {
+  font-family: troika;
+  src: url(../fonts/troika.otf);
+}
+.selectFilters {
+  grid-area: "select-filters";
+}
+
+.sliderFilters {
+  grid-area: "slider-filters";
+}
+
+.filterGrid {
+  display: grid;
+  grid-template-areas: "select-filters slider-filters";
+}
+@media (max-width: 830px) {
+  .filterGrid {
+    grid-template-areas: "select-filters" "slider-filters";
+  }
+}
+
+.collection .filterGrid {
+  font-family: troika, Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}
+.collection input[type=number], .collection select[name=order] {
+  font-family: troika, Arial, Helvetica, sans-serif;
+  display: none;
+}
+
+label:has(+ input[type=range]) {
+  bottom: 3px;
+}
+
+label:has(input[type=checkbox]) {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 3px;
+  padding-left: 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input[type=checkbox] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+span.checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: rgb(225, 225, 225);
+  border: 1px solid darkgray;
+  border-radius: 4px;
+}
+span.checkbox::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+label:has(input[type=checkbox]):hover span.checkbox {
+  background-color: rgb(200, 200, 200);
+}
+
+input[type=checkbox]:checked ~ span.checkbox {
+  background-color: #2196F3 !important;
+}
+
+label:has(input[type=checkbox]) input[type=checkbox]:checked ~ span.checkbox:after {
+  display: block;
+}
+
+@media (max-width: 410px) {
+  html:lang(en) .collection:has(.filterGrid) {
+    font-size: 4vw;
+  }
+  html:lang(en) .collection:has(.filterGrid) select {
+    font-size: 3.5vw;
+    padding: 1vw;
+  }
+  html:lang(en) .collection:has(.filterGrid) input[type=range] {
+    width: 30vw;
+  }
+  html:lang(en) span.checkbox {
+    width: 3.5vw;
+    height: 3.5vw;
+  }
+  html:lang(en) span.checkbox::after {
+    left: 1vw;
+    top: 0.2vw;
+    width: 1vw;
+    height: 1.8vw;
+    border-width: 0 0.8vw 0.8vw 0;
+  }
+  html:lang(en) label:has(input[type=checkbox]) {
+    padding-left: 4.5vw;
+  }
+}
+
+@media (max-width: 457px) {
+  html:lang(nl) .collection:has(.filterGrid) {
+    font-size: 3.3vw;
+  }
+  html:lang(nl) .collection:has(.filterGrid) select {
+    font-size: 2.8vw;
+    padding: 1vw;
+  }
+  html:lang(nl) .collection:has(.filterGrid) input[type=range] {
+    width: 30vw;
+  }
+  html:lang(nl) span.checkbox {
+    width: 3vw;
+    height: 3vw;
+  }
+  html:lang(nl) span.checkbox::after {
+    left: 0.8vw;
+    top: 0;
+    width: 0.8vw;
+    height: 1.6vw;
+    border-width: 0 0.8vw 0.8vw 0;
+  }
+  html:lang(nl) label:has(input[type=checkbox]) {
+    padding-left: 4vw;
+  }
+}
+
+/*# sourceMappingURL=filters.css.map */

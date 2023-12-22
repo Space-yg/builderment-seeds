@@ -4,7 +4,9 @@
         "Raw Resources": "Raw Resources",
         "Other": "Other",
         "Seed": "Seed",
-        "Builderment Seeds": "Builderment Seeds"
+        "Builderment Seeds": "Builderment Seeds",
+        "Free Palestine": "Free Palestine",
+        "Disclaimer": "Disclaimer"
     },
     "filter": {
         "Resource": "Resource",
@@ -15,6 +17,7 @@
         "Descending": "Descending",
         "World Size": "World Size",
         "Resource Amount": "Resource Amount",
+        "Calculate with Power Plants": "Calculate with Power Plants",
         "Total Results": "Total Results"
     },
     "resources": {

@@ -1,0 +1,223 @@
+@use "fonts.scss";
+
+:root {
+    --primary-color: #d9ffd9;
+    --secondary-color: #f0fff0;
+}
+
+//// Highlight
+::selection {
+    // Change highlight background color to black
+    background: rgb(10, 149, 42);
+    // Change highlight text color to red
+    color: #ffffff;
+}
+
+//// Scrollbar
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+::-webkit-scrollbar-thumb {
+    background: #bbb; 
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #999; 
+}
+
+//// Organization
+body {
+    // Position
+    margin: 0;
+    padding: 0;
+    // Font
+    @include fonts.Oswald;
+    // @include fonts.troika;
+    color: black;
+    background-color: var(--primary-color);
+}
+// p
+p {
+    // Position
+    margin: 0 0 8px 0;
+}
+// a
+a {
+    color: black;
+    text-decoration: none;
+    background-image: linear-gradient(rgb(121, 223, 121), rgb(121, 223, 121));
+    background-repeat: no-repeat;
+    background-size: auto 6px;
+    background-position: 0 80%;
+
+    &:hover {
+        transition: all .1s;
+        background-size: auto 2px;
+    }
+
+    &:has(img) {
+        background: none;
+    }
+}
+// hs
+h1 {
+    // Position
+    margin: 0;
+    // Font
+    text-align: center;
+    font-weight: normal;
+}
+h2 {
+    // Font
+    color: gray;
+    text-decoration: underline;
+    font-family: Oswald, Arial, Helvetica, sans-serif;
+    font-weight: normal;
+}
+h1, h2, h3 {
+    // Font
+    @include fonts.troika;
+}
+// Lists
+ul {
+    // Position
+    margin: 0;
+}
+// Select
+select {
+    // Position
+    margin: 2px 0;
+    padding: 5px;
+    border-radius: 7px;
+    font-family: inherit;
+    @include fonts.troika;
+    // Font
+    color: black;
+}
+// Header
+header {
+    // Position
+    position: relative;
+}
+// Footer
+footer {
+    // Font
+    text-align: center;
+    color: gray;
+    @include fonts.Oswald;
+
+    a {
+        // Font
+        color: gray;
+    }
+}
+
+//// Other
+.important {
+    // Font
+    color: red;
+}
+
+//// Header Grid
+.headerGrid {
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+
+    h1 {
+        text-wrap: wrap;
+        margin-bottom: 10px;
+    }
+}
+// Languages
+nav.languages {
+    background-color: white;
+    // Position
+    position: absolute;
+    right: 3px;
+    top: 50px;
+    text-align: center;
+    padding: 10px;
+    // Transition
+    transition: all .4s;
+    opacity: 0;
+    visibility: hidden;
+
+    > ul {
+        list-style-type: none;
+        // Position
+        padding: 0;
+
+        > li {
+            cursor: pointer;
+        }
+    }
+}
+button.languages {
+    // Position
+    position: absolute;
+    right: 34px;
+    top: 24px;
+    border: 0;
+    padding: 0;
+    // Other
+    background-color: transparent;
+    cursor: pointer;
+}
+button.languages:hover + nav.languages, nav.languages:hover {
+    // Transition
+    transition: all .4s;
+    opacity: 1;
+    visibility: visible;
+}
+
+//// Collection
+.collection {
+    // Position
+    padding: 20px;
+    border: solid 1px black;
+    border-radius: 20px;
+    background-color: white;
+    max-width: 1000px;
+    margin: 20px auto;
+    // Decrease the size of the collection when the screen size is too small
+    @media (max-width: 1250px) {
+        width: 80%;
+    }
+}
+
+//// Disclaimer
+.disclaimer {
+    display: flex;
+    width: 100%;
+    height: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    font-size: 1.5rem;
+
+    p {
+        margin: 0;
+    }
+
+    html:lang(en) & {
+        @media (max-width: 260px) {
+            font-size: 9vw;
+    
+            img {
+                width: 12vw;
+            }
+        }
+    }
+
+    html:lang(nl) & {
+        @media (max-width: 280px) {
+            font-size: 8.5vw;
+    
+            img {
+                width: 11.5vw;
+            }
+        }
+    }
+}
