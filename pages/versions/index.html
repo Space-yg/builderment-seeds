@@ -14,7 +14,7 @@
 		<meta name="author" content="Space.yg, Human-Crow">
 
 		<!-- Open Graph -->
-		<meta property="og:title" content="Builderment Seeds">
+		<meta property="og:title" content="Versions - Builderment Seeds">
 		<meta property="og:description" content="Welcome to the Builderment Seeds! Here you can find the versions of the Builderment Seeds website!">
 		<meta property="og:url" content="./">
 		<meta property="og:image" content="https://space-yg.github.io/builderment-seeds/images/favicon.jpeg">
@@ -29,31 +29,33 @@
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJBGE52HFP"></script>
 	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
+		window.dataLayer = window.dataLayer || []
+		function gtag() { dataLayer.push(arguments) }
+		gtag('js', new Date())
 		gtag('config', 'G-ZJBGE52HFP');
 	</script>
 
 	<body>
 		<!-- 🇵🇸 -->
-		<div class="disclaimer"><img style="width: 30px;" src="https://emojigraph.org/media/apple/flag-palestinian-territories_1f1f5-1f1f8.png" alt="Palestine Flag"><p>Free Palestine.</p>&nbsp;<a href="../disclaimer/index.html">Disclaimer</a></div>
+		<div class="disclaimer"><img style="width: 30px;" src="https://emojigraph.org/media/apple/flag-palestinian-territories_1f1f5-1f1f8.png" alt="Palestine Flag">
+			<p>Free Palestine.</p>&nbsp;<a href="../disclaimer/index.html">Disclaimer</a>
+		</div>
 
 		<header class="collection">
 			<h1 class="center">Versions</h1>
 			<br>
-			
+
 			<p>Here are the versions of the Builderment Seeds website! If you have any suggestions, be sure to send on the <a href="https://discord.gg/builderment-618226575652945941" target="_blank">Builderment Discord server</a>.</p>
 			<p>Click <a href="../../index.html">here</a> to go back to the main page.</p>
 			<p>The dates on this page are in the format of "I'm not American."</p>
 		</header>
-		
+
 		<main class="collection"></main>
 	</body>
 
 	<!-- Scripts -->
-	<script src="../index.js"></script>																<!-- Script that runs on all pages -->
-	<script src="../footer.js" type="module"></script>												<!-- Generate the footer -->
+	<script src="../index.js"></script> <!-- Script that runs on all pages -->
+	<script src="../footer.js" type="module"></script> <!-- Generate the footer -->
 	<script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.2/dist/markdown-it.min.js"></script> <!-- MarkdownIt -->
 	<script async type="module">
 		const md = window.markdownit()
@@ -61,9 +63,9 @@
 		// Edit Markdown rules https://github.com/markdown-it/markdown-it/blob/master/docs/examples/renderer_rules.md
 
 		/** Default token generator */
-		const proxy = (tokens, idx, options, env, self) => self.renderToken(tokens, idx, options);
+		const proxy = (tokens, idx, options, env, self) => self.renderToken(tokens, idx, options)
 
-		const defaultHeadingOpenRenderer = md.renderer.rules.heading_open || proxy;
+		const defaultHeadingOpenRenderer = md.renderer.rules.heading_open || proxy
 		/**
 		 * <h#>
 		 * Convert h3 tags to time tags whenever there is \t after the h3 markup.
@@ -92,7 +94,7 @@
 			return defaultHeadingOpenRenderer(tokens, idx, options, env, self)
 		}
 
-		const defaultHeadingCloseRenderer = md.renderer.rules.heading_close || proxy;
+		const defaultHeadingCloseRenderer = md.renderer.rules.heading_close || proxy
 		/**
 		 * </h#>
 		 * Convert h3 tags to time tags whenever there is \t after the h3 markup.
@@ -109,7 +111,7 @@
 			return defaultHeadingCloseRenderer(tokens, idx, options, env, self)
 		}
 
-		const defaultLinkOpenRenderer = md.renderer.rules.link_open || proxy;
+		const defaultLinkOpenRenderer = md.renderer.rules.link_open || proxy
 		/**
 		 * <a>
 		 * Add target="_blank" attribute whenever there is ~ after the link.
@@ -125,7 +127,7 @@
 					if (tokens[idx + i + 1].content[0] === "~") {
 						// Add target="_blank"
 						tokens[idx].attrJoin("target", "_blank")
-			
+
 						// Remove ~
 						tokens[idx + i + 1].content = tokens[idx + i + 1].content.slice(1)
 					}
@@ -142,4 +144,4 @@
 		text = await text.text()
 		document.getElementsByTagName("main")[0].innerHTML = md.render(text)
 	</script>
-	</html>
+</html>
