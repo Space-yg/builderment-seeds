@@ -1,4 +1,4 @@
-Hallo! Welkom bij de Builderment Seeds! Hier kan je elke seed vinden die je maar wilt! Deze website is gemaakt door <a href="https://discordapp.com/users/710012954736590908" target="_blank">Space.yg</a> met behulp van <a href="https://discordapp.com/users/947807205028139018" target="_blank">Human-Crow</a>.
+Hallo! Welkom bij de Builderment Seeds! Hier kan je elke seed vinden die je maar wilt! Deze website is gemaakt door [Space.yg](https://discordapp.com/users/710012954736590908)~ met behulp van [Human-Crow](https://discordapp.com/users/947807205028139018)~.
 
 Tips:
 - Klik op een seed om het te kopiëren.

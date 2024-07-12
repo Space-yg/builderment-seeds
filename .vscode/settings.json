@@ -1,0 +1,7 @@
+{
+	"markdownlint.config": {
+		"blanks-around-headings": false,
+		"no-duplicate-heading": false,
+		"no-empty-links": false,
+	}
+}

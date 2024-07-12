@@ -3,11 +3,20 @@
   font-family: Oswald;
   src: url(../fonts/Oswald-Regular.ttf);
 }
+.Oswald {
+  font-family: Oswald, Arial, Helvetica, sans-serif;
+}
+
 /* Bold CAPITAL font */
 @font-face {
   font-family: troika;
   src: url(../fonts/troika.otf);
 }
+.troika {
+  font-family: troika, Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}
+
 :root {
   --primary-color: #d9ffd9;
   --secondary-color: #f0fff0;
@@ -18,20 +27,38 @@
   color: #ffffff;
 }
 
+::-moz-selection {
+  background: rgb(10, 149, 42);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline-color: black;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #bbb;
+  background-color: #bbbbbb;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #999;
+  background-color: #999999;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
 }
 
 body {
@@ -61,18 +88,67 @@ a:hover {
 a:has(img) {
   background: none;
 }
+a[target=_blank]::after {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 4px;
+  background-size: 1rem;
+  background-repeat: no-repeat;
+  content: "";
+  background-image: url("../../images/new tab.svg");
+  background-size: 0.6rem;
+  width: 0.6em;
+  height: 0.6rem;
+}
+a[href$=".pdf"]::after {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 4px;
+  background-size: 1rem;
+  background-repeat: no-repeat;
+  content: "";
+  background-image: url("../../images/pdf icon.png");
+}
+a[href$=".doc"]::after, a[href$=".docx"]::after {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 4px;
+  background-size: 1rem;
+  background-repeat: no-repeat;
+  content: "";
+  background-image: url("../../images/word document icon.svg");
+}
+
+code, .code {
+  border-radius: 10px;
+  background-color: #ddd;
+  font-family: monospace;
+  color: black;
+}
+
+code {
+  padding: 3px;
+}
+
+pre {
+  padding: 15px;
+  border: 1px solid black;
+  tab-size: 1.5rem;
+  border-radius: 10px;
+  color: gray;
+}
 
 h1 {
   margin: 0;
-  text-align: center;
-  font-weight: normal;
 }
 
 h2 {
   color: gray;
   text-decoration: underline;
   font-family: Oswald, Arial, Helvetica, sans-serif;
-  font-weight: normal;
 }
 
 h1, h2, h3 {
@@ -82,16 +158,6 @@ h1, h2, h3 {
 
 ul {
   margin: 0;
-}
-
-select {
-  margin: 2px 0;
-  padding: 5px;
-  border-radius: 7px;
-  font-family: inherit;
-  font-family: troika, Arial, Helvetica, sans-serif;
-  font-weight: normal;
-  color: black;
 }
 
 header {
@@ -105,6 +171,255 @@ footer {
 }
 footer a {
   color: gray;
+}
+
+hr {
+  width: 90%;
+  margin: 2rem auto;
+}
+
+hr.short {
+  width: 20%;
+}
+
+img, input[type=image] {
+  width: 100%;
+}
+
+input {
+  font-family: inherit;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  position: relative;
+  bottom: 4px;
+  height: 3px;
+  border-radius: 5px;
+  background-color: rgb(100, 206, 108);
+}
+input[type=range]:has(+ datalist) {
+  bottom: 12px;
+}
+input[type=range]:has(+ datalist)::-webkit-slider-thumb {
+  margin-bottom: 18px;
+}
+input[type=range]::-ms-fill-lower {
+  background-color: rgb(100, 206, 108);
+}
+input[type=range]::-ms-fill-upper {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: white;
+  box-shadow: 0 0 5px rgb(200, 200, 200);
+  border-radius: 50%;
+  transition: 0.2s ease-in-out;
+}
+input[type=range]::-moz-range-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: white;
+  box-shadow: 0 0 5px rgb(200, 200, 200);
+  border-radius: 50%;
+  transition: 0.2s ease-in-out;
+}
+input[type=range]::-ms-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  height: 1rem;
+  width: 1rem;
+  background-color: white;
+  box-shadow: 0 0 5px rgb(200, 200, 200);
+  border-radius: 50%;
+  transition: 0.2s ease-in-out;
+}
+
+label:has(input[type=checkbox]) {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 3px;
+  padding-left: 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input[type=checkbox] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+input[type=checkbox] + span.checkbox::before {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  border: 2px solid black;
+  border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  animation: in 0.05s;
+  visibility: hidden;
+}
+input[type=checkbox]:focus-visible + span.checkbox::before {
+  width: 20px;
+  height: 20px;
+  animation: out 0.05s;
+  visibility: visible;
+}
+@keyframes out {
+  from {
+    width: 15px;
+    height: 15px;
+    visibility: hidden;
+  }
+  to {
+    width: 20px;
+    height: 20px;
+    visibility: visible;
+  }
+}
+@keyframes in {
+  from {
+    width: 20px;
+    height: 20px;
+    visibility: visible;
+  }
+  to {
+    width: 15px;
+    height: 15px;
+    visibility: hidden;
+  }
+}
+
+span.checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: rgb(225, 225, 225);
+  border: 1px solid darkgray;
+  border-radius: 4px;
+}
+span.checkbox::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+label:has(input[type=checkbox]):hover span.checkbox {
+  background-color: rgb(200, 200, 200);
+}
+
+input[type=checkbox]:checked + span.checkbox {
+  background-color: #2196F3 !important;
+}
+input[type=checkbox]:checked + span.checkbox:after {
+  display: block;
+}
+
+div.button:has(input[type=button]) {
+  display: inline-block;
+}
+
+div.button:has(input[type=button]) > input[type=button] {
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+div.button:has(input[type=button]), button.bm-button {
+  position: relative;
+  isolation: isolate;
+  padding: 0.7em;
+  border: none;
+  color: rgb(246, 246, 246);
+  font-family: troika, Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  clip-path: polygon(0 0.4em, 0.4em 0, calc(100% - 0.4em) 0, 100% 0.4em, 100% calc(100% - 0.4em), calc(100% - 0.4em) 100%, 0.4em 100%, 0 calc(100% - 0.4em));
+}
+div.button:has(input[type=button])::before, div.button:has(input[type=button])::after, button.bm-button::before, button.bm-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+div.button:has(input[type=button])::before, button.bm-button::before {
+  background-color: rgb(219, 219, 219);
+  z-index: -2;
+}
+div.button:has(input[type=button])::after, button.bm-button::after {
+  background-color: rgb(103, 159, 220);
+  z-index: -1;
+  clip-path: polygon(0.2em 0.5em, 0.5em 0.2em, calc(100% - 0.4em - 0.1em) 0.2em, calc(100% - 0.2em) 0.5em, calc(100% - 0.2em) calc(100% - 0.4em - 0.1em), calc(100% - 0.4em - 0.1em) calc(100% - 0.2em), 0.5em calc(100% - 0.2em), 0.2em calc(100% - 0.4em - 0.1em));
+}
+
+input[type=button]::selection, button::selection {
+  background-color: rgb(31, 117, 209);
+}
+
+input[type=button]::-moz-selection, button::selection {
+  background-color: rgb(31, 117, 209);
+}
+
+select {
+  margin: 2px 0;
+  padding: 5px;
+  border-radius: 7px;
+  font-family: inherit;
+  color: black;
+}
+
+datalist {
+  display: inline-flex;
+  position: relative;
+  justify-content: space-between;
+  height: auto;
+  overflow: hidden;
+  width: 125px;
+  left: -133px;
+  top: 10px;
+}
+
+.center {
+  text-align: center;
 }
 
 .important {

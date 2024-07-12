@@ -1,118 +1,118 @@
 body {
-    overflow-x: hidden;
+	overflow-x: hidden;
 }
 // Table
 .wrap {
-    position: relative;
-    overscroll-behavior: contain;
+	position: relative;
+	overscroll-behavior: contain;
 
-    border: 1px solid black;
+	border: 1px solid black;
 }
 // Thead
 .headers {
-    top: 0;
-    position: -webkit-sticky;
-    position: sticky;
-    z-index: 1;
+	top: 0;
+	position: -webkit-sticky;
+	position: sticky;
+	z-index: 1;
 
-    background-color: white;
-    border-bottom: 1px solid black;
+	background-color: white;
+	border-bottom: 1px solid black;
 }
 // th
 .heading {
-    display: flex;
-    text-align: center;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1;
+	display: flex;
+	text-align: center;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	z-index: 1;
 
-    padding: 5px;
-    text-wrap: wrap;
-    justify-content: center;
-    font-family: troika, Arial, Helvetica, sans-serif;
+	padding: 5px;
+	text-wrap: wrap;
+	justify-content: center;
+	font-family: troika, Arial, Helvetica, sans-serif;
 }
 // Head scroll
 .scroller {
-    overflow-x: hidden;
+	overflow-x: hidden;
 
-    &::-webkit-scrollbar {
-        display: none;
-    }
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 // tbody
 .tracks {
-    overflow: auto;
-    scroll-snap-type: x mandatory;
+	overflow: auto;
+	scroll-snap-type: x mandatory;
 }
 // tbody and head scroll
 .tracks, .scroller {
-    display: flex;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
+	display: flex;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
 }
 // col
 .track {
-    flex: 1 0;
-    scroll-snap-align: start;
-    
-    margin: auto;
-    font-family: Oswald, Arial, Helvetica, sans-serif;
+	flex: 1 0;
+	scroll-snap-align: start;
+	
+	margin: auto;
+	font-family: Oswald, Arial, Helvetica, sans-serif;
 
-    // This makes it switch from normal view to scroll view
-    html:lang(en) & {
-        @media (max-width: 1000px) {
-            flex: 1 0 90px;
-        }
-    }
-    html:lang(nl) & {
-        @media (max-width: 1140px) {
-            flex: 1 0 90px;
-        }
-    }
+	// This makes it switch from normal view to scroll view
+	html:lang(en) & {
+		@media (max-width: 1000px) {
+			flex: 1 0 90px;
+		}
+	}
+	html:lang(nl) & {
+		@media (max-width: 1140px) {
+			flex: 1 0 90px;
+		}
+	}
 
-    &:first-child {
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: bolder;
-        margin: auto;
-        
-        .entry {
-            display: flex;
-            align-items: center;
+	&:first-child {
+		font-family: Arial, Helvetica, sans-serif;
+		font-weight: bolder;
+		margin: auto;
+		
+		.entry {
+			display: flex;
+			align-items: center;
 
-            &:hover {
-                cursor: pointer;
-            }
-        }
-    }
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
 
-    &:last-child .entry {
-        cursor: pointer;
-    }
+	&:last-child .entry {
+		cursor: pointer;
+	}
 }
 // td
 .entry {
-    border-top: 1px solid black;
-    background-color: white;
-    height: 25px;
+	border-top: 1px solid black;
+	background-color: white;
+	height: 25px;
 
-    &:first-child {
-        border: 0;
-        margin: auto;
-    }
+	&:first-child {
+		border: 0;
+		margin: auto;
+	}
 }
 
 //// Show More Button
 div.showMore {
-    // Position
-    border: solid 1px black;
-    border-top: 0;
-    text-align: center;
-    // Font
-    font-family: troika, Arial, Helvetica, sans-serif;
-    font-size: 18px;
-    background-color: transparent;
-    color: rgb(153, 0, 255);
-    // Mouse
-    cursor: pointer;
+	// Position
+	border: solid 1px black;
+	border-top: 0;
+	text-align: center;
+	// Font
+	font-family: troika, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	background-color: transparent;
+	color: rgb(153, 0, 255);
+	// Mouse
+	cursor: pointer;
 }

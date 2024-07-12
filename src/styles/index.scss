@@ -1,223 +1,499 @@
 @use "fonts.scss";
+@use "mixins.scss";
 
 :root {
-    --primary-color: #d9ffd9;
-    --secondary-color: #f0fff0;
+	--primary-color: #d9ffd9;
+	--secondary-color: #f0fff0;
 }
 
 //// Highlight
+// Selecting text
 ::selection {
-    // Change highlight background color to black
-    background: rgb(10, 149, 42);
-    // Change highlight text color to red
-    color: #ffffff;
+	background: rgb(10, 149, 42);
+	color: #ffffff;
+}
+::-moz-selection {
+	background: rgb(10, 149, 42);
+	color: #ffffff;
+}
+// Focus with keyboard
+:focus-visible {
+	outline-color: black;
 }
 
 //// Scrollbar
 ::-webkit-scrollbar {
-    width: 10px;
+	width: 10px;
+	height: 10px;
 }
-::-webkit-scrollbar-track {
-    background: transparent; 
-}
-::-webkit-scrollbar-thumb {
-    background: #bbb; 
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #999; 
-}
+// Track the scrollbar is moving on
+::-webkit-scrollbar-track { background-color: transparent; }
+// Slider that you move
+::-webkit-scrollbar-thumb { background-color: #bbbbbb;}
+::-webkit-scrollbar-thumb:hover { background-color: #999999; }
+// Corner: when you have horizontal and vertical scrollbars
+::-webkit-scrollbar-corner { background-color: transparent; }
+// Up and down buttons
+::-webkit-scrollbar-button { display: none; }
 
-//// Organization
+//// Body
 body {
-    // Position
-    margin: 0;
-    padding: 0;
-    // Font
-    @include fonts.Oswald;
-    // @include fonts.troika;
-    color: black;
-    background-color: var(--primary-color);
+	margin: 0;
+	padding: 0;
+	@include fonts.Oswald;
+	color: black;
+	background-color: var(--primary-color);
 }
-// p
+
+//// Paragraph
 p {
-    // Position
-    margin: 0 0 8px 0;
+	margin: 0 0 8px 0;
 }
-// a
+
+//// Anchor
 a {
-    color: black;
-    text-decoration: none;
-    background-image: linear-gradient(rgb(121, 223, 121), rgb(121, 223, 121));
-    background-repeat: no-repeat;
-    background-size: auto 6px;
-    background-position: 0 80%;
+	color: black;
+	text-decoration: none;
+	background-image: linear-gradient(rgb(121, 223, 121), rgb(121, 223, 121));
+	background-repeat: no-repeat;
+	background-size: auto 6px;
+	background-position: 0 80%;
 
-    &:hover {
-        transition: all .1s;
-        background-size: auto 2px;
-    }
+	&:hover {
+		transition: all .1s;
+		background-size: auto 2px;
+	}
 
-    &:has(img) {
-        background: none;
-    }
+	// Remove highlight from images
+	&:has(img) { background: none; }
+
+	@mixin a-ends {
+		display: inline-block;
+		width: 1rem;
+		height: 1rem;
+		margin-left: 4px;
+		background-size: 1rem;
+		background-repeat: no-repeat;
+		content: "";
+	}
+	// Open in new tab
+	&[target="_blank"]::after {
+		@include a-ends;
+		background-image: url("../../images/new\ tab.svg");
+		background-size: 0.6rem;
+		width: 0.6em;
+		height: 0.6rem;
+	}
+	// .pdf
+	&[href$=".pdf"]::after {
+		@include a-ends;
+		background-image: url("../../images/pdf\ icon.png");
+	}
+	// .doc or .docx
+	&[href$=".doc"]::after, &[href$=".docx"]::after {
+		@include a-ends;
+		background-image: url("../../images/word\ document\ icon.svg");
+	}
 }
-// hs
+
+//// Code
+code, .code {
+	border-radius: 10px;
+	background-color: #ddd;
+	font-family: monospace;
+	color: black;
+}
+code {
+	padding: 3px;
+}
+
+//// Pre
+pre {
+	padding: 15px;
+	border: 1px solid black;
+	tab-size: 1.5rem;
+	border-radius: 10px;
+	color: gray;
+}
+
+//// Headings
 h1 {
-    // Position
-    margin: 0;
-    // Font
-    text-align: center;
-    font-weight: normal;
+	// Position
+	margin: 0;
 }
 h2 {
-    // Font
-    color: gray;
-    text-decoration: underline;
-    font-family: Oswald, Arial, Helvetica, sans-serif;
-    font-weight: normal;
+	// Font
+	color: gray;
+	text-decoration: underline;
+	font-family: Oswald, Arial, Helvetica, sans-serif;
 }
 h1, h2, h3 {
-    // Font
-    @include fonts.troika;
+	// Font
+	@include fonts.troika;
 }
-// Lists
+
+//// Lists
+// Unordered list
 ul {
-    // Position
-    margin: 0;
+	// Position
+	margin: 0;
 }
-// Select
-select {
-    // Position
-    margin: 2px 0;
-    padding: 5px;
-    border-radius: 7px;
-    font-family: inherit;
-    @include fonts.troika;
-    // Font
-    color: black;
-}
-// Header
+
+//// Header
 header {
-    // Position
-    position: relative;
+	// Position
+	position: relative;
 }
-// Footer
+
+//// Footer
 footer {
-    // Font
-    text-align: center;
-    color: gray;
-    @include fonts.Oswald;
+	// Font
+	text-align: center;
+	color: gray;
+	@include fonts.Oswald;
 
-    a {
-        // Font
-        color: gray;
-    }
+	a {
+		// Font
+		color: gray;
+	}
 }
 
-//// Other
+//// Horizontal Line
+hr {
+	width: 90%;
+	margin: 2rem auto;
+}
+hr.short {
+	width: 20%;
+}
+
+//// Image
+img, input[type=image] {
+	width: 100%;
+}
+
+//// Input
+input {
+	font-family: inherit;
+}
+/// Input Range
+input[type="range"] {
+	// Remove default appearance
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: none;
+	
+	// Track
+	position: relative;
+	bottom: 4px;
+	&:has(+ datalist) {
+		bottom: 12px;
+
+		// Centers thumb on the track
+		&::-webkit-slider-thumb {
+			margin-bottom: 18px;
+		}
+	}
+	height: 3px;
+	border-radius: 5px;
+	background-color: rgb(100, 206, 108);
+	&::-ms-fill-lower { background-color: rgb(100, 206, 108); }
+	&::-ms-fill-upper { background-color: rgba(0, 0, 0, 0.1); }
+	
+	// Thumb
+	@mixin range-thumb {
+		// Remove default appearance
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: none;  // For moz
+
+		height: 1rem;
+		width: 1rem;
+		background-color: white;
+		box-shadow: 0 0 5px rgb(200, 200, 200);
+		border-radius: 50%;
+		transition: .2s ease-in-out;
+	}
+	&::-webkit-slider-thumb { @include range-thumb; }
+	&::-moz-range-thumb { @include range-thumb; }
+	&::-ms-thumb { @include range-thumb; }
+}
+/// Checkbox
+// Edit container that has input
+label:has(input[type="checkbox"]) {
+	// Position
+	position: relative;
+	display: inline-block;
+	margin-bottom: 3px;
+	padding-left: 20px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+// Remove default
+input[type="checkbox"] {
+	// Position
+	position: absolute;
+	width: 0;
+	height: 0;
+	opacity: 0;
+	margin: 0;
+	// Cursor
+	cursor: pointer;
+
+	// Outline animation
+	@include mixins.select(15px, 15px, 5px, "&:focus-visible ", "+ span.checkbox", false);
+}
+// Add new checkbox
+span.checkbox {
+	// Position
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 15px;
+	width: 15px;
+	background-color: rgb(225, 225, 225);
+	border: 1px solid darkgray;
+	border-radius: 4px;
+
+	// Check mark
+	&::after {
+		// Position
+		content: "";
+		position: absolute;
+		display: none;
+		left: 4px;
+		top: 1px;
+		width: 4px;
+		height: 8px;
+		border: solid white;
+		border-width: 0 3px 3px 0;
+		-webkit-transform: rotate(45deg);
+		-moz-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		-o-transform: rotate(45deg);
+		transform: rotate(45deg);
+	}
+}
+label:has(input[type="checkbox"]):hover span.checkbox {
+	background-color: rgb(200, 200, 200);
+}
+// Show when checked
+input[type="checkbox"]:checked {
+	+ span.checkbox {
+		background-color: #2196F3 !important;
+	}
+	+ span.checkbox:after {
+		display: block;
+	}
+}
+/// Input Button and Button
+div.button:has(input[type="button"]) {
+	display: inline-block;
+}
+div.button:has(input[type="button"]) > input[type="button"] {
+	border: none;
+	background-color: transparent;
+	color: inherit;
+	padding: 0;
+}
+div.button:has(input[type="button"]), button.bm-button {
+	$edge-size: 0.4em;
+	$border-width: 0.2em;
+
+	position: relative;
+	isolation: isolate;
+	padding: 0.7em;
+	border: none;
+	color: rgb(246, 246, 246);
+	@include fonts.troika;
+
+	// Corners
+	clip-path:
+		polygon(
+			/* Top left */
+			0 $edge-size,
+			$edge-size 0,
+			/* Top right */
+			calc(100% - $edge-size) 0,
+			100% $edge-size,
+			/* Bottom right */
+			100% calc(100% - $edge-size),
+			calc(100% - $edge-size) 100%,
+			/* Bottom left */
+			$edge-size 100%,
+			0 calc(100% - $edge-size)
+		);
+
+	&::before, &::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+	}
+
+	// Border
+	&::before {
+		background-color: rgb(219, 219, 219);
+		z-index: -2;
+	}
+
+	// Fill
+	&::after {
+		background-color: rgb(103, 159, 220);
+		z-index: -1;
+		// Corners
+		clip-path:
+			polygon(
+				/* Top left */
+				$border-width calc($edge-size + $border-width / 2),
+				calc($edge-size + $border-width / 2) $border-width,
+				/* Top right */
+				calc(100% - $edge-size - $border-width / 2) $border-width,
+				calc(100% - $border-width) calc($edge-size + $border-width / 2),
+				/* Bottom right */
+				calc(100% - $border-width) calc(100% - $edge-size - $border-width / 2),
+				calc(100% - $edge-size - $border-width / 2) calc(100% - $border-width),
+				/* Bottom left */
+				calc($edge-size + $border-width / 2) calc(100% - $border-width),
+				$border-width calc(100% - $edge-size - $border-width / 2)
+			);
+	}
+}
+input[type="button"]::selection, button::selection { background-color: rgb(31, 117, 209); }
+input[type="button"]::-moz-selection, button::selection { background-color: rgb(31, 117, 209); }
+
+//// Other Inputs
+/// Select
+select {
+	// Position
+	margin: 2px 0;
+	padding: 5px;
+	border-radius: 7px;
+	font-family: inherit;
+	color: black;
+}
+datalist {
+	display: inline-flex;
+	position: relative;
+    justify-content: space-between;
+    height: auto;
+    overflow: hidden;
+	width: 125px;
+	left: -133px;
+	top: 10px;
+}
+
+//// CLasses
+.center {
+	text-align: center;
+}
 .important {
-    // Font
-    color: red;
+	// Font
+	color: red;
 }
 
 //// Header Grid
 .headerGrid {
-    display: grid;
-    grid-template-columns: 1fr 6fr 1fr;
+	display: grid;
+	grid-template-columns: 1fr 6fr 1fr;
 
-    h1 {
-        text-wrap: wrap;
-        margin-bottom: 10px;
-    }
+	h1 {
+		text-wrap: wrap;
+		margin-bottom: 10px;
+	}
 }
 // Languages
 nav.languages {
-    background-color: white;
-    // Position
-    position: absolute;
-    right: 3px;
-    top: 50px;
-    text-align: center;
-    padding: 10px;
-    // Transition
-    transition: all .4s;
-    opacity: 0;
-    visibility: hidden;
+	background-color: white;
+	// Position
+	position: absolute;
+	right: 3px;
+	top: 50px;
+	text-align: center;
+	padding: 10px;
+	// Transition
+	transition: all .4s;
+	opacity: 0;
+	visibility: hidden;
 
-    > ul {
-        list-style-type: none;
-        // Position
-        padding: 0;
+	> ul {
+		list-style-type: none;
+		// Position
+		padding: 0;
 
-        > li {
-            cursor: pointer;
-        }
-    }
+		> li {
+			cursor: pointer;
+		}
+	}
 }
 button.languages {
-    // Position
-    position: absolute;
-    right: 34px;
-    top: 24px;
-    border: 0;
-    padding: 0;
-    // Other
-    background-color: transparent;
-    cursor: pointer;
+	// Position
+	position: absolute;
+	right: 34px;
+	top: 24px;
+	border: 0;
+	padding: 0;
+	// Other
+	background-color: transparent;
+	cursor: pointer;
 }
 button.languages:hover + nav.languages, nav.languages:hover {
-    // Transition
-    transition: all .4s;
-    opacity: 1;
-    visibility: visible;
+	// Transition
+	transition: all .4s;
+	opacity: 1;
+	visibility: visible;
 }
 
 //// Collection
 .collection {
-    // Position
-    padding: 20px;
-    border: solid 1px black;
-    border-radius: 20px;
-    background-color: white;
-    max-width: 1000px;
-    margin: 20px auto;
-    // Decrease the size of the collection when the screen size is too small
-    @media (max-width: 1250px) {
-        width: 80%;
-    }
+	// Position
+	padding: 20px;
+	border: solid 1px black;
+	border-radius: 20px;
+	background-color: white;
+	max-width: 1000px;
+	margin: 20px auto;
+	// Decrease the size of the collection when the screen size is too small
+	@media (max-width: 1250px) {
+		width: 80%;
+	}
 }
 
 //// Disclaimer
 .disclaimer {
-    display: flex;
-    width: 100%;
-    height: 2.5rem;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--secondary-color);
-    font-size: 1.5rem;
+	display: flex;
+	width: 100%;
+	height: 2.5rem;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--secondary-color);
+	font-size: 1.5rem;
 
-    p {
-        margin: 0;
-    }
+	p {
+		margin: 0;
+	}
 
-    html:lang(en) & {
-        @media (max-width: 260px) {
-            font-size: 9vw;
-    
-            img {
-                width: 12vw;
-            }
-        }
-    }
+	html:lang(en) & {
+		@media (max-width: 260px) {
+			font-size: 9vw;
+	
+			img {
+				width: 12vw;
+			}
+		}
+	}
 
-    html:lang(nl) & {
-        @media (max-width: 280px) {
-            font-size: 8.5vw;
-    
-            img {
-                width: 11.5vw;
-            }
-        }
-    }
+	html:lang(nl) & {
+		@media (max-width: 280px) {
+			font-size: 8.5vw;
+	
+			img {
+				width: 11.5vw;
+			}
+		}
+	}
 }

@@ -1,4 +1,4 @@
-Hello! Welcome to the Builderment Seeds! Here you can search for any seed you want! This website is made by <a href="https://discordapp.com/users/710012954736590908" target="_blank">Space.yg</a> with the help of <a href="https://discordapp.com/users/947807205028139018" target="_blank">Human-Crow</a>.
+Hello! Welcome to the Builderment Seeds! Here you can search for any seed you want! This website is made by [Space.yg](https://discordapp.com/users/710012954736590908)~ with the help of [Human-Crow](https://discordapp.com/users/947807205028139018)~.
 
 Tips:
 - Click on a seed to copy.

@@ -1,7 +1,7 @@
 div.whiteBackground {
   top: 0;
-  width: 100%;
-  height: 100%;
+  width: 100dvw;
+  height: 100dvh;
   background-color: rgba(255, 255, 255, 0.9);
   position: fixed;
   z-index: 2;
@@ -9,11 +9,10 @@ div.whiteBackground {
 
 .lds-spinner {
   position: fixed;
-  left: 50%;
-  bottom: 50%;
+  left: 50dvw;
+  bottom: 50dvh;
   z-index: 2;
-  transform: translate(-50%, 25%);
-  color: official;
+  transform: translate(-50%, 50%);
   display: inline-block;
   width: 80px;
   height: 80px;
@@ -22,7 +21,7 @@ div.whiteBackground {
   transform-origin: 40px 40px;
   animation: lds-spinner 1.2s linear infinite;
 }
-.lds-spinner div:after {
+.lds-spinner div::after {
   content: " ";
   display: block;
   position: absolute;
@@ -30,7 +29,7 @@ div.whiteBackground {
   left: 37px;
   width: 6px;
   height: 18px;
-  border-radius: 20%;
+  border-radius: 10px;
   background: rgb(0, 0, 0);
 }
 .lds-spinner div:nth-child(1) {
@@ -89,6 +88,29 @@ div.whiteBackground {
   100% {
     opacity: 0;
   }
+}
+.progress-bar {
+  position: fixed;
+  left: 50dvw;
+  bottom: calc(50dvh - 70px);
+  z-index: 2;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 5px;
+  visibility: hidden;
+}
+.progress-bar > div {
+  background-color: rgb(10, 149, 42);
+  height: 100%;
+}
+.progress-bar > div > span {
+  position: absolute;
+  transform: translate(calc(100% + 5px), calc(-50% + 2.5px));
+  right: 0;
+  color: gray;
+}
+.progress-bar > div > span:last-child {
+  transform: translate(calc(100% + 2.3em), calc(-50% + 2.5px));
 }
 
 /*# sourceMappingURL=loading.css.map */

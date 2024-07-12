@@ -1,0 +1,59 @@
+@mixin select($width, $height, $offset: 5px, $on-select: ":hover", $at-element: "&", $on-self: true) {
+	#{$at-element}::before {
+		content: "";
+		position: absolute;
+		display: inline-block;
+		border: 2px solid black;
+		border-radius: 4px;
+		// Center
+		top: 50%;
+		left: 50%;
+		-webkit-transform: translate(-50%, -50%);
+		-moz-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		-o-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+
+		animation: in .05s;
+		visibility: hidden;
+	}
+	@if $on-self {
+		#{$at-element + $on-select}::before {
+			width: $width + $offset;
+			height: $height + $offset;
+			animation: out .05s;
+			visibility: visible;
+		}
+	} @else {
+		#{$on-select + $at-element}::before {
+			width: $width + $offset;
+			height: $height + $offset;
+			animation: out .05s;
+			visibility: visible;
+		}
+	}
+	@keyframes out {
+		from {
+			width: $width;
+			height: $height;
+			visibility: hidden;
+		}
+		to {
+			width: $width + $offset;
+			height: $height + $offset;
+			visibility: visible;
+		}
+	}
+	@keyframes in {
+		from {
+			width: $width + $offset;
+			height: $height + $offset;
+			visibility: visible;
+		}
+		to {
+			width: $width;
+			height: $height;
+			visibility: hidden;
+		}
+	}
+}

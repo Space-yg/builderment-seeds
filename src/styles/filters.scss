@@ -4,33 +4,82 @@
 .selectFilters { grid-area: 'select-filters'; }
 .sliderFilters { grid-area: 'slider-filters'; }
 .filterGrid {
-    display: grid;
-    grid-template-areas:
-        'select-filters slider-filters';
-    // Switch grid when screen size gets smaller
-    @media (max-width: 830px) {
-        grid-template-areas:
-            'select-filters'
-            'slider-filters';
-    }
+	display: grid;
+	grid-template-areas:
+		'select-filters slider-filters';
+	// Switch grid when screen size gets smaller
+	@media (max-width: 830px) {
+		grid-template-areas:
+			'select-filters'
+			'slider-filters';
+	}
 }
 
 //// Input Amount
 .collection {
-    .filterGrid {
-        @include fonts.troika;
-    }
+	.filterGrid, input[type="number"] {
+		@include fonts.troika;
+	}
 
-    input[type="number"], select[name="order"] {
-        // Font
-        font-family: troika, Arial, Helvetica, sans-serif;
-        display: none;
-    }
+	// Input number
+	input[type="number"] {
+		width: 4rem;
+	}
 }
 
-//// Input Range
+/// Input Range
+input[type="range"] {
+	// Remove default appearance
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: none;
+	
+	// Track
+	position: relative;
+	bottom: 4px;
+	&:has(+ datalist) {
+		bottom: 12px;
+
+		// Centers thumb on the track
+		&::-webkit-slider-thumb {
+			margin-bottom: 18px;
+		}
+	}
+	height: 3px;
+	border-radius: 5px;
+	background-color: rgb(100, 206, 108);
+	&::-ms-fill-lower { background-color: rgb(100, 206, 108); }
+	&::-ms-fill-upper { background-color: rgba(0, 0, 0, 0.1); }
+	
+	// Thumb
+	@mixin range-thumb {
+		// Remove default appearance
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: none;  // For moz
+
+		height: 1rem;
+		width: 1rem;
+		background-color: white;
+		box-shadow: 0 0 5px rgb(200, 200, 200);
+		border-radius: 50%;
+		transition: .2s ease-in-out;
+	}
+	&::-webkit-slider-thumb { @include range-thumb; }
+	&::-moz-range-thumb { @include range-thumb; }
+	&::-ms-thumb { @include range-thumb; }
+}
+// Span
+input[type="range"] + span {
+	display: inline-block;
+	width: 1rem;
+	@include fonts.Oswald;
+}
+// Label
 label:has(+ input[type="range"]) {
-    bottom: 3px;
+	bottom: 3px;
 }
 
 //// Checkbox
@@ -102,78 +151,88 @@ label:has(input[type="checkbox"]) input[type="checkbox"]:checked ~ span.checkbox
 
 // English
 html:lang(en) {
-    @media (max-width: 410px) {
-        //// Filter Collection
-        .collection:has(.filterGrid) {
-            font-size: 4vw;
+	@media (max-width: 410px) {
+		//// Filter Collection
+		.collection:has(.filterGrid) {
+			font-size: 3.9vw;
 
-            // Select Menu
-            select {
-                font-size: 3.5vw;
-                padding: 1vw;
-            }
-            // Input Range
-            input[type="range"] {
-                width: 30vw;
-            }
-        }
+			// Select Menu
+			select {
+				padding: 1.2vw;
+				font-size: 3.28vw;
+			}
+			// Input Range
+			input[type="range"] {
+				width: 31.4vw;
+			}
+			// Input number
+			input[type="number"] {
+				width: 15.6vw;
+				font-size: 3.5vw;
+			}
+		}
 
-        //// Checkbox
-        span.checkbox {
-            width: 3.5vw;
-            height: 3.5vw;
+		//// Checkbox
+		span.checkbox {
+			width: 3.6vw;
+			height: 3.6vw;
 
-            // Check mark
-            &::after {
-                left: 1vw;
-                top: .2vw;
-                width: 1vw;
-                height: 1.8vw;
-                border-width: 0 .8vw .8vw 0;
-            }
-        }
-        // Edit container that has input
-        label:has(input[type="checkbox"]) {
-            padding-left: 4.5vw;
-        }
-    }
+			// Check mark
+			&::after {
+				left: 1vw;
+				top: .3vw;
+				width: 1vw;
+				height: 1.8vw;
+				border-width: 0 .8vw .8vw 0;
+			}
+		}
+		// Edit container that has input
+		label:has(input[type="checkbox"]) {
+			padding-left: 4.9vw;
+		}
+	}
 }
 
 // Netherland
 html:lang(nl) {
-    @media (max-width: 457px) {
-        //// Filter Collection
-        .collection:has(.filterGrid) {
-            font-size: 3.3vw;
+	@media (max-width: 456px) {
+		//// Filter Collection
+		.collection:has(.filterGrid) {
+			font-size: 3.5vw;
 
-            // Select Menu
-            select {
-                font-size: 2.8vw;
-                padding: 1vw;
-            }
-            // Input Range
-            input[type="range"] {
-                width: 30vw;
-            }
-        }
+			// Select Menu
+			select {
+				padding: 1.075vw;
+				font-size: 2.8vw;
+			}
+			// Input Range
+			input[type="range"] {
+				width: 27vw;
+			}
+			// Input number
+			input[type="number"] {
+				width: 13.5vw;
+				font-size: 2.8vw;
+			}
+		}
 
-        //// Checkbox
-        span.checkbox {
-            width: 3vw;
-            height: 3vw;
+		//// Checkbox
+		span.checkbox {
+			width: 3.4vw;
+			height: 3.4vw;
 
-            // Check mark
-            &::after {
-                left: .8vw;
-                top: 0;
-                width: .8vw;
-                height: 1.6vw;
-                border-width: 0 .8vw .8vw 0;
-            }
-        }
-        // Edit container that has input
-        label:has(input[type="checkbox"]) {
-            padding-left: 4vw;
-        }
-    }
+			// Check mark
+			&::after {
+				left: .95vw;
+				top: .25vw;
+				width: .9vw;
+				height: 1.7vw;
+				border-width: 0 .8vw .8vw 0;
+			}
+		}
+		// Edit container that has input
+		label:has(input[type="checkbox"]) {
+			padding-left: 4.4vw;
+		}
+	}
 }
