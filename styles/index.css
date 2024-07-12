@@ -96,7 +96,7 @@ a[target=_blank]::after {
   background-size: 1rem;
   background-repeat: no-repeat;
   content: "";
-  background-image: url("../../images/new-tab.svg");
+  background-image: url("../images/new-tab.svg");
   background-size: 0.6rem;
   width: 0.6em;
   height: 0.6rem;
@@ -109,7 +109,7 @@ a[href$=".pdf"]::after {
   background-size: 1rem;
   background-repeat: no-repeat;
   content: "";
-  background-image: url("../../images/pdf-icon.png");
+  background-image: url("../images/pdf-icon.png");
 }
 a[href$=".doc"]::after, a[href$=".docx"]::after {
   display: inline-block;
@@ -119,7 +119,7 @@ a[href$=".doc"]::after, a[href$=".docx"]::after {
   background-size: 1rem;
   background-repeat: no-repeat;
   content: "";
-  background-image: url("../../images/word-document-icon.svg");
+  background-image: url("../images/word-document-icon.svg");
 }
 
 code, .code {

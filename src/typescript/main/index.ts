@@ -164,7 +164,6 @@ req.addEventListener("load", async function() {  // Do not change this to => fun
 	for (let i = 0; i < s.length; i += 12) seedsUtf8.push(s.slice(i, i + 12))
 
 	// seed(ws,ra)(wd)si(cp)(cl)(wl)u
-	console.time("new")
 	for (const utf8 of seedsUtf8) {
 		const wsOrRa = utf8[4].toString(2).padStart(8, "0")
 		const r = parseInt(wsOrRa.slice(4), 2)
@@ -184,7 +183,6 @@ req.addEventListener("load", async function() {  // Do not change this to => fun
 			pp: 0,
 		} as Seed)
 	}
-	console.timeEnd("new")
 
 	// Amount Filter
 	amountFilter.addEventListener("change", () => Filter(seeds))

@@ -99,7 +99,6 @@ req.addEventListener("load", async function () {
     const seedsUtf8 = [];
     for (let i = 0; i < s.length; i += 12)
         seedsUtf8.push(s.slice(i, i + 12));
-    console.time("new");
     for (const utf8 of seedsUtf8) {
         const wsOrRa = utf8[4].toString(2).padStart(8, "0");
         const r = parseInt(wsOrRa.slice(4), 2);
@@ -118,7 +117,6 @@ req.addEventListener("load", async function () {
             pp: 0,
         });
     }
-    console.timeEnd("new");
     amountFilter.addEventListener("change", () => Filter(seeds));
     amount.addEventListener("change", () => Filter(seeds));
     order.addEventListener("change", () => Filter(seeds));
