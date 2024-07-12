@@ -1,3 +1,9 @@
+## V1.5.4
+### \t12/7/2024
+
+- Fixed glob image not working well on the phone.
+- Fixed new tab icon not showing.
+
 ## V1.5.3
 ### \t12/7/2024
 

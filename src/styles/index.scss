@@ -79,7 +79,7 @@ a {
 	// Open in new tab
 	&[target="_blank"]::after {
 		@include a-ends;
-		background-image: url("../../images/new\ tab.svg");
+		background-image: url("../../images/new-tab.svg");
 		background-size: 0.6rem;
 		width: 0.6em;
 		height: 0.6rem;
@@ -87,12 +87,12 @@ a {
 	// .pdf
 	&[href$=".pdf"]::after {
 		@include a-ends;
-		background-image: url("../../images/pdf\ icon.png");
+		background-image: url("../../images/pdf-icon.png");
 	}
 	// .doc or .docx
 	&[href$=".doc"]::after, &[href$=".docx"]::after {
 		@include a-ends;
-		background-image: url("../../images/word\ document\ icon.svg");
+		background-image: url("../../images/word-document-icon.svg");
 	}
 }
 
@@ -437,9 +437,15 @@ button.languages {
 	top: 24px;
 	border: 0;
 	padding: 0;
+
 	// Other
 	background-color: transparent;
 	cursor: pointer;
+
+	> img {
+		width: 25px;
+		height: 25px;
+	}
 }
 button.languages:hover + nav.languages, nav.languages:hover {
 	// Transition
