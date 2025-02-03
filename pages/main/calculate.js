@@ -1,10 +1,8 @@
-import { Item } from "../../../builderment-classes/dir/classes/Item.js";
-import * as _ from "../../../builderment-classes/dir/objects/items.js";
-_;
+import { Item } from "builderment-classes";
 import { resourceFilter } from "./filter.js";
 export function calculateResources(seeds) {
-    if (Item.items[resourceFilter.value] !== undefined) {
-        const item = Item.items[resourceFilter.value];
+    const item = Item.items.find(item => item.name === resourceFilter.value);
+    if (typeof item !== "undefined") {
         seeds.forEach(seed => {
             seed.rf = item.getMaxResourceAmountInSeed({
                 "Wood Log": seed.wd,

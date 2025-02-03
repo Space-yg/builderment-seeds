@@ -27,6 +27,6 @@
   },
   "homepage": "https://github.com/Space-yg/builderment-seeds#readme",
   "dependencies": {
-    "builderment-classes": "git+https://github.com/Space-yg/builderment-classes.git"
+    "builderment-classes": "^0.0.2"
   }
 }

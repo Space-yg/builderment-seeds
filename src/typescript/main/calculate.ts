@@ -5,18 +5,20 @@
 
 // For deployment
 // import { Item } from "../../../builderment-classes/dir/index.js"
-import { Item } from "../../../builderment-classes/dir/classes/Item.js"
+// import { Item } from "../../../builderment-classes/dir/classes/Item.js"
 // @ts-ignore
-import * as _ from "../../../builderment-classes/dir/objects/items.js"; _  // Do not remove this underscore
+// import * as _ from "../../../builderment-classes/dir/objects/items.js"; _  // Do not remove this underscore
+
+import { Item } from "builderment-classes"
 
 import { Seed } from "./types.js"
 import { resourceFilter } from "./filter.js"
 
 /** Calculate the resources */
 export function calculateResources(seeds: Seed[]) {
-	if (Item.items[resourceFilter.value] !== undefined) {
-		const item: Item = Item.items[resourceFilter.value]
-		
+	const item = Item.items.find(item => item.name === resourceFilter.value)
+
+	if (typeof item !== "undefined") {
 		// Calculate resources
 		seeds.forEach(seed => {
 			seed.rf = item.getMaxResourceAmountInSeed({
@@ -97,15 +99,15 @@ function getMaxResourceAmountInSeedWithPowerPlant(resources: {
 	const extractorsNuclearPp: number = plantVars[resources.resourceAmount - 1][1]
 	const nuclearPp: number = resources.uraniumOre * urExRate / fuelCostRatio.uraniumOre * coalBoostUr
 	const extraExtractors: number = nuclearPp * extractorsNuclearPp * 0.4
-	const fuelCostExtractors: {[x: string]: number} = {}
+	const fuelCostExtractors: { [x: string]: number } = {}
 	for (let i = 0; i < _resourcesWithoutUranium.length; i++) fuelCostExtractors[_resourcesWithoutUranium[i]] = nuclearPp * fuelCostRatio[_resourcesWithoutUranium[i]] / exRate
 
 	function getExcess(nuclearBoostCoal: number, estimatedScore: number): [number, number] {
 		const totalCoal = resources.coal * (nuclearBoostCoal * 1.4 + (1 - nuclearBoostCoal) * 1.2)
-		const needed: {[x: string]: number} = {}
-		const coalBoost: {[x: string]: number} = {}
-		const coalExtractors: {[x: string]: number} = {}
-		const nuclearExtractors: {[x: string]: number} = {}
+		const needed: { [x: string]: number } = {}
+		const coalBoost: { [x: string]: number } = {}
+		const coalExtractors: { [x: string]: number } = {}
+		const nuclearExtractors: { [x: string]: number } = {}
 		for (let i = 0; i < _resourcesWithoutUranium.length; i++) {
 			const resource = _resourcesWithoutUranium[i]
 			needed[resource] = estimatedScore / scoreError / exRate * etRatio[resource] + fuelCostExtractors[resource]
