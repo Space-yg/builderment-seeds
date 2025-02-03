@@ -4,5 +4,6 @@ exclude:
   - vendor/
 
 include:
-  - node_modules
-  - node_modules/.pnpm/builderment-classes@0.0.2/node_modules/selfmap/dist/index.mjs
+  - node_modules/
+  - node_modules/.pnpm/
+  - .pnpm/
