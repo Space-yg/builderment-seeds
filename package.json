@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/Space-yg/builderment-seeds#readme",
   "dependencies": {
-    "builderment-classes": "^0.0.2"
+    "builderment-classes": "^0.0.2",
+    "selfmap": "^1.0.1"
   }
 }
