@@ -1,0 +1,157 @@
+// Variables
+$checkbox-width: 2em;
+$checkbox-height: 1.25em;
+$circle-size: 1.17em;
+$circle-margin-left: .05em;
+
+// Edit container that has checkbox
+.bm-checkbox {
+	// Position
+	position: relative;
+	display: block;
+	padding-left: 2.25em;
+
+	// Style
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	// Cursor
+	cursor: pointer;
+
+	// Remove default
+	> input {
+		// Remove default styling
+		appearance: none;
+		margin: 0;
+
+		// Position
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: $checkbox-width;
+		min-height: $checkbox-height;
+
+		// Style
+		outline: 2px solid transparent;
+		background-color: rgb(225, 225, 225);
+		border-radius: 1em;
+		transition: background-color .25s, outline .1s;
+
+		// Cursor
+		cursor: pointer;
+
+		// Turn on when checked
+		@mixin checked {
+			background-color: rgb(100, 206, 108);
+
+			&::after {
+				left: calc($checkbox-width - $circle-size - $circle-margin-left);
+			}
+		}
+		&:checked {
+			@include checked;
+		}
+		&::-ms-check {
+			@include checked;
+		}
+
+		// Focus animation
+		&:focus-visible {
+			outline: 2px solid black;
+		}
+
+		// Circle
+		&::after {
+			content: "";
+
+			// Position
+			position: absolute;
+			left: $circle-margin-left;
+			top: .027em;
+			width: $circle-size;
+			min-height: $circle-size;
+
+			// Style
+			background-color: white;
+			border-radius: 50%;
+			transition: left .25s;
+		}
+	}
+}
+
+// // Edit container that has checkbox
+// .bm-checkbox {
+// 	// Position
+// 	position: relative;
+// 	display: block;
+// 	padding-left: 2.25em;
+// 	cursor: pointer;
+// 	-webkit-user-select: none;
+// 	-moz-user-select: none;
+// 	-ms-user-select: none;
+// 	user-select: none;
+
+// 	// Remove default
+// 	> input {
+// 		// Position
+// 		position: absolute;
+// 		width: 0;
+// 		height: 0;
+// 		opacity: 0;
+// 		margin: 0;
+// 		// Cursor
+// 		cursor: pointer;
+
+// 		// Focus animation
+// 		&:focus-visible + span.bm-new-checkbox {
+// 			outline: 2px solid black;
+// 		}
+
+// 		// Turn on when checked
+// 		@mixin checked {
+// 			+ span.bm-new-checkbox {
+// 				background-color: rgb(100, 206, 108);
+
+// 				&::after {
+// 					left: calc($checkbox-width - $circle-size - $circle-margin-left);
+// 				}
+// 			}
+// 		}
+// 		&:checked {
+// 			@include checked;
+// 		}
+// 		&::-ms-check {
+// 			@include checked;
+// 		}
+// 	}
+
+// 	// Add new checkbox
+// 	> span.bm-new-checkbox {
+// 		// Position
+// 		position: absolute;
+// 		top: 0;
+// 		left: 0;
+// 		outline: 2px solid transparent;
+// 		width: $checkbox-width;
+// 		min-height: $checkbox-height;
+// 		background-color: rgb(225, 225, 225);
+// 		border-radius: 1em;
+// 		transition: background-color .25s, outline .1s;
+
+// 		// Circle
+// 		&::after {
+// 			// Position
+// 			content: "";
+// 			position: absolute;
+// 			left: $circle-margin-left;
+// 			top: .027em;
+// 			width: $circle-size;
+// 			min-height: $circle-size;
+// 			background-color: white;
+// 			border-radius: 50%;
+// 			transition: left .25s;
+// 		}
+// 	}
+// }

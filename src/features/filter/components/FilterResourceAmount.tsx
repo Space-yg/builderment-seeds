@@ -1,0 +1,42 @@
+import React from "react"
+import { Select } from "@components/form"
+import { signs, filterWorldSettings } from "@data/other"
+import { Filter, Sign, WorldSettingSize } from "src/types"
+import FilterOption from "./FilterOption"
+import { useFiltersDispatch } from "@context/FiltersContext"
+
+type Props = {
+	filterResource: Filter.FilterResourceAmount
+	groupIds: number[]
+}
+
+/** Filter a resource */
+export default function FilterResourceAmount({ filterResource, groupIds }: Props) {
+	const filtersDispatch = useFiltersDispatch()
+
+	return (
+		<FilterOption
+			id={filterResource.id}
+			groupIds={groupIds}
+			label="Filter Resource Amount"
+		>
+			<span>Resource Amount </span>
+			<Select options={signs} value={filterResource.sign} onChange={e => filtersDispatch({
+				type: "update",
+				filterId: filterResource.id,
+				groupIds,
+				updater(draft: Filter.FilterResourceAmount) {
+					draft.sign = e.target.value as Sign
+				},
+			})} />
+			<Select options={filterWorldSettings} value={filterResource.amount} onChange={e => filtersDispatch({
+				type: "update",
+				filterId: filterResource.id,
+				groupIds,
+				updater(draft: Filter.FilterResourceAmount) {
+					draft.amount = +e.target.value as WorldSettingSize
+				},
+			})} />
+		</FilterOption>
+	)
+}

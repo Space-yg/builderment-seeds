@@ -1,0 +1,53 @@
+.bm-slider > input {
+	// Remove default appearance
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: none;
+
+	// Track
+	position: relative;
+	bottom: 4px;
+	&:has(+ datalist) {
+		bottom: 12px;
+
+		// Centers thumb on the track
+		&::-webkit-slider-thumb {
+			margin-bottom: 18px;
+		}
+	}
+	height: 3px;
+	border-radius: 5px;
+	background-color: rgb(100, 206, 108);
+	&::-ms-fill-lower {
+		background-color: rgb(100, 206, 108);
+	}
+	&::-ms-fill-upper {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+
+	// Thumb
+	@mixin range-thumb {
+		// Remove default appearance
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: none; // For moz
+
+		height: 1rem;
+		width: 1rem;
+		background-color: white;
+		box-shadow: 0 0 5px rgb(200, 200, 200);
+		border-radius: 50%;
+		transition: .2s ease-in-out;
+	}
+	&::-webkit-slider-thumb {
+		@include range-thumb;
+	}
+	&::-moz-range-thumb {
+		@include range-thumb;
+	}
+	&::-ms-thumb {
+		@include range-thumb;
+	}
+}

@@ -1,0 +1,157 @@
+// Advanced filter button
+.advanced-filter-checkbox > input,
+.advanced-filter-checkbox::before,
+.advanced-filter-checkbox::after {
+	// Position
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	height: 5px;
+
+	// Style
+	border-radius: .5em;
+	background-color: black;
+}
+.advanced-filter-checkbox {
+	// Position
+	position: absolute;
+	top: 1.5em;
+	right: 2.5em;
+	width: 2em;
+	height: 2em;
+	z-index: 2;
+
+	// Tooltip
+	> span.tooltip {
+		// Style
+		opacity: 0;
+		transition: opacity .2s;
+
+		&::before, &::after {
+			// Position
+			position: absolute;
+			display: none;
+			border: 1px solid black;
+
+			// Style
+			transition: display .2s allow-discrete;
+			background-color: darkgray;
+		}
+
+		// Message
+		&::before {
+			// Position
+			content: "Advanced filter";
+			top: 2em;
+			right: 1.25em;
+			transform: translateX(50%);
+			width: 7em;
+			padding: .25em;
+
+			// Style
+			text-align: center;
+			border-radius: .5em;
+
+			// Font
+			font-size: .75em;
+		}
+
+		// Arrow
+		&::after {
+			// Position
+			content: "";
+			top: 1.25em;
+			right: 0;
+			transform: translateX(-100%) rotate(45deg);
+			width: .5em;
+			height: .5em;
+
+			// Style
+			border-bottom: none;
+			border-right: none;
+		}
+	}
+	// Show tooltip when hover
+	&:hover > span.tooltip {
+		// Style
+		opacity: 1;
+
+		&::after, &::before {
+			// Position
+			display: block;
+		}
+	}
+
+	// Background shown when selected
+	> div.highlight {
+		&::before,
+		&::after {
+			content: "";
+
+			// Position
+			position: absolute;
+			top: -1.125em;
+			right: -.5em;
+			width: 2.5em;
+			height: 2.5em;
+
+			// Style
+			border-radius: .5em;
+		}
+
+		// Show it is selected
+		&::before {
+			// Style
+			opacity: 0;
+			border: 1px solid black;
+			background-color: lightgray;
+			transition: opacity .1s;
+		}
+
+		// Focus using a keyboard
+		&:has(~ input:focus-visible)::after {
+			outline: 1px solid black;
+		}
+	}
+
+	// Highlight when checked
+	&:has(input:checked) > div.highlight::before {
+		opacity: 1;
+	}
+
+	// Top bar
+	&::before {
+		// Position
+		content: "";
+		z-index: 1;
+		top: -.6em;
+		right: -.25em;
+		width: 2em;
+	}
+
+	// Middle bar
+	> input {
+		// Position
+		top: 0;
+		right: 0;
+		width: 1.5em;
+
+		// Style
+		appearance: none;
+
+		// Focus using a keyboard
+		&:focus-visible {
+			outline: none;
+		}
+	}
+
+	// Bottom bar
+	&::after {
+		// Position
+		content: "";
+		z-index: 1;
+		top: .6em;
+		right: .25em;
+		width: 1em;
+	}
+}
