@@ -1,20 +1,14 @@
 import React from "react"
 import App from "./App.tsx"
 import { createRoot } from "react-dom/client"
-import { FilteredSeedsProvider } from "@/context/FilteredSeedsContext.tsx"
+import { BrowserRouter } from "react-router"
 
 import "./index.scss"
 
 createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
-
-		{/* Set the filtered seeds */}
-		<FilteredSeedsProvider>
-
-			{/* The actual application */}
+		<BrowserRouter>
 			<App />
-
-		</FilteredSeedsProvider>
-
+		</BrowserRouter>
 	</React.StrictMode>
 )

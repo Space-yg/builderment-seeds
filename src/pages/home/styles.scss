@@ -1,0 +1,143 @@
+// Main app
+#root {
+	// Position
+	display: grid;
+	grid-template-areas:
+		"header aside"
+		"main aside";
+	grid-template-columns: 2fr 1fr;
+	grid-template-rows: auto 1fr;
+
+	@media (width <=1400px) {
+		// Position
+		grid-template-areas:
+			"header"
+			"aside"
+			"main";
+		grid-template-columns: 1fr;
+	}
+}
+
+// Aside wrapper
+.aside-wrapper {
+	// Position
+	grid-area: aside;
+
+	// Aside
+	> .aside {
+		// Style
+		text-align: center;
+	}
+}
+
+// A filter or sort option
+.option {
+	// Position
+	position: relative;
+	display: block;
+	padding: 1.5em;
+	margin: 1em 0;
+	text-align: left;
+
+	// Style
+	border: 2px solid black;
+	border-radius: 1em;
+
+	// Change layout of filter NOT a group
+	&:not(.filter-group) {
+		// Position
+		display: flex;
+		flex-wrap: wrap;
+
+		> label, > span:not(.title) {
+			flex-grow: 1;
+			flex-shrink: 0;
+			flex-basis: 33%;
+		}
+	}
+
+	// Label of the filter option
+	> span.title {
+		// Position
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 1em;
+		padding: 0 .2em;
+
+		// Style
+		transform: translateY(calc(-50% - 1px));
+		background-color: white;
+	}
+
+	// Remove button (×)
+	.remove-button {
+		// Position
+		position: absolute;
+		padding: .1em;
+		font-size: 1.5em;
+		top: 0;
+		right: .75em;
+		transform: translateY(calc(-50% - 1px));
+
+		// Style
+		background-color: white;
+		border: none;
+		border-radius: 1em;
+
+		// Cursor
+		cursor: pointer;
+		user-select: none;
+	}
+
+	// Up and down buttons
+	[class|="move-button"] {
+		// Position
+		position: absolute;
+		right: 0;
+		top: 50%;
+		margin: 0;
+		padding: 0;
+		width: .75em;
+		height: .75em;
+		transform: translate(57.5%, -50%) rotate(45deg);
+
+		// Style
+		border: .2em solid white;
+		border-radius: .25em;
+		background-color: white;
+
+		// Cursor
+		cursor: pointer;
+		user-select: none;
+
+		> div {
+			// Position
+			width: 100%;
+			height: 100%;
+
+			// Style
+			border: 2px solid black;
+		}
+	}
+	.move-button-up {
+		// Position
+		top: 30%;
+
+		&, > div {
+			// Style
+			border-bottom: none;
+			border-right: none;
+		}
+	}
+	.move-button-down {
+		// Position
+		top: 70%;
+
+		&, > div {
+			// Style
+			border-top: none;
+			border-left: none;
+		}
+	}
+}

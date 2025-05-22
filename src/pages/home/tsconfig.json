@@ -1,0 +1,20 @@
+{
+	"extends": "../../../tsconfig.app.json",
+	"compilerOptions": {
+		"paths": {
+			// Global
+			"@/components/*": ["src/components/*"],
+
+			// Local
+			"!/features/*": ["src/pages/home/features/*"],
+			"!/data/*": ["src/pages/home/data/*"],
+			"!/utils/*": ["src/pages/home/utils/*"],
+			"!/context/*": ["src/pages/home/context/*"],
+			"!/types": ["src/pages/home/types.d.ts"],
+
+			// Other
+			"builderment-classes": ["node_modules/builderment-classes/dist/browser/index.d.ts", "node_modules/builderment-classes/dist/browser/index.js"]
+		}
+	},
+	"include": ["./"]
+}
