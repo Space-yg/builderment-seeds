@@ -1,11 +1,11 @@
-import React, { useState } from "react"
-import { Seed } from "src/types"
+import React, { memo, useState } from "react"
+import { Seed } from "@/types"
 
 type Props = {
 	seed: Seed
 }
 
-export default function SeedsTableRow({ seed }: Props) {
+const SeedsTableRow = memo(function SeedsTableRow({ seed }: Props) {
 	const [longResource, setLongResource] = useState(false)
 
 	return (
@@ -23,4 +23,6 @@ export default function SeedsTableRow({ seed }: Props) {
 			<td onClick={e => setLongResource(!longResource)}>{longResource ? Math.round(seed.r * 100_000) / 100_000 : Math.round(seed.r * 1000) / 1000}</td>
 		</tr>
 	)
-}
+})
+
+export default SeedsTableRow

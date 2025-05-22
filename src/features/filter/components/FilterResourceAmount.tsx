@@ -1,9 +1,9 @@
 import React from "react"
-import { Select } from "@components/form"
-import { signs, filterWorldSettings } from "@data/other"
-import { Filter, Sign, WorldSettingSize } from "src/types"
+import { Select } from "@/components/form"
+import { signs, filterWorldSettings } from "@/data/other"
+import { Filter, Sign, WorldSettingSize } from "@/types"
 import FilterOption from "./FilterOption"
-import { useFiltersDispatch } from "@context/FiltersContext"
+import { useFiltersDispatch } from "@/context/FiltersContext"
 
 type Props = {
 	filterResource: Filter.FilterResourceAmount
@@ -20,7 +20,7 @@ export default function FilterResourceAmount({ filterResource, groupIds }: Props
 			groupIds={groupIds}
 			label="Filter Resource Amount"
 		>
-			<span>Resource Amount </span>
+			<span className="bm-span">Resource Amount </span>
 			<Select options={signs} value={filterResource.sign} onChange={e => filtersDispatch({
 				type: "update",
 				filterId: filterResource.id,

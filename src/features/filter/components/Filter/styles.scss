@@ -1,17 +1,10 @@
-// Advanced filter button
-.advanced-filter-checkbox > input,
-.advanced-filter-checkbox::before,
-.advanced-filter-checkbox::after {
-	// Position
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	height: 5px;
-
-	// Style
-	border-radius: .5em;
-	background-color: black;
+.filter {
+	> p {
+		margin-bottom: .2em;
+	}
 }
+
+// Advanced filter button
 .advanced-filter-checkbox {
 	// Position
 	position: absolute;
@@ -20,6 +13,20 @@
 	width: 2em;
 	height: 2em;
 	z-index: 2;
+
+	& > input,
+	&::before,
+	&::after {
+		// Position
+		margin: 0;
+		padding: 0;
+		position: absolute;
+		height: 5px;
+
+		// Style
+		border-radius: .5em;
+		background-color: black;
+	}
 
 	// Tooltip
 	> span.tooltip {

@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react"
-import { Seed } from "src/types"
+import { Seed } from "@/types"
 
 /** The seeds context */
 export const SeedsContext = createContext<Seed[]>([])

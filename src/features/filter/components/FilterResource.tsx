@@ -1,10 +1,10 @@
 import React from "react"
-import { InputNumber, Select } from "@components/form"
-import { rawResources } from "@data/resources"
-import { signs } from "@data/other"
-import { Filter, Sign } from "src/types"
+import { InputNumber, Select } from "@/components/form"
+import { rawResources } from "@/data/resources"
+import { signs } from "@/data/other"
+import { Filter, Sign } from "@/types"
 import FilterOption from "./FilterOption"
-import { useFiltersDispatch } from "@context/FiltersContext"
+import { useFiltersDispatch } from "@/context/FiltersContext"
 
 type Props = {
 	filterResource: Filter.FilterResource

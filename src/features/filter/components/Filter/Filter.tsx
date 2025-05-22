@@ -1,13 +1,14 @@
 import React, { useCallback, useState } from "react"
-import { Section } from "@components/layout"
-import { Filter as FilterType } from "src/types"
 import FilterGroup from "../FilterGroup/FilterGroup"
-import { useFilteredSeeds, useFilteredSeedsDispatch } from "@context/FilteredSeedsContext"
+import { Section } from "@/components/layout"
+import { useFilteredSeeds, useFilteredSeedsDispatch } from "@/context/FilteredSeedsContext"
+import { useFilters, useFiltersDispatch } from "@/context/FiltersContext"
+import { useSorts } from "@/context/SortContext"
+import { useSeeds } from "@/context/SeedsContext"
+
+import type { Filter as FilterType } from "@/types"
 
 import "./styles.scss"
-import { useFilters, useFiltersDispatch } from "@context/FiltersContext"
-import { useSorts } from "@context/SortContext"
-import { useSeeds } from "@context/SeedsContext"
 
 type Props = {}
 
@@ -58,7 +59,7 @@ export default function Filter({ }: Props) {
 	}, [setUsingAdvancedFilter, filters, filtersDispatch])
 
 	return (
-		<Section tag="aside" className="aside">
+		<Section tag="aside" className="aside filter">
 			<h1>Filter</h1>
 
 			{/* Advanced filter checkbox */}
@@ -82,7 +83,7 @@ export default function Filter({ }: Props) {
 			<p>Total results: {filteredSeeds.length}</p>
 
 			{/* Apply filter button */}
-			<button type="button" onClick={e => filteredSeedsDispatch({ type: "filter", filters, sorts, seeds })}>Apply Filter</button>
+			<button type="button" className="bm-button" onClick={e => filteredSeedsDispatch({ type: "filter", filters, sorts, seeds })}>Apply Filter</button>
 		</Section>
 	)
 }

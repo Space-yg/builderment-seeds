@@ -1,9 +1,9 @@
 import React from "react"
-import { Input, Select } from "@components/form"
-import { seedOperations } from "@data/other"
-import { Filter } from "src/types"
+import { Input, Select } from "@/components/form"
+import { seedOperations } from "@/data/other"
+import { Filter } from "@/types"
 import FilterOption from "./FilterOption"
-import { useFiltersDispatch } from "@context/FiltersContext"
+import { useFiltersDispatch } from "@/context/FiltersContext"
 
 type Props = {
 	filterResource: Filter.FilterSeed
@@ -20,7 +20,7 @@ export default function FilterSeed({ filterResource, groupIds }: Props) {
 			groupIds={groupIds}
 			label="Filter Seed"
 		>
-			<span>Seed </span>
+			<span className="bm-span">Seed </span>
 			<Select options={seedOperations} value={filterResource.operation} onChange={e => filtersDispatch({
 				type: "update",
 				filterId: filterResource.id,

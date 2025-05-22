@@ -2,23 +2,23 @@
 $checkbox-width: 2em;
 $checkbox-height: 1.25em;
 $circle-size: 1.17em;
-$circle-margin-left: .05em;
+$circle-top: .04em;
+$circle-margin-left: .06em;
 
 // Edit container that has checkbox
 .bm-checkbox {
 	// Position
 	position: relative;
 	display: block;
+	margin-top: .25em;
 	padding-left: 2.25em;
 
-	// Style
+	// Cursor
+	cursor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-
-	// Cursor
-	cursor: pointer;
 
 	// Remove default
 	> input {
@@ -69,7 +69,7 @@ $circle-margin-left: .05em;
 			// Position
 			position: absolute;
 			left: $circle-margin-left;
-			top: .027em;
+			top: $circle-top;
 			width: $circle-size;
 			min-height: $circle-size;
 
@@ -78,6 +78,11 @@ $circle-margin-left: .05em;
 			border-radius: 50%;
 			transition: left .25s;
 		}
+	}
+
+	> span {
+		// Make label selectable
+		user-select: auto;
 	}
 }
 

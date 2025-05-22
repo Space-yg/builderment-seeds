@@ -1,4 +1,4 @@
-import { Filter } from "src/types"
+import { Filter } from "@/types"
 
 /**
  * Gets a filter group by deep diving into the `filters` group using the IDs from `groupIds`

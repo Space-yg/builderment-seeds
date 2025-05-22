@@ -1,7 +1,4 @@
-input, select {
-	font: inherit;
-}
-
+// Builderment-styled input and select
 .bm-input, .bm-select {
 	position: relative;
 
@@ -13,20 +10,31 @@ input, select {
 		padding: 0 .2em;
 		background-color: white;
 	}
-
-	> select, > input {
-		margin: 0;
-		border: 1px solid black;
-		border-radius: .6em;
-	}
 }
 
+.bm-input > input, .bm-select > select, .bm-span {
+	width: 100%;
+	min-width: 130px;
+	max-width: 100%;
+	// min-width: max-content;
+	margin: 0;
+	border: 1px solid black;
+	border-radius: .6em;
+}
+
+// Builderment-styled span
+.bm-span {
+	padding: .6em .75em .4em;
+}
+
+// Builderment-styled select
 .bm-select {
 	> select {
 		padding: .5em;
 	}
 }
 
+// Builderment-styled input
 .bm-input {
 	> input {
 		padding: .6em .75em;

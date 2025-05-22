@@ -1,0 +1,70 @@
+@use "/src/fonts.scss";
+
+// Corners
+@mixin clip-path($edge-size, $border-width) {
+	clip-path:
+		polygon(
+			/* Top left */
+			$border-width calc($edge-size + $border-width / 2),
+			calc($edge-size + $border-width / 2) $border-width,
+			/* Top right */
+			calc(100% - $edge-size - $border-width / 2) $border-width,
+			calc(100% - $border-width) calc($edge-size + $border-width / 2),
+			/* Bottom right */
+			calc(100% - $border-width) calc(100% - $edge-size - $border-width / 2),
+			calc(100% - $edge-size - $border-width / 2) calc(100% - $border-width),
+			/* Bottom left */
+			calc($edge-size + $border-width / 2) calc(100% - $border-width),
+			$border-width calc(100% - $edge-size - $border-width / 2));
+}
+
+// Input button and button
+.bm-button {
+	// Position
+	position: relative;
+	width: 100%;
+	padding: 0.7em;
+	margin: .5em 0;
+	outline: none;
+	border: none;
+	@include clip-path(.4em, 0em);
+
+	// Style
+	isolation: isolate;
+	color: rgb(246, 246, 246); // Text color
+	background-color: rgb(219, 219, 219); // Outline color
+
+	// Cursor
+	cursor: pointer;
+
+	// Font
+	@include fonts.troika;
+
+	// Internal Fill
+	&::before {
+		// Position
+		content: "";
+		z-index: -1;
+		position: absolute;
+		inset: 0;
+		@include clip-path(.4em, 0.2em);
+
+		// Style
+		background-color: rgb(103, 159, 220); // Inner color
+	}
+
+	// Focus and hover
+	&:focus-visible, &:hover {
+		&::before {
+			background-color: rgb(91, 145, 200);
+		}
+	}
+}
+
+// Selection
+.bm-button::selection {
+	background-color: rgb(31, 117, 209);
+}
+.bm-button::-moz-selection {
+	background-color: rgb(31, 117, 209);
+}

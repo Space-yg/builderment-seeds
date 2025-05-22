@@ -1,4 +1,4 @@
-import { SmallWorldSettingSize, WorldSettingSize } from "src/types"
+import { SmallWorldSettingSize, WorldSettingSize } from "@/types"
 
 /** All base 62 characters */
 export const base62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" as const

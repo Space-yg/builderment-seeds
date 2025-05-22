@@ -1,4 +1,4 @@
-import { Seed } from "src/types"
+import { Seed } from "@/types"
 import { Item } from "builderment-classes"
 import { getResourcesFromData } from "./dataReader"
 

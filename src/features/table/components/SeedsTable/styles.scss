@@ -1,19 +1,93 @@
+@use "/src/fonts.scss";
+
+// Main
+.main {
+	grid-area: main;
+	height: min-content; // Needed to not expand when there is space for it to expand
+	display: grid; // This is needed to make the .table-wrapper take the width of the .main, not the table
+}
+
+.table-wrapper {
+	// Position
+	width: 100%;
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
 // Seeds table
-.seeds-table {
-	border-collapse: collapse;
+table.seeds-table {
+	// Position
+	width: max-content;
+	min-width: 100%;
+
+	// Do NOT switch collapse.
+	// This is needed for the boarders of the th to stick to it.
+	border-collapse: separate;
+	border-spacing: 0;
+
+	> thead {
+		// Position
+		position: -webkit-sticky;
+		position: sticky;
+		top: 0;
+		z-index: 1;
+
+		// Style
+		background-color: white;
+
+		th {
+			// Position
+			padding: .5em;
+
+			// Font
+			@include fonts.troika;
+		}
+	}
 
 	th, td {
+		// Style
 		border: 1px solid black;
 	}
 
-	th {
-		padding: .5em;
-	}
-
 	td {
+		// Position
 		padding: 0 .5em;
 
+		// Make seed more visible
+		&:first-child {
+			// Font
+			font-family: monospace;
+			font-size: 1.25em;
+			font-weight: bold;
+		}
+
+		// Resource
 		&:last-child {
+			// Cursor
+			cursor: pointer;
+		}
+	}
+
+	// Show more button
+	tr.show-more > td {
+		// Position
+		padding: 0;
+
+		// Font
+		font-size: 1.2em;
+		@include fonts.troika;
+
+		> button {
+			// Position
+			width: 100%;
+			padding: 0;
+			appearance: none;
+
+			// Style
+			background-color: transparent;
+			border: none;
+
+			// Cursor
 			cursor: pointer;
 		}
 	}

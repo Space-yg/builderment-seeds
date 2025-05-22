@@ -45,7 +45,9 @@ export default function Select({ label, options, value, onChange }: Props) {
 			<select value={value} onChange={onChange}>
 				{optionElements}
 			</select>
-			<span>{label}</span>
+			{label &&
+				<span>{label}</span>
+			}
 		</label>
 	)
 }

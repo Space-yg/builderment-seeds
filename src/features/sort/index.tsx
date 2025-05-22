@@ -1,4 +1,4 @@
-import Sort from "./components/Sort"
+import Sort from "./components/Sort/Sort"
 
 export {
 	Sort,

@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useContext } from "react"
-import { filterSeeds } from "@utils/filters"
-import { Seed, Sort, Filter } from "src/types"
-import { sortSeeds } from "@utils/sorts"
+import { filterSeeds } from "@/utils/filters"
+import { Seed, Sort, Filter } from "@/types"
+import { sortSeeds } from "@/utils/sorts"
 import { original } from "immer"
 import { useImmerReducer } from "use-immer"
 

@@ -1,13 +1,13 @@
 import React, { useCallback, useState } from "react"
-import { Section } from "@components/layout"
-import { useSeeds } from "@context/SeedsContext"
-import { useFilteredSeedsDispatch } from "@context/FilteredSeedsContext"
-import { Checkbox, Select } from "@components/form"
-import { resourcesCategorized } from "@data/resources"
+import { Section } from "@/components/layout"
+import { useSeeds } from "@/context/SeedsContext"
+import { useFilteredSeedsDispatch } from "@/context/FilteredSeedsContext"
+import { Checkbox, Select } from "@/components/form"
+import { resourcesCategorized } from "@/data/resources"
 import { calculateResource } from "../../utils/calculate"
-import { useFilters } from "@context/FiltersContext"
-import { useSorts } from "@context/SortContext"
-import { Seed } from "src/types"
+import { useFilters } from "@/context/FiltersContext"
+import { useSorts } from "@/context/SortContext"
+import { Seed } from "@/types"
 
 import "./styles.scss"
 
@@ -53,7 +53,7 @@ export default function Calculate({ setSeeds }: Props) {
 			<Checkbox label="Calculate with alt recipes" checked={withAlt} onChange={handleAltCheckboxOnChange} />
 
 			{/* Calculate */}
-			<button type="button" onClick={handleButtonOnClick}>Calculate Resource</button>
+			<button type="button" className="bm-button" onClick={handleButtonOnClick}>Calculate Resource</button>
 		</Section>
 	)
 }

@@ -1,8 +1,8 @@
 import React, { createContext, ReactNode, useContext } from "react"
 import { useImmerReducer } from "use-immer"
-import { Filter } from "src/types"
-import { getFilter, getGroup } from "@features/filter/utils/helpers"
-import { swap } from "@utils/helpers"
+import { Filter } from "@/types"
+import { getFilter, getGroup } from "@/features/filter/utils/helpers"
+import { swap } from "@/utils/helpers"
 
 /** Set the filters */
 type SetAction = {

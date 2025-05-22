@@ -1,15 +1,17 @@
-import React, { Fragment } from "react"
-import { Filter } from "src/types"
-import { CustomSelect, Select } from "@components/form"
-import { groupOperationsOptions } from "@data/other"
+import React, { Fragment, useCallback } from "react"
 import FilterResource from "../FilterResource"
 import FilterWorldSize from "../FilterWorldSize"
 import FilterOption from "../FilterOption"
 import FilterResourceAmount from "../FilterResourceAmount"
 import FilterSeed from "../FilterSeed"
+import { Select, CustomSelect } from "@/components/form"
+import { groupOperationsOptions } from "@/data/other"
+import { useFilters, useFiltersDispatch } from "@/context/FiltersContext"
+import { getGroup } from "../../utils/helpers"
+
+import type { Filter } from "@/types"
 
 import "./styles.scss"
-import { useFilters, useFiltersDispatch } from "@context/FiltersContext"
 
 type Props = {
 	currentId: number
@@ -22,12 +24,11 @@ type Props = {
 
 /** Represents a group of filters */
 export default function FilterGroup({ currentId, setCurrentId, groupIds = [0], usingAdvancedFilter, removable = true, movable = true }: Props) {
-	const filters = useFilters()
+	const filters = getGroup(useFilters(), groupIds)!
 	const filtersDispatch = useFiltersDispatch()
 
 	// Create all filter elements
 	let filterTags: React.JSX.Element[] = filters.group.map((filter, index) => {
-
 		// Add operation (and/or)
 		let operationElement: React.JSX.Element | null = null
 		if (usingAdvancedFilter && index !== 0) {
@@ -60,7 +61,7 @@ export default function FilterGroup({ currentId, setCurrentId, groupIds = [0], u
 				break
 
 			case "group":
-				const g = groupIds.slice()
+				const g = [...groupIds]
 				g.push(filter.id)
 				filterElement = (
 					<FilterGroup
@@ -71,6 +72,7 @@ export default function FilterGroup({ currentId, setCurrentId, groupIds = [0], u
 						usingAdvancedFilter={usingAdvancedFilter}
 					/>
 				)
+				break
 		}
 
 		return (
@@ -90,7 +92,7 @@ export default function FilterGroup({ currentId, setCurrentId, groupIds = [0], u
 	})
 
 	/** Add a filter to the filters */
-	function addFilter(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+	const addFilter = useCallback((e: React.SyntheticEvent<HTMLSelectElement, Event>) => {
 		filtersDispatch({
 			type: "add",
 			currentId,
@@ -98,7 +100,7 @@ export default function FilterGroup({ currentId, setCurrentId, groupIds = [0], u
 			filter: e.currentTarget.value as Filter.FilterName,
 		})
 		setCurrentId(currentId + 1)
-	}
+	}, [filtersDispatch, currentId, groupIds, setCurrentId])
 
 	const filterOptions = [
 		{

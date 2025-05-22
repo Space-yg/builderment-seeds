@@ -1,22 +1,36 @@
-// Aside
-.aside {
+// Main app
+#root {
 	// Position
-	position: relative;
-	padding: 1em;
-	margin-bottom: 1em;
+	display: grid;
+	grid-template-areas:
+		"header aside"
+		"main aside";
+	grid-template-columns: 2fr 1fr;
+	grid-template-rows: auto 1fr;
 
-	// Style
-	text-align: center;
-	border: 3px solid black;
-	border-radius: 2em;
-
-	> h1 {
+	@media (width <=1400px) {
 		// Position
-		margin: 0;
+		grid-template-areas:
+			"header"
+			"aside"
+			"main";
+		grid-template-columns: 1fr;
 	}
 }
 
-// Option
+// Aside wrapper
+.aside-wrapper {
+	// Position
+	grid-area: aside;
+
+	// Aside
+	> .aside {
+		// Style
+		text-align: center;
+	}
+}
+
+// A filter or sort option
 .option {
 	// Position
 	position: relative;
@@ -29,8 +43,21 @@
 	border: 2px solid black;
 	border-radius: 1em;
 
+	// Change layout of filter NOT a group
+	&:not(.filter-group) {
+		// Position
+		display: flex;
+		flex-wrap: wrap;
+
+		> label, > span:not(.title) {
+			flex-grow: 1;
+			flex-shrink: 0;
+			flex-basis: 33%;
+		}
+	}
+
 	// Label of the filter option
-	> span:first-child {
+	> span.title {
 		// Position
 		display: block;
 		position: absolute;

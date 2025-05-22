@@ -1,8 +1,8 @@
 import React from "react"
-import { Sort } from "src/types"
-import { Select } from "@components/form"
-import { seedOrderOptions, seedOptions } from "@data/other"
-import { useSorts, useSortsDispatch } from "@context/SortContext"
+import { Sort } from "@/types"
+import { Select } from "@/components/form"
+import { seedOrderOptions, seedOptions } from "@/data/other"
+import { useSorts, useSortsDispatch } from "@/context/SortContext"
 
 type Props = {
 	id: number
@@ -37,7 +37,7 @@ export default function SortOption({ id, className }: Props) {
 			data-id={id}
 		>
 			{/* Label */}
-			<span>Sort</span>
+			<span className="title">Sort</span>
 
 			{/* Delete filter */}
 			<button type="button" className="remove-button" onClick={e => sortsDispatch({

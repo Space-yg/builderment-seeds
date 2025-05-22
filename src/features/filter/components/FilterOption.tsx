@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react"
-import { useFiltersDispatch } from "@context/FiltersContext"
+import { useFiltersDispatch } from "@/context/FiltersContext"
 
 type Props = {
 	label: string
@@ -35,7 +35,7 @@ export default function FilterOption({ label, children, id, groupIds, className,
 			data-id={id}
 		>
 			{/* Label of the filter */}
-			<span>{label}</span>
+			<span className="title">{label}</span>
 
 			{/* Delete filter */}
 			{removable &&

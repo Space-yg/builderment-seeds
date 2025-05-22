@@ -1,7 +1,7 @@
 import React from "react"
 import App from "./App.tsx"
 import { createRoot } from "react-dom/client"
-import { FilteredSeedsProvider } from "@context/FilteredSeedsContext.tsx"
+import { FilteredSeedsProvider } from "@/context/FilteredSeedsContext.tsx"
 
 import "./index.scss"
 

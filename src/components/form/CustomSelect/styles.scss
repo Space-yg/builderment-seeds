@@ -1,79 +1,12 @@
-.bm-custom-select {
+select.custom-select {
 	// Position
-	position: relative;
-	display: block;
+	width: 100%;
+	padding: .5em;
 	text-align: center;
 
-	// Label
-	> button {
-		// Position
-		width: 100%;
-		padding: .5em;
-
-		// Style
-		background-color: lightgray;
-		border: none;
-		border-radius: .5em;
-
-		// Cursor
-		cursor: pointer;
-		user-select: none;
-
-		// Show options
-		&.open + div {
-			// Style
-			transform: translateX(calc(-50% + .5em)) scale(1);
-			opacity: 1;
-
-			// Options
-			> button {
-				// Position
-				display: block;
-			}
-		}
-	}
-
-	// Options container
-	> div {
-		// Position
-		position: absolute;
-		top: 100%;
-		left: 50%;
-		z-index: 1;
-		transform: translateX(calc(-50% + .5em)) scale(.8);
-
-		// Style
-		box-sizing: border-box;
-		border-radius: .5em;
-		background-color: darkgray;
-		opacity: 0;
-		transition:
-			transform .15s,
-			opacity .15s;
-
-		// Options
-		> button {
-			// Position
-			display: none;
-			width: 100%;
-			padding: .25em .75em;
-			// padding: 0;
-			border-radius: .5em;
-			background-color: transparent;
-			border: none;
-
-			// Style
-			transition: display .1s allow-discrete;
-
-			// Cursor
-			cursor: pointer;
-			user-select: none;
-
-			&:hover {
-				// Style
-				background-color: gray;
-			}
-		}
-
-	}
+	// Style
+	appearance: none;
+	background-color: lightgray;
+	border: none;
+	border-radius: .5em;
 }

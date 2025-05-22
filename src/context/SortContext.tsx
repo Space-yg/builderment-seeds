@@ -1,6 +1,6 @@
-import { swap } from "@utils/helpers"
+import { swap } from "@/utils/helpers"
 import React, { createContext, ReactNode, useContext } from "react"
-import { Sort } from "src/types"
+import { Sort } from "@/types"
 import { useImmerReducer } from "use-immer"
 
 /** Set the sorts */

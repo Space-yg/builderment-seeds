@@ -1,4 +1,4 @@
-import { Filter, Resources, Seed } from "src/types"
+import { Filter, Resources, Seed } from "@/types"
 import { filterInPlace, replaceInPlace } from "./helpers"
 
 /**

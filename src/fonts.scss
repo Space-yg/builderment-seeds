@@ -1,0 +1,24 @@
+/* Thin font */
+@font-face {
+	font-family: Oswald;
+	src: url(../fonts/Oswald-Regular.ttf);
+}
+@mixin Oswald {
+	font-family: Oswald, Arial, Helvetica, sans-serif;
+}
+.Oswald {
+	@include Oswald;
+}
+
+/* Bold CAPITAL font */
+@font-face {
+	font-family: troika;
+	src: url(../fonts/troika.otf);
+}
+@mixin troika {
+	font-family: troika, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+}
+.troika {
+	@include troika;
+}

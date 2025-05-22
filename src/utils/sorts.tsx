@@ -1,4 +1,4 @@
-import { Seed, Sort } from "src/types"
+import { Seed, Sort } from "@/types"
 
 export function sortSeeds(seeds: Seed[], sorts: Sort.SortOption[]): Seed[] {
 	return [...seeds].sort((seed1, seed2) => {
