@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import HomeWrapped from "./Home"
 import { FilteredSeedsProvider } from "!/context/FilteredSeedsContext"
 
@@ -6,11 +6,8 @@ import "./styles.scss"
 
 /** The whole application */
 export default function HomeWrapper() {
-	// TODO: Fix the calculate resource with power plant issue
 	// TODO: Add loading
 	// TODO: Localization
-	// TODO: versions and disclaimer pages
-	// TODO: Head: Add Google tag, meta data, Open Graph, and Twitter Card
 	// TODO Later: Add a way to filter by equal resources. E.g. Instead of Wood = 300, it would be Wood = Coal
 	// I could make another option called "Text mode" which will allow the user to write an equation to filter by.
 	// This equation can have the resources (wood, coal, etc.) in them and can use advanced operations
@@ -32,6 +29,11 @@ export default function HomeWrapper() {
 	//   filter
 	//   sort
 	//   main
+
+	// Add the .home class to the body
+	useEffect(() => {
+		document.body.className = "home"
+	}, [])
 
 	// NOW DO: Styling. Stop with tsx and performance, you finished the functionality
 	return (

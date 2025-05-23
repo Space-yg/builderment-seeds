@@ -16,5 +16,6 @@
 			"builderment-classes": ["node_modules/builderment-classes/dist/browser/index.d.ts", "node_modules/builderment-classes/dist/browser/index.js"]
 		}
 	},
-	"include": ["./"]
+	"include": ["./"],
+	"exclude": []
 }

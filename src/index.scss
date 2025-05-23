@@ -11,10 +11,14 @@ button, input, select {
 	font: inherit;
 }
 body {
-	margin: .5em;
+	margin: 0;
 	background-color: rgb(217, 255, 217);
 	@include fonts.Oswald;
 }
 h1, h2, h3 {
 	@include fonts.troika;
+}
+footer {
+	width: 100%;
+	text-align: center;
 }

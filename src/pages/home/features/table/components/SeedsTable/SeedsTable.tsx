@@ -27,6 +27,9 @@ export default function SeedsTable({ }: Props) {
 	useEffect(() => {
 		document.removeEventListener("scroll", scrollHandler)
 		document.addEventListener("scroll", scrollHandler)
+
+		// Remove event listener after destruction of table
+		return () => document.removeEventListener("scroll", scrollHandler)
 	}, [])
 
 	return (

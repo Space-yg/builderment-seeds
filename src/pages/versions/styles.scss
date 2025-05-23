@@ -1,0 +1,18 @@
+.root {
+	> * {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 60em;
+	}
+}
+
+.main {
+	h2 {
+		display: inline-block;
+
+		+ time {
+			color: gray;
+			font-size: small;
+		}
+	}
+}
