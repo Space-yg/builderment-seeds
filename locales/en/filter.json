@@ -1,0 +1,17 @@
+{
+	"Filter": "Filter",
+	"Advanced filter": "Advanced filter",
+	"Filter Group": "Filter Group",
+	"And": "And",
+	"Or": "Or",
+	"Filter Resource": "Filter Resource",
+	"Filter World Size": "Filter World Size",
+	"Filter Resource Amount": "Filter Resource Amount",
+	"Filter Seed": "Filter Seed",
+	"seed": {
+		"is": "is",
+		"has": "has"
+	},
+	"Total results": "Total results",
+	"Apply Filter": "Apply Filter"
+}

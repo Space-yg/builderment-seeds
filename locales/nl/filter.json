@@ -1,0 +1,17 @@
+{
+	"Filter": "Filter",
+	"Advanced filter": "Geavanceerd filter",
+	"Filter Group": "Filter Groep",
+	"And": "En",
+	"Or": "Of",
+	"Filter Resource": "Filter Voorwerp",
+	"Filter World Size": "Filter Wereld Grootte",
+	"Filter Resource Amount": "Filter Grondstof Hoeveelheid",
+	"Filter Seed": "Filter Seed",
+	"seed": {
+		"is": "is",
+		"has": "heeft"
+	},
+	"Total results": "Aantal resultaten",
+	"Apply Filter": "Filter Toepassen"
+}
