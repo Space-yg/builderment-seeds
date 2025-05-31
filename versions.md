@@ -1,5 +1,17 @@
+## v2.0.1
+
+### \t31/5/2025
+
+- Fixed when filtering by seeds and translating the website and then translating the website, the seed operation would stay the same in the previous translation.
+- Fixed calculating resource select menu would not display the selected resource, but would still work. Thanks [Human-Crow](https://discordapp.com/users/947807205028139018)!
+- Added a button next to each seed to open [Human-Crow's Builderment Calculator](https://human-crow.github.io/alt_calculator/) for the user to see the amount of resources, alt ratios, or boosted resources for that seed.
+- Changed the font of the seeds from the system monospace font to [Iosevka](https://typeof.net/Iosevka/).
+- Fixed layout margins in [Disclaimer](https://space-yg.github.io/builderment-seeds/disclaimer) and [Versions](https://space-yg.github.io/builderment-seeds/versions) pages.
+
 ## v2.0.0
-<!-- TODO: ADD DATE OF RELEASE -->
+
+### \t31/5/2025
+
 - New layout!
 - Migrated from vanilla JavaScript to React.js.
 - Better filtering system.

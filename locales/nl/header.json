@@ -5,5 +5,7 @@
 	"tip1": "Klik op een seed om het te kopiëren.",
 	"tip2": "Klik op een getal in de Grondstof kolom om een nauwkeuriger getal te krijgen.",
 	"notes": "Opmerkingen:",
-	"note1": "De Wereld Grootte en Grondstof Hoeveelheid zijn alleen beschikbaar als je de geavanceerde wereld instellingen ontgrendeld hebt, de standaard waarde voor beide is 100%."
+	"note1": "De Wereld Grootte en Grondstof Hoeveelheid zijn alleen beschikbaar als je de geavanceerde wereld instellingen ontgrendeld hebt, de standaard waarde voor beide is 100%.",
+	"note2": "Als je de hoeveelheid grondstoffen, alt-ratio's of gebooste grondstoffen voor een seed wilt weten, klik dan op het {{open new tab icon}} pictogram naast de grondstof van de seed.",
+	"Open in new tab icon": "Open in nieuw tabblad"
 }
