@@ -50,7 +50,7 @@ export default function Calculate({ setSeeds }: Props) {
 			{/* Resource */}
 			<Select
 				onChange={handleSelectOnChange}
-				value={"Earth Token"}
+				value={resource}
 				options={resourcesCategorized.map<[string, { option: string, value: string }[]]>(optgroup => [
 					ReactDOMServer.renderToStaticMarkup(t(optgroup[0])),
 					optgroup[1].map(option => {

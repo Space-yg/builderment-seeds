@@ -1,4 +1,5 @@
 import React from "react"
+import ReactDOMServer from "react-dom/server"
 import { Section } from "@/components/layout"
 import { useTranslation } from "@/features/translation"
 import TranslationSelect from "../TranslationSelect/TranslationSelect"
@@ -26,6 +27,9 @@ export default function Header({ }: Props) {
 			<p>{t("notes")}</p>
 			<ul>
 				<li>{t("note1")}</li>
+				<li>{t("note2", {
+					"open new tab icon": <img style={{ width: ".75em" }} src={import.meta.env.BASE_URL + "/images/new-tab.svg"} alt={ReactDOMServer.renderToStaticMarkup(t("Open in new tab icon"))} />
+				})}</li>
 			</ul>
 		</Section>
 	)

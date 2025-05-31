@@ -120,7 +120,7 @@ export function useTranslation(namespaces?: string[], options?: Omit<Partial<Inf
 	// Add fallback first if there is
 	if (info.fallbackLang && info.fallbackLang !== info.lang) {
 		try {
-			Object.assign(translations, useCreateTranslation({ ...info, lang: info.fallbackLang }, fallbackLangPromises))
+			ObjectAssign(useCreateTranslation({ ...info, lang: info.fallbackLang }, fallbackLangPromises), translations)
 		} catch (err) {
 			// Promise error (expected)
 			if (err instanceof Promise) {

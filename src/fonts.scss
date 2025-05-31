@@ -1,4 +1,4 @@
-/* Thin font */
+// Thin font
 @font-face {
 	font-family: Oswald;
 	src: url(/fonts/Oswald-Regular.ttf);
@@ -10,7 +10,7 @@
 	@include Oswald;
 }
 
-/* Bold CAPITAL font */
+// Bold CAPITAL font
 @font-face {
 	font-family: troika;
 	src: url(/fonts/troika.otf);
@@ -21,4 +21,16 @@
 }
 .troika {
 	@include troika;
+}
+
+// Monospace font
+@font-face {
+	font-family: 'Iosevka Fixed Web';
+	src: url(/fonts/IosevkaFixed-SemiBold.woff2) format('woff2');
+}
+@mixin Iosevka {
+	font-family: "Iosevka Fixed Web", "Courier New", Courier, monospace;
+}
+.Iosevka {
+	@include Iosevka;
 }

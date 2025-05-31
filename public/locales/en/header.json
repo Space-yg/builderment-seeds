@@ -5,5 +5,7 @@
 	"tip1": "Click on a seed to copy.",
 	"tip2": "Click on a number at the Resource column to get an accurate amount.",
 	"notes": "Notes:",
-	"note1": "The World Size and Resource Amount are available only to people with advanced world settings. If you do not have advanced world settings, the default for both is 100%."
+	"note1": "The World Size and Resource Amount are available only to people with advanced world settings. If you do not have advanced world settings, the default for both is 100%.",
+	"note2": "If you want to know the amount of resources, alt ratios, or boosted resources for a seed, click on the {{open new tab icon}} icon next to the resource of the seed.",
+	"Open in new tab icon": "Open in new tab icon"
 }

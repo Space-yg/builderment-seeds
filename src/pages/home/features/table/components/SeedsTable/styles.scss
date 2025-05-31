@@ -56,9 +56,7 @@ table.seeds-table {
 		// Make seed more visible
 		&:first-child {
 			// Font
-			font-family: monospace;
-			font-size: 1.25em;
-			font-weight: bold;
+			@include fonts.Iosevka;
 		}
 
 		// Resource

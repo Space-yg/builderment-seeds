@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react"
-import SeedsTableRow from "../SeedsTableRow"
+import ReactDOMServer from "react-dom/server"
+import SeedsTableRow from "../SeedsTableRow/SeedsTableRow"
 import { Section } from "@/components/layout"
 import { Loading } from "@/components/other"
 import { useTranslation } from "@/features/translation"
 import { useFilteredSeeds } from "!/contexts/FilteredSeeds"
+import { decode } from 'html-entities'
 
 import "./styles.scss"
 
@@ -25,7 +27,8 @@ export default function SeedsTable({ progress, progressText, seedsLoaded }: Prop
 	const defaultNumberOfSeedsToAdd = 50
 	const [numberOfSeedsToShow, setNumberOfSeedsToShow] = useState(defaultNumberOfSeedsToShow)
 	const seedsToShow = filteredSeeds.slice(0, numberOfSeedsToShow)	// First numberOfSeedToShow only
-	const trs: React.JSX.Element[] = seedsToShow.map(seed => <SeedsTableRow key={seed.sd + seed.ws.toString() + seed.ra.toString()} seed={seed} />)
+	const openResourcesText = decode(ReactDOMServer.renderToStaticMarkup(t("See resources needed, alt ratios, and resource boosts")))
+	const trs: React.JSX.Element[] = seedsToShow.map(seed => <SeedsTableRow key={seed.sd + seed.ws.toString() + seed.ra.toString()} seed={seed} openResourcesText={openResourcesText} />)
 
 	function scrollHandler(event: Event) {
 		// Make the thead actually sticky

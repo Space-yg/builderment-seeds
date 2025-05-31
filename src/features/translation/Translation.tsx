@@ -6,7 +6,7 @@ function parseTranslationFromTranslations(translations: Translations, translatio
 	let t: any = translations
 	for (const key of translationSplit) {
 		t = t[key]
-		if (typeof t === "undefined") break
+		if (typeof t !== "object") break
 	}
 	return t
 }
@@ -18,6 +18,7 @@ function parseTranslationFromTranslations(translations: Translations, translatio
  */
 export function CreateTranslation(translations: Translations) {
 	return function t(translation: string, placeholders?: Record<any, string | React.JSX.Element>, key?: React.Key | null | undefined): React.JSX.Element | React.JSX.Element[] {
+		// console.log(translation, translations)
 		let trans = parseTranslationFromTranslations(translations, translation)
 
 		if (typeof trans === "undefined") {

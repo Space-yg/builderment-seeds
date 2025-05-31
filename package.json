@@ -2,7 +2,7 @@
   "name": "builderment-seeds",
   "private": true,
   "homepage": "https://space-yg.github.io/builderment-seeds/",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "builderment-classes": "^0.0.6",
+    "html-entities": "^2.6.0",
     "immer": "^10.1.1",
     "markdown-it": "^14.1.0",
     "react": "^19.1.0",
