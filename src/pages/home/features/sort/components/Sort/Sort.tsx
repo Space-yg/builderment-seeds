@@ -1,14 +1,17 @@
 import React, { useState } from "react"
 import SortOption from "../SortOption"
 import { Section } from "@/components/layout"
-import { useFilteredSeedsDispatch } from "!/context/FilteredSeedsContext"
-import { useSorts, useSortsDispatch } from "!/context/SortContext"
+import { useTranslation } from "@/features/translation"
+import { useFilteredSeedsDispatch } from "!/contexts/FilteredSeeds"
+import { useSorts, useSortsDispatch } from "!/contexts/Sort"
 
 import "./styles.scss"
 
 type Props = {}
 
 export default function Sort({ }: Props) {
+	const t = useTranslation(["sort"])
+
 	const filteredSeedsDispatch = useFilteredSeedsDispatch()
 
 	const sorts = useSorts()
@@ -20,7 +23,7 @@ export default function Sort({ }: Props) {
 
 	return (
 		<Section tag="aside" className="aside sort">
-			<h1>Sort</h1>
+			<h1>{t("Sort")}</h1>
 
 			{/* Sort options */}
 			{sortOptions}
@@ -40,7 +43,7 @@ export default function Sort({ }: Props) {
 			}}>+</button>
 
 			{/* Apply sort */}
-			<button type="button" className="bm-button" onClick={e => filteredSeedsDispatch({ type: "sort", sorts })}>Apply Sort</button>
+			<button type="button" className="bm-button" onClick={e => filteredSeedsDispatch({ type: "sort", sorts })}>{t("Apply Sort")}</button>
 		</Section>
 	)
 }

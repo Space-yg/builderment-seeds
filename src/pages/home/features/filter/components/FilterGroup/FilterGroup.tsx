@@ -1,12 +1,14 @@
 import React, { Fragment, useCallback } from "react"
+import ReactDOMServer from "react-dom/server"
 import FilterResource from "../FilterResource"
 import FilterWorldSize from "../FilterWorldSize"
 import FilterOption from "../FilterOption"
 import FilterResourceAmount from "../FilterResourceAmount"
 import FilterSeed from "../FilterSeed"
 import { Select, CustomSelect } from "@/components/form"
+import { useTranslation } from "@/features/translation"
 import { groupOperationsOptions } from "!/data/other"
-import { useFilters, useFiltersDispatch } from "!/context/FiltersContext"
+import { useFilters, useFiltersDispatch } from "!/contexts/Filters"
 import { getGroup } from "!/utils/filters"
 
 import type { Filter } from "!/types"
@@ -24,6 +26,8 @@ type Props = {
 
 /** Represents a group of filters */
 export default function FilterGroup({ currentId, setCurrentId, groupIds = [0], usingAdvancedFilter, removable = true, movable = true }: Props) {
+	const t = useTranslation(["filter"])
+
 	const filters = getGroup(useFilters(), groupIds)!
 	const filtersDispatch = useFiltersDispatch()
 
@@ -32,14 +36,14 @@ export default function FilterGroup({ currentId, setCurrentId, groupIds = [0], u
 		// Add operation (and/or)
 		let operationElement: React.JSX.Element | null = null
 		if (usingAdvancedFilter && index !== 0) {
-			if (index === 1) operationElement = <Select key={filter.id - .5} label="" options={groupOperationsOptions} value={filters.operation} onChange={e => filtersDispatch({
+			if (index === 1) operationElement = <Select key={filter.id - .5} label="" options={groupOperationsOptions.map(operations => { return { option: ReactDOMServer.renderToStaticMarkup(t(operations.option)), value: operations.value } })} value={filters.operation} onChange={e => filtersDispatch({
 				type: "update",
 				groupIds,
 				updater(draft: Filter.FilterGroup) {
 					draft.operation = e.target.value as Filter.GroupOperation
 				},
 			})} />
-			else operationElement = <p key={filter.id - .5}>{filters.operation === "and" ? "And" : "Or"}</p>
+			else operationElement = <p key={filter.id - .5}>{filters.operation === "and" ? t("And") : t("Or")}</p>
 		}
 
 		let filterElement: React.JSX.Element = <></>
@@ -104,30 +108,30 @@ export default function FilterGroup({ currentId, setCurrentId, groupIds = [0], u
 
 	const filterOptions = [
 		{
-			option: "Filter resource",
+			option: ReactDOMServer.renderToStaticMarkup(t("Filter Resource")),
 			value: "resource",
 		},
 		{
-			option: "Filter world size",
+			option: ReactDOMServer.renderToStaticMarkup(t("Filter World Size")),
 			value: "world size",
 		},
 		{
-			option: "Filter resource amount",
+			option: ReactDOMServer.renderToStaticMarkup(t("Filter Resource Amount")),
 			value: "resource amount",
 		},
 		{
-			option: "Filter seed",
+			option: ReactDOMServer.renderToStaticMarkup(t("Filter Seed")),
 			value: "seed",
 		},
 	]
 	if (usingAdvancedFilter) filterOptions.push({
-		option: "Filter group",
+		option: ReactDOMServer.renderToStaticMarkup(t("Filter Group")),
 		value: "group",
 	})
 
 	return (
 		<FilterOption
-			label="Filter Group"
+			label={ReactDOMServer.renderToStaticMarkup(t("Filter Group"))}
 			id={filters.id}
 			groupIds={groupIds.slice(0, -1)}
 			className="filter-group"

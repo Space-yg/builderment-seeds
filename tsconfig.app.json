@@ -32,6 +32,8 @@
     "paths": {
       // Global
       "@/components/*": ["src/components/*"],
+      "@/features/*": ["src/features/*"],
+      "@/contexts/*": ["src/contexts/*"],
 
       // Local
       "!/*": ["src/pages/home/*"]

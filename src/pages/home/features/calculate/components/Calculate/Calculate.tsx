@@ -1,13 +1,15 @@
 import React, { useCallback, useState } from "react"
+import ReactDOMServer from "react-dom/server"
 import { Section } from "@/components/layout"
-import { useSeeds } from "!/context/SeedsContext"
-import { useFilteredSeedsDispatch } from "!/context/FilteredSeedsContext"
 import { Checkbox, Select } from "@/components/form"
+import { useTranslation } from "@/features/translation"
+import { useSeeds } from "!/contexts/Seeds"
+import { useFilteredSeedsDispatch } from "!/contexts/FilteredSeeds"
+import { useFilters } from "!/contexts/Filters"
+import { useSorts } from "!/contexts/Sort"
 import { resourcesCategorized } from "!/data/resources"
 import { calculateResource } from "../../utils/calculate"
-import { useFilters } from "!/context/FiltersContext"
-import { useSorts } from "!/context/SortContext"
-import { Seed } from "!/types"
+import type { Seed } from "!/types"
 
 import "./styles.scss"
 
@@ -16,6 +18,8 @@ type Props = {
 }
 
 export default function Calculate({ setSeeds }: Props) {
+	const t = useTranslation(["calculate", "resources", "glossary"])
+
 	const seeds = useSeeds()
 
 	const sorts = useSorts()
@@ -30,7 +34,7 @@ export default function Calculate({ setSeeds }: Props) {
 
 	const handleButtonOnClick = useCallback(async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		const s = await calculateResource(seeds, resource, withPowerPlant, withAlt)
-		setSeeds(s) // Update the r in the seeds. If this is not here, then 
+		setSeeds(s) // Update the r in the seeds. If this is not here, then
 		// when clicking filter will use the original seeds (with all r = 0)
 		filteredSeedsDispatch({ type: "calculate", seeds: s, filters, sorts })
 	}, [seeds, resource, withPowerPlant, withAlt, setSeeds, filteredSeedsDispatch, filters, sorts])
@@ -41,19 +45,30 @@ export default function Calculate({ setSeeds }: Props) {
 
 	return (
 		<Section tag="aside" className="aside calculate">
-			<h1>Calculate</h1>
+			<h1>{t("Calculate")}</h1>
 
 			{/* Resource */}
-			<Select options={resourcesCategorized} value={resource} onChange={handleSelectOnChange} />
+			<Select
+				onChange={handleSelectOnChange}
+				value={"Earth Token"}
+				options={resourcesCategorized.map<[string, { option: string, value: string }[]]>(optgroup => [
+					ReactDOMServer.renderToStaticMarkup(t(optgroup[0])),
+					optgroup[1].map(option => {
+						return {
+							option: ReactDOMServer.renderToStaticMarkup(t(option, {}, option)),
+							value: option
+						}
+					}).sort((a, b) => -(a.option < b.option))
+				])}
+			/>
+			{/* Calculate with power plant */}
+			<Checkbox label={ReactDOMServer.renderToStaticMarkup(t("Calculate with power plant"))} checked={withPowerPlant} onChange={handlePowerPlantCheckboxOnChange} />
 
 			{/* Calculate with power plant */}
-			<Checkbox label="Calculate with power plant" checked={withPowerPlant} onChange={handlePowerPlantCheckboxOnChange} />
-
-			{/* Calculate with power plant */}
-			<Checkbox label="Calculate with alt recipes" checked={withAlt} onChange={handleAltCheckboxOnChange} />
+			<Checkbox label={ReactDOMServer.renderToStaticMarkup(t("Calculate with alt recipes"))} checked={withAlt} onChange={handleAltCheckboxOnChange} />
 
 			{/* Calculate */}
-			<button type="button" className="bm-button" onClick={handleButtonOnClick}>Calculate Resource</button>
+			<button type="button" className="bm-button" onClick={handleButtonOnClick}>{t("Calculate Resource")}</button>
 		</Section>
 	)
 }

@@ -51,12 +51,14 @@ export default defineConfig({
 		alias: [
 			// Global
 			{ find: "@/components", replacement: path.resolve(__dirname, "./src/components") },
+			{ find: "@/features", replacement: path.resolve(__dirname, "./src/features") },
+			{ find: "@/contexts", replacement: path.resolve(__dirname, "./src/contexts") },
 
 			// Local
 			{ find: "!/features", replacement: "", customResolver: pagesLocalImport("/features", true) },
 			{ find: "!/data", replacement: "", customResolver: pagesLocalImport("/data") },
 			{ find: "!/utils", replacement: "", customResolver: pagesLocalImport("/utils") },
-			{ find: "!/context", replacement: "", customResolver: pagesLocalImport("/context") },
+			{ find: "!/contexts", replacement: "", customResolver: pagesLocalImport("/contexts") },
 			{ find: "!/type", replacement: "", customResolver: pagesLocalImport("/type") },
 
 			// Can use regex like this (example)

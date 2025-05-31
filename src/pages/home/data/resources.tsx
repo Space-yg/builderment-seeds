@@ -64,9 +64,9 @@ export const rawResources = [
 	"Uranium Ore",
 ]
 
-export const resourcesCategorized = {
-	"Raw Resources": rawResources,
-	"Other Resources": [
+export const resourcesCategorized: [string, string[]][] = [
+	["Raw Resources", rawResources],
+	["Other Resources", [
 		"Atomic Locator",
 		"Battery",
 		"Carbon Fiber",
@@ -113,5 +113,5 @@ export const resourcesCategorized = {
 		"Turbocharger",
 		"Wood Frame",
 		"Wood Plank",
-	]
-}
+	]]
+]

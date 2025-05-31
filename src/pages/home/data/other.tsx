@@ -50,7 +50,7 @@ export const seedOptions = [
 		value: "wl",
 	},
 	{
-		option: "Uranium",
+		option: "Uranium Ore",
 		value: "u",
 	},
 	{

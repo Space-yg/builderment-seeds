@@ -8,13 +8,14 @@
 .advanced-filter-checkbox {
 	// Position
 	position: absolute;
-	top: 1.5em;
-	right: 2.5em;
-	width: 2em;
-	height: 2em;
+	top: .9em;
+	right: 2em;
+	width: 2.25em;
+	height: 1.75em;
 	z-index: 2;
 
-	& > input,
+	//// Bars
+	> input,
 	&::before,
 	&::after {
 		// Position
@@ -28,120 +29,23 @@
 		background-color: black;
 	}
 
-	// Tooltip
-	> span.tooltip {
-		// Style
-		opacity: 0;
-		transition: opacity .2s;
-
-		&::before, &::after {
-			// Position
-			position: absolute;
-			display: none;
-			border: 1px solid black;
-
-			// Style
-			transition: display .2s allow-discrete;
-			background-color: darkgray;
-		}
-
-		// Message
-		&::before {
-			// Position
-			content: "Advanced filter";
-			top: 2em;
-			right: 1.25em;
-			transform: translateX(50%);
-			width: 7em;
-			padding: .25em;
-
-			// Style
-			text-align: center;
-			border-radius: .5em;
-
-			// Font
-			font-size: .75em;
-		}
-
-		// Arrow
-		&::after {
-			// Position
-			content: "";
-			top: 1.25em;
-			right: 0;
-			transform: translateX(-100%) rotate(45deg);
-			width: .5em;
-			height: .5em;
-
-			// Style
-			border-bottom: none;
-			border-right: none;
-		}
-	}
-	// Show tooltip when hover
-	&:hover > span.tooltip {
-		// Style
-		opacity: 1;
-
-		&::after, &::before {
-			// Position
-			display: block;
-		}
-	}
-
-	// Background shown when selected
-	> div.highlight {
-		&::before,
-		&::after {
-			content: "";
-
-			// Position
-			position: absolute;
-			top: -1.125em;
-			right: -.5em;
-			width: 2.5em;
-			height: 2.5em;
-
-			// Style
-			border-radius: .5em;
-		}
-
-		// Show it is selected
-		&::before {
-			// Style
-			opacity: 0;
-			border: 1px solid black;
-			background-color: lightgray;
-			transition: opacity .1s;
-		}
-
-		// Focus using a keyboard
-		&:has(~ input:focus-visible)::after {
-			outline: 1px solid black;
-		}
-	}
-
-	// Highlight when checked
-	&:has(input:checked) > div.highlight::before {
-		opacity: 1;
-	}
-
 	// Top bar
 	&::before {
 		// Position
 		content: "";
 		z-index: 1;
-		top: -.6em;
-		right: -.25em;
-		width: 2em;
+		top: 0;
+		right: 0;
+		width: 100%;
 	}
 
 	// Middle bar
 	> input {
 		// Position
-		top: 0;
-		right: 0;
-		width: 1.5em;
+		top: 50%;
+		right: 12.5%;
+		width: 75%;
+		transform: translateY(-50%);
 
 		// Style
 		appearance: none;
@@ -157,8 +61,135 @@
 		// Position
 		content: "";
 		z-index: 1;
-		top: .6em;
-		right: .25em;
-		width: 1em;
+		bottom: 0;
+		right: 25%;
+		width: 50%;
+	}
+
+	//// Tooltip
+	> span.tooltip {
+		// Style
+		opacity: 0;
+		transition: opacity .2s, display .2s allow-discrete;
+
+		// Position
+		display: none;
+		position: absolute;
+		bottom: 0;
+		right: 50%;
+		transform: translate(50%, calc(100% + .75em));
+		width: max-content;
+		padding: .25em .375em;
+
+		// Style
+		text-align: center;
+		border-radius: .5em;
+		background-color: darkgray;
+		border: 1px solid black;
+
+		// Font
+		font-size: .75em;
+
+		// Arrow
+		&::after {
+			// Position
+			content: "";
+			position: absolute;
+			display: none;
+			border: 1px solid black;
+			border-bottom: none;
+			border-right: none;
+			top: 0;
+			right: 50%;
+			transform: translate(55%, -60%) rotate(45deg);
+			width: .5em;
+			height: .5em;
+
+			// Animation
+			transition: display .2s allow-discrete;
+
+			// Style
+			background-color: darkgray;
+		}
+	}
+
+	// Show tooltip when hover or focus with keyboard
+	&:hover, &:has(input:focus-visible) {
+		> span.tooltip {
+			// Position
+			display: block;
+
+			// Style
+			opacity: 1;
+
+			&::after {
+				// Position
+				display: block;
+			}
+		}
+	}
+
+	//// Background shown when selected
+	> div.highlight {
+		// Position
+		width: 100%;
+		height: 100%;
+
+		&::before,
+		&::after {
+			content: "";
+
+			// Position
+			position: absolute;
+			top: 50%;
+			right: 50%;
+			width: 100%;
+			height: 100%;
+			padding: 1em;
+			transform: translate(50%, -50%);
+
+			// Style
+			border-radius: .5em;
+		}
+
+		// Show it is selected
+		&::before {
+			// Position
+			border: 1px solid black;
+
+			// Style
+			opacity: 0;
+			background-color: lightgray;
+			transition: opacity .1s;
+		}
+
+		// Show when focused with keyboard
+		&::after {
+			// Style
+			outline-offset: 0;
+
+			// Animation
+			transition: outline-offset .1s, outline .1s;
+		}
+
+		// Focus using a keyboard
+		&:has(~ input:focus-visible)::after {
+			// Style
+			outline: 2px solid black;
+			outline-offset: .2em;
+		}
+
+		// NOT focused using a keyboard
+		&:has(~ input:not(:focus-visible))::after {
+			// Style
+			outline: 0px solid black;
+			outline-offset: 0em;
+		}
+	}
+
+	// Highlight when checked
+	&:has(input:checked) > div.highlight::before {
+		// Style
+		opacity: 1;
 	}
 }

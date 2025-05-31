@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react"
-import { useFiltersDispatch } from "!/context/FiltersContext"
+import { useFiltersDispatch } from "!/contexts/Filters"
 
 type Props = {
 	label: string

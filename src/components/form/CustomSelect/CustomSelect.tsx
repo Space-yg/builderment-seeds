@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { FormProps } from "../types"
 
 import "./styles.scss"
@@ -25,12 +25,20 @@ export default function CustomSelect({ label, options, onSelect }: Props) {
 		)
 	})
 
+	/** Handle on key down event */
+	const handleOnKeyDown = useCallback((event: React.KeyboardEvent<HTMLSelectElement>) => {
+		// Prevent switching language using arrows
+		if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+			event.preventDefault()
+		}
+	}, [])
+
 	return (
-		<select className="custom-select" defaultValue={label} onInput={e => {
+		<select className="custom-select" defaultValue={label} onKeyDown={handleOnKeyDown} onInput={e => {
 			onSelect(e)
 			e.currentTarget.selectedIndex = 0
 		}}>
-			<option disabled>{label}</option>
+			<option disabled hidden>{label}</option>
 			{optionElements}
 		</select>
 	)

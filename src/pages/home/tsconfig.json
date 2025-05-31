@@ -4,12 +4,14 @@
 		"paths": {
 			// Global
 			"@/components/*": ["src/components/*"],
+			"@/features/*": ["src/features/*"],
+			"@/contexts/*": ["src/contexts/*"],
 
 			// Local
 			"!/features/*": ["src/pages/home/features/*"],
 			"!/data/*": ["src/pages/home/data/*"],
 			"!/utils/*": ["src/pages/home/utils/*"],
-			"!/context/*": ["src/pages/home/context/*"],
+			"!/contexts/*": ["src/pages/home/contexts/*"],
 			"!/types": ["src/pages/home/types.d.ts"],
 
 			// Other

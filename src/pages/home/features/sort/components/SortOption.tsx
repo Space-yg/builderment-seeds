@@ -1,8 +1,10 @@
 import React from "react"
+import ReactDOMServer from "react-dom/server"
 import { Sort } from "!/types"
 import { Select } from "@/components/form"
 import { seedOrderOptions, seedOptions } from "!/data/other"
-import { useSorts, useSortsDispatch } from "!/context/SortContext"
+import { useSorts, useSortsDispatch } from "!/contexts/Sort"
+import { useTranslation } from "@/features/translation"
 
 type Props = {
 	id: number
@@ -10,6 +12,8 @@ type Props = {
 }
 
 export default function SortOption({ id, className }: Props) {
+	const t = useTranslation(["sort", "resources", "glossary"])
+
 	const sorts = useSorts()
 	const sortsDispatch = useSortsDispatch()
 
@@ -37,7 +41,7 @@ export default function SortOption({ id, className }: Props) {
 			data-id={id}
 		>
 			{/* Label */}
-			<span className="title">Sort</span>
+			<span className="title">{t("Sort")}</span>
 
 			{/* Delete filter */}
 			<button type="button" className="remove-button" onClick={e => sortsDispatch({
@@ -49,7 +53,7 @@ export default function SortOption({ id, className }: Props) {
 
 			{/* Sort fields */}
 			<Select
-				options={seedOptions}
+				options={seedOptions.map(sort => { return { option: ReactDOMServer.renderToStaticMarkup(t(sort.option)), value: sort.value } })}
 				value={sorts.find(sort => sort.id === id)!.resource}
 				onChange={e => sortsDispatch({
 					type: "update",
@@ -60,7 +64,7 @@ export default function SortOption({ id, className }: Props) {
 				})}
 			/>
 			<Select
-				options={seedOrderOptions}
+				options={seedOrderOptions.map(sort => { return { option: ReactDOMServer.renderToStaticMarkup(t(sort.option)), value: sort.value } })}
 				value={sorts.find(sort => sort.id === id)!.order}
 				onChange={e => sortsDispatch({
 					type: "update",

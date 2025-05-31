@@ -1,3 +1,8 @@
+/**
+ * Extract the resources from an {@link ArrayBuffer}.
+ * @param buffer The {@link ArrayBuffer} to get the data from.
+ * @returns The resources.
+ */
 export function getResourcesFromData(buffer: ArrayBuffer | ArrayBufferLike): number[] {
 	const dataView = new DataView(buffer)
 

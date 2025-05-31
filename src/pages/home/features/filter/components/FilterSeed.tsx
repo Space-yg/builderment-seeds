@@ -1,8 +1,10 @@
 import React from "react"
+import ReactDOMServer from "react-dom/server"
 import FilterOption from "./FilterOption"
 import { Input, Select } from "@/components/form"
+import { useTranslation } from "@/features/translation"
 import { seedOperations } from "!/data/other"
-import { useFiltersDispatch } from "!/context/FiltersContext"
+import { useFiltersDispatch } from "!/contexts/Filters"
 
 import type { Filter } from "!/types"
 
@@ -13,16 +15,18 @@ type Props = {
 
 /** Filter a resource */
 export default function FilterSeed({ filterResource, groupIds }: Props) {
+	const t = useTranslation(["filter", "glossary"])
+
 	const filtersDispatch = useFiltersDispatch()
 
 	return (
 		<FilterOption
 			id={filterResource.id}
 			groupIds={groupIds}
-			label="Filter Seed"
+			label={ReactDOMServer.renderToStaticMarkup(t("Filter Seed"))}
 		>
-			<span className="bm-span">Seed </span>
-			<Select options={seedOperations} value={filterResource.operation} onChange={e => filtersDispatch({
+			<span className="bm-span">{t("Seed")}</span>
+			<Select options={seedOperations.map(operation => { return { option: ReactDOMServer.renderToStaticMarkup(t(`seed.${operation}`)), value: operation } })} value={filterResource.operation} onChange={e => filtersDispatch({
 				type: "update",
 				filterId: filterResource.id,
 				groupIds,
@@ -30,7 +34,7 @@ export default function FilterSeed({ filterResource, groupIds }: Props) {
 					draft.operation = e.target.value as Filter.SeedOperations
 				},
 			})} />
-			<Input placeholder="Seed" value={filterResource.seed} onChange={e => filtersDispatch({
+			<Input placeholder={ReactDOMServer.renderToStaticMarkup(t("Seed"))} value={filterResource.seed} onChange={e => filtersDispatch({
 				type: "update",
 				filterId: filterResource.id,
 				groupIds,

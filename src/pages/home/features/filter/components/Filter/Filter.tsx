@@ -1,14 +1,15 @@
 import React, { useCallback, useState } from "react"
 import FilterGroup from "../FilterGroup/FilterGroup"
 import { Section } from "@/components/layout"
-import { useFilteredSeeds, useFilteredSeedsDispatch } from "!/context/FilteredSeedsContext"
-import { useFilters, useFiltersDispatch } from "!/context/FiltersContext"
-import { useSorts } from "!/context/SortContext"
-import { useSeeds } from "!/context/SeedsContext"
+import { useFilteredSeeds, useFilteredSeedsDispatch } from "!/contexts/FilteredSeeds"
+import { useFilters, useFiltersDispatch } from "!/contexts/Filters"
+import { useSorts } from "!/contexts/Sort"
+import { useSeeds } from "!/contexts/Seeds"
 
 import type { Filter as FilterType } from "!/types"
 
 import "./styles.scss"
+import { useTranslation } from "@/features/translation"
 
 type Props = {}
 
@@ -32,6 +33,8 @@ function flatFilter(filterGroup: FilterType.FilterGroup): FilterType.FilterGroup
 
 /** Add and remove filters */
 export default function Filter({ }: Props) {
+	const t = useTranslation(["filter"])
+
 	const seeds = useSeeds()
 
 	const filters = useFilters()
@@ -60,13 +63,13 @@ export default function Filter({ }: Props) {
 
 	return (
 		<Section tag="aside" className="aside filter">
-			<h1>Filter</h1>
+			<h1>{t("Filter")}</h1>
 
 			{/* Advanced filter checkbox */}
 			<label className="advanced-filter-checkbox">
 				{/* DO NOT CHANGE THE ORDER */}
 				<div className="highlight"></div>
-				<span className="tooltip"></span>
+				<span className="tooltip">{t("Advanced filter")}</span>
 				<input type="checkbox" placeholder="test" checked={usingAdvancedFilter} onChange={handleChange} />
 			</label>
 
@@ -80,10 +83,10 @@ export default function Filter({ }: Props) {
 			/>
 
 			{/* Total results */}
-			<p>Total results: {filteredSeeds.length}</p>
+			<p>{t("Total results")}: {filteredSeeds.length}</p>
 
 			{/* Apply filter button */}
-			<button type="button" className="bm-button" onClick={e => filteredSeedsDispatch({ type: "filter", filters, sorts, seeds })}>Apply Filter</button>
+			<button type="button" className="bm-button" onClick={e => filteredSeedsDispatch({ type: "filter", filters, sorts, seeds })}>{t("Apply Filter")}</button>
 		</Section>
 	)
 }

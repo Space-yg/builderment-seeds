@@ -1,0 +1,170 @@
+@use "/src/fonts.scss";
+
+@mixin clip-path($intensity, $boarder-width: 0em) {
+	$zero: $boarder-width;
+	$one: calc(100% - $boarder-width);
+	clip-path:
+		polygon(
+			/* Bottom left */
+			$zero $one,
+
+			/* Top left */
+			$zero $intensity,
+			$intensity $zero,
+
+			/* Top 1 (left crack) */
+			calc($one * .3) $zero,
+			calc($one * .3 + $intensity * .6) calc($intensity * .4 + $boarder-width * .4),
+			calc($one * .3 + $intensity) $zero,
+
+			/* Top 2 (Right crack) */
+			calc($one * .9 + $boarder-width * .5) $zero,
+			calc($one * .9 + $intensity * .6 + $boarder-width * .5) calc($intensity * .4 + $boarder-width * .4),
+			calc($one * .9 + $intensity + $boarder-width * .5) $zero,
+
+			/* Top right */
+			$one $zero,
+
+			/* bottom right */
+			$one calc($one - $intensity + $boarder-width * .9),
+			calc($one - $intensity * 1.5 + $boarder-width * 1.3) $one,
+
+			/* Bottom 1 (right crack) */
+			calc($one * .89 + $boarder-width * 1) $one,
+			calc($one * .89 - ($intensity * .35 - $boarder-width * 1.5)) calc($one - ($intensity * .1)),
+			calc($one * .89 - ($intensity - $boarder-width * 1.5)) $one,
+
+			/* Bottom 2 (middle crack) */
+			calc($one * .65 + $boarder-width * 1) $one,
+			calc($one * .65 - ($intensity * .3 - $boarder-width * 1.25)) calc($one - ($intensity * .2 + $boarder-width * .2)),
+			calc($one * .65 - ($intensity - $boarder-width * 1.25)) $one,
+
+			/* Bottom 3 (left crack) */
+			calc($one * .45 + $boarder-width * 1) $one,
+			calc($one * .45 - ($intensity * .3 - $boarder-width)) calc($one - ($intensity * .2 + $boarder-width * .2)),
+			calc($one * .45 - ($intensity - $boarder-width)) $one,
+		);
+}
+
+.loading {
+	// Position
+	position: absolute;
+	inset: 0;
+	z-index: 10;
+
+	// Style
+	background-color: rgb(160, 206, 255);
+	border-radius: inherit;
+
+	> .loading-animation {
+		// Position
+		position: absolute;
+		margin: auto;
+		inset: 0;
+		width: 2em;
+		height: 2em;
+
+		// Loading pieces
+		> div {
+			// Position
+			position: absolute;
+			width: 12%;
+			height: 30%;
+			margin: auto;
+			inset: 0;
+			border-radius: .5em;
+
+			// Style
+			background-color: white;
+
+			// Animation
+			animation: fade 1s linear infinite;
+
+			@for $i from 1 to 9 {
+				&:nth-child(#{$i}) {
+					// Position
+					// Must be negative in order to reverse the effect of animation-delay being negative
+					// (animation-delay being negative makes the loading load counterclockwise, so this reversed that)
+					transform: rotate(calc(-360deg / 8 * $i)) translate(0, -.6em);
+
+					// Animation
+					// Must be negative in order to start early
+					animation-delay: calc(-1s / 8 * $i);
+				}
+			}
+		}
+
+		// Move up if there is a progress bar
+		&:has(+ .loading-progress) {
+			transform: translateY(-30%);
+		}
+	}
+
+	> .loading-progress {
+		position: absolute;
+		margin: auto;
+		inset: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 1.25em;
+		transform: translateY(100%);
+
+		$progress-bar-width: 10em;
+
+		// Progress bar
+		> progress {
+			// Position
+			position: relative;
+			appearance: none;
+			height: .75em;
+			width: $progress-bar-width;
+
+			// Style
+			background-color: black;
+			@include clip-path(.2em, 0em);
+
+			// Entire progress bar
+			&::-webkit-progress-inner-element {
+				// Style
+				@include clip-path(.25em, .075em);
+			}
+
+			// NOT filled in part
+			&::-webkit-progress-bar {
+				// Style
+				background-color: rgb(75, 74, 75);
+			}
+
+			// Filled in part
+			&::-webkit-progress-value {
+				// Style
+				background: linear-gradient(rgb(122, 236, 132) 45%, rgb(103, 205, 112) 55%);
+			}
+			&::-moz-progress-bar {
+				// Style
+				background: linear-gradient(rgb(122, 236, 132) 45%, rgb(103, 205, 112) 55%);
+			}
+		}
+
+		// Progress text
+		> span {
+			margin-left: $progress-bar-width * 1.75;
+			margin-top: .1em;
+			position: absolute;
+			color: white;
+			font-size: large;
+			@include fonts.troika;
+		}
+	}
+}
+
+@keyframes fade {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0.25;
+	}
+}

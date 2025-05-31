@@ -18,8 +18,8 @@ const SeedsTableRow = memo(function SeedsTableRow({ seed }: Props) {
 			<td>{seed.cl}</td>
 			<td>{seed.wl}</td>
 			<td>{seed.u}</td>
-			<td>{seed.ws}</td>
-			<td>{seed.ra}</td>
+			<td>{seed.ws}%</td>
+			<td>{seed.ra}%</td>
 			<td onClick={e => setLongResource(!longResource)}>{longResource ? Math.round(seed.r * 100_000) / 100_000 : Math.round(seed.r * 1000) / 1000}</td>
 		</tr>
 	)

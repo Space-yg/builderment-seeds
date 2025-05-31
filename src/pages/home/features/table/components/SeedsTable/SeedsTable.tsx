@@ -1,13 +1,21 @@
 import React, { useEffect, useRef, useState } from "react"
 import SeedsTableRow from "../SeedsTableRow"
 import { Section } from "@/components/layout"
-import { useFilteredSeeds } from "!/context/FilteredSeedsContext"
+import { Loading } from "@/components/other"
+import { useTranslation } from "@/features/translation"
+import { useFilteredSeeds } from "!/contexts/FilteredSeeds"
 
 import "./styles.scss"
 
-type Props = {}
+type Props = {
+	progress: number
+	progressText: string
+	seedsLoaded: boolean
+}
 
-export default function SeedsTable({ }: Props) {
+export default function SeedsTable({ progress, progressText, seedsLoaded }: Props) {
+	const t = useTranslation(["table", "resources", "glossary"])
+
 	const filteredSeeds = useFilteredSeeds()
 	const table = useRef<HTMLTableElement>(null)
 	const tableHead = useRef<HTMLTableSectionElement>(null)
@@ -34,22 +42,25 @@ export default function SeedsTable({ }: Props) {
 
 	return (
 		<Section tag="main" className="main">
+			{/* Loading animation */}
+			{!seedsLoaded && <Loading progress={progress} progressText={progressText} />}
+
 			{/* This div is needed to make the vertical scrolling work */}
 			<div className="table-wrapper">
 				<table className="seeds-table" ref={table}>
 					<thead ref={tableHead}>
 						<tr>
-							<th>Seed</th>
-							<th>Wood Log</th>
-							<th>Stone</th>
-							<th>Iron Ore</th>
-							<th>Copper Ore</th>
-							<th>Coal</th>
-							<th>Wolframite</th>
-							<th>Uranium</th>
-							<th>World Size</th>
-							<th>Resource Amount</th>
-							<th>Resource</th>
+							<th>{t("Seed")}</th>
+							<th>{t("Wood Log")}</th>
+							<th>{t("Stone")}</th>
+							<th>{t("Iron Ore")}</th>
+							<th>{t("Copper Ore")}</th>
+							<th>{t("Coal")}</th>
+							<th>{t("Wolframite")}</th>
+							<th>{t("Uranium Ore")}</th>
+							<th>{t("World Size")}</th>
+							<th>{t("Resource Amount")}</th>
+							<th>{t("Resource")}</th>
 						</tr>
 					</thead>
 					<tbody className="syncscroll">
@@ -59,13 +70,13 @@ export default function SeedsTable({ }: Props) {
 							<tr className="show-more">
 								{numberOfSeedsToShow > defaultNumberOfSeedsToShow &&
 									<td colSpan={filteredSeeds.length > numberOfSeedsToShow ? 2 : 11}>
-										<button type="button" onClick={e => setNumberOfSeedsToShow(numberOfSeedsToShow - defaultNumberOfSeedsToAdd)}>Show Less</button>
+										<button type="button" onClick={e => setNumberOfSeedsToShow(numberOfSeedsToShow - defaultNumberOfSeedsToAdd)}>{t("Show Less")}</button>
 									</td>
 								}
 
 								{filteredSeeds.length > numberOfSeedsToShow &&
 									<td colSpan={numberOfSeedsToShow > defaultNumberOfSeedsToShow ? 9 : 11}>
-										<button type="button" onClick={e => setNumberOfSeedsToShow(numberOfSeedsToShow + defaultNumberOfSeedsToAdd)}>Show More</button>
+										<button type="button" onClick={e => setNumberOfSeedsToShow(numberOfSeedsToShow + defaultNumberOfSeedsToAdd)}>{t("Show More")}</button>
 									</td>
 								}
 							</tr>
