@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { memo, useState } from "react"
 import SortOption from "../SortOption"
 import { Section } from "@/components/layout"
 import { useTranslation } from "@/features/translation"
@@ -9,7 +9,7 @@ import "./styles.scss"
 
 type Props = {}
 
-export default function Sort({ }: Props) {
+const Sort = memo(function({ }: Props) {
 	const t = useTranslation(["sort"])
 
 	const filteredSeedsDispatch = useFilteredSeedsDispatch()
@@ -46,4 +46,6 @@ export default function Sort({ }: Props) {
 			<button type="button" className="bm-button" onClick={e => filteredSeedsDispatch({ type: "sort", sorts })}>{t("Apply Sort")}</button>
 		</Section>
 	)
-}
+})
+
+export default Sort

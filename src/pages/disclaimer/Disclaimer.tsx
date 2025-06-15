@@ -7,9 +7,10 @@ import "./styles.scss"
 type Props = {}
 
 export default function Disclaimer({ }: Props) {
-	// Add the .disclaimer class to the body
 	useEffect(() => {
+		// Add the .disclaimer class to the body
 		document.body.className = "disclaimer"
+		document.head.title = "Disclaimer - Builderment Seeds"
 	}, [])
 
 	return (

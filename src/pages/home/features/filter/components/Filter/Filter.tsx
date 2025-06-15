@@ -1,6 +1,7 @@
-import React, { useCallback, useState } from "react"
+import React, { memo, useCallback, useState } from "react"
 import FilterGroup from "../FilterGroup/FilterGroup"
 import { Section } from "@/components/layout"
+import { useTranslation } from "@/features/translation"
 import { useFilteredSeeds, useFilteredSeedsDispatch } from "!/contexts/FilteredSeeds"
 import { useFilters, useFiltersDispatch } from "!/contexts/Filters"
 import { useSorts } from "!/contexts/Sort"
@@ -9,7 +10,6 @@ import { useSeeds } from "!/contexts/Seeds"
 import type { Filter as FilterType } from "!/types"
 
 import "./styles.scss"
-import { useTranslation } from "@/features/translation"
 
 type Props = {}
 
@@ -32,7 +32,7 @@ function flatFilter(filterGroup: FilterType.FilterGroup): FilterType.FilterGroup
 }
 
 /** Add and remove filters */
-export default function Filter({ }: Props) {
+const Filter = memo(function({ }: Props) {
 	const t = useTranslation(["filter"])
 
 	const seeds = useSeeds()
@@ -89,4 +89,6 @@ export default function Filter({ }: Props) {
 			<button type="button" className="bm-button" onClick={e => filteredSeedsDispatch({ type: "filter", filters, sorts, seeds })}>{t("Apply Filter")}</button>
 		</Section>
 	)
-}
+})
+
+export default Filter

@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "pnpm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "Measure-Command { gh-pages -d dist }"
   },
   "dependencies": {
     "builderment-classes": "^0.0.6",

@@ -1,5 +1,3 @@
 import Calculate from "./components/Calculate/Calculate"
 
-export {
-	Calculate
-}
+export default Calculate

@@ -1,12 +1,14 @@
 import React from "react"
 import { Link } from "react-router"
-
-import "./styles.scss"
 import { useTranslation } from "@/features/translation"
 
-type Props = {}
+import "./styles.scss"
 
-export default function Footer({ }: Props) {
+type Props = {
+	versionsText: string
+}
+
+export default function Footer({ versionsText }: Props) {
 	const t = useTranslation(["footer"])
 
 	return (
@@ -14,7 +16,7 @@ export default function Footer({ }: Props) {
 			<p>{t("inquiry", {
 				"Builderment Discord server": <a href="https://discord.gg/builderment-618226575652945941" target="_blank">Builderment Discord server</a>
 			})}</p>
-			<p><Link to="/versions">V2.0.0</Link></p>
+			<p><Link to="/versions">{versionsText.slice(3, versionsText.indexOf("\n"))}</Link></p>
 		</footer>
 	)
 }

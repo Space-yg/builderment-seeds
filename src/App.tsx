@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react"
+import React, { Suspense, lazy, useEffect, useState } from "react"
 import { Route, Routes } from "react-router"
 import Versions from "./pages/versions"
 import Disclaimer from "./pages/disclaimer"
@@ -15,7 +15,16 @@ import "./App.scss"
 /** The whole application */
 export default function App() {
 	const language = useLanguage()
+	const [versionsText, setVersionsText] = useState<string>("Loading...")
 
+	useEffect(() => {
+		// Fetch versions
+		fetch(import.meta.env.BASE_URL + "/versions.md")
+			.then(res => res.text())
+			.then(text => setVersionsText(text))
+	}, [])
+
+	// TODO: Add Gtags to all pages
 	return (
 		<>
 			<Suspense fallback={<Loading />}>
@@ -24,11 +33,11 @@ export default function App() {
 					<div className="root">
 						<Routes>
 							<Route index element={<Home />} />
-							<Route path="/versions" element={<Versions />} />
+							<Route path="/versions" element={<Versions versionsText={versionsText} />} />
 							<Route path="/disclaimer" element={<Disclaimer />} />
 						</Routes>
 					</div>
-					<Footer />
+					<Footer versionsText={versionsText} />
 				</Translate>
 			</Suspense>
 		</>

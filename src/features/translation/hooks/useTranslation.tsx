@@ -1,10 +1,28 @@
 import { useTranslationsInfo } from '../context/TranslationsInfo'
 import { CreateTranslation } from '../Translation'
+
 import type { Info, Translations } from '../types'
 
 const cache: Record<string, Translations> = {}
 let fallbackLangPromises: Promise<any> | undefined = undefined
 let langPromises: Promise<any> | undefined = undefined
+
+let langFolderChecks: { [path: string]: boolean } = {}
+let langFolderCheckPromise: Promise<any> | undefined = undefined
+
+function useCheckFolder(path: string, promise: Promise<any> | undefined): boolean {
+	if (typeof langFolderChecks[path] !== "undefined") return langFolderChecks[path]
+
+	if (typeof promise !== "undefined") throw promise
+
+	// Try to fetch the file
+	promise = fetch(path)
+		.then(res => res.text()) // Try to get the text
+		.then(text => langFolderChecks[path] = true) // true if file found
+		.catch(err => langFolderChecks[path] = false) // false if file is not found
+
+	throw promise
+}
 
 /**
  * Gets the translations for a single language only.
@@ -70,7 +88,8 @@ function useCreateTranslation(info: Info, promise: Promise<any> | undefined): Tr
 function compareTranslationsRecursively(currentTranslation: string, nestedTranslation: string, lang: string, langTranslations: Translations, fallbackLang: string, fallbackTranslations: Translations): void {
 	// Object
 	if (typeof fallbackTranslations[currentTranslation] === "object") for (const innerFallbackTranslation in fallbackTranslations[currentTranslation]) {
-		compareTranslationsRecursively(innerFallbackTranslation, `${nestedTranslation}.${innerFallbackTranslation}`, lang, langTranslations[currentTranslation], fallbackLang, fallbackTranslations[currentTranslation])
+		if (typeof langTranslations[currentTranslation] === "undefined") console.error(`Cannot find "${nestedTranslation}" from language ${fallbackLang} in language ${lang}`)
+		else compareTranslationsRecursively(innerFallbackTranslation, `${nestedTranslation}.${innerFallbackTranslation}`, lang, langTranslations[currentTranslation], fallbackLang, fallbackTranslations[currentTranslation])
 	}
 	// NOT Object
 	else if (!(currentTranslation in langTranslations)) console.error(`Cannot find "${nestedTranslation}" from language ${fallbackLang} in language ${lang}`)
@@ -117,7 +136,7 @@ export function useTranslation(namespaces?: string[], options?: Omit<Partial<Inf
 	}
 	let translations: Translations = {}
 
-	// Add fallback first if there is
+	// Add fallback first, if there is
 	if (info.fallbackLang && info.fallbackLang !== info.lang) {
 		try {
 			ObjectAssign(useCreateTranslation({ ...info, lang: info.fallbackLang }, fallbackLangPromises), translations)
@@ -135,19 +154,16 @@ export function useTranslation(namespaces?: string[], options?: Omit<Partial<Inf
 		}
 	}
 
-	// Add lang translations
+	// Check if lang folder exists
+	const folderToCheck = `${info.path}/${info.lang}/header.json`
 	try {
-		let langTrans = useCreateTranslation(info, langPromises)
-
-		// Display all missing translations from language compared to the fallback language
-		if (info.fallbackLang && info.fallbackLang !== info.lang) compareTranslations(info.lang, langTrans, info.fallbackLang, translations)
-
-		ObjectAssign(langTrans, translations)
+		// Using an if condition to not repeatedly try to check if the file exists or not each render
+		if (typeof langFolderChecks[folderToCheck] === "undefined") useCheckFolder(folderToCheck, langFolderCheckPromise)
 	} catch (err) {
 		// Promise error (expected)
 		if (err instanceof Promise) {
-			langPromises = err
-			throw langPromises
+			langFolderCheckPromise = err
+			throw langFolderCheckPromise
 		}
 		// Any other error
 		else {
@@ -156,6 +172,31 @@ export function useTranslation(namespaces?: string[], options?: Omit<Partial<Inf
 		}
 	}
 
+	// if lang folder exists
+	if (langFolderChecks[folderToCheck]) {
+		// Add lang translations
+		try {
+			let langTrans = useCreateTranslation(info, langPromises)
+
+			// Display all missing translations from language compared to the fallback language
+			if (info.fallbackLang && info.fallbackLang !== info.lang) compareTranslations(info.lang, langTrans, info.fallbackLang, translations)
+
+			ObjectAssign(langTrans, translations)
+		} catch (err) {
+			// Promise error (expected)
+			if (err instanceof Promise) {
+				langPromises = err
+				throw langPromises
+			}
+			// Any other error
+			else {
+				console.error(err)
+				throw err
+			}
+		}
+	}
+
+	langFolderCheckPromise = undefined
 	langPromises = undefined
 	fallbackLangPromises = undefined
 

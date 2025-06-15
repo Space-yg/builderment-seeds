@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React, { memo, useCallback, useState } from "react"
 import ReactDOMServer from "react-dom/server"
 import { Section } from "@/components/layout"
 import { Checkbox, Select } from "@/components/form"
@@ -17,7 +17,7 @@ type Props = {
 	setSeeds: React.Dispatch<React.SetStateAction<Seed[]>>
 }
 
-export default function Calculate({ setSeeds }: Props) {
+const Calculate = memo(function({ setSeeds }: Props) {
 	const t = useTranslation(["calculate", "resources", "glossary"])
 
 	const seeds = useSeeds()
@@ -71,4 +71,6 @@ export default function Calculate({ setSeeds }: Props) {
 			<button type="button" className="bm-button" onClick={handleButtonOnClick}>{t("Calculate Resource")}</button>
 		</Section>
 	)
-}
+})
+
+export default Calculate

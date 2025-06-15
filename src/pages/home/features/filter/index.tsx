@@ -1,5 +1,3 @@
 import Filter from "./components/Filter/Filter"
 
-export {
-	Filter,
-}
+export default Filter

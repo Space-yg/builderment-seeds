@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 import ReactDOMServer from "react-dom/server"
 import { Section } from "@/components/layout"
 import { useTranslation } from "@/features/translation"
@@ -8,7 +8,7 @@ import "./styles.scss"
 
 type Props = {}
 
-export default function Header({ }: Props) {
+const Header = memo(function({ }: Props) {
 	const t = useTranslation(["header"])
 
 	return (
@@ -22,7 +22,6 @@ export default function Header({ }: Props) {
 			<p>{t("tips")}:</p>
 			<ul>
 				<li>{t("tip1")}</li>
-				<li>{t("tip2")}</li>
 			</ul>
 			<p>{t("notes")}</p>
 			<ul>
@@ -33,4 +32,6 @@ export default function Header({ }: Props) {
 			</ul>
 		</Section>
 	)
-}
+})
+
+export default Header
