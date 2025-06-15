@@ -1,12 +1,20 @@
+## v2.0.2
+
+### \t15/6/2025
+
+- Fixed footer to change the version number automatically.
+- Fixed website not working when device's language is not English or Dutch. Thanks [mmelzi](https://discordapp.com/users/328149807099019264)~!
+- Removed the click seed to copy tip from the header.
+
 ## v2.0.1
 
 ### \t31/5/2025
 
 - Fixed when filtering by seeds and translating the website and then translating the website, the seed operation would stay the same in the previous translation.
-- Fixed calculating resource select menu would not display the selected resource, but would still work. Thanks [Human-Crow](https://discordapp.com/users/947807205028139018)!
-- Added a button next to each seed to open [Human-Crow's Builderment Calculator](https://human-crow.github.io/alt_calculator/) for the user to see the amount of resources, alt ratios, or boosted resources for that seed.
-- Changed the font of the seeds from the system monospace font to [Iosevka](https://typeof.net/Iosevka/).
-- Fixed layout margins in [Disclaimer](https://space-yg.github.io/builderment-seeds/disclaimer) and [Versions](https://space-yg.github.io/builderment-seeds/versions) pages.
+- Fixed calculating resource select menu would not display the selected resource, but would still work. Thanks ~[Human-Crow](https://discordapp.com/users/947807205028139018)~!
+- Added a button next to each seed to open [Human-Crow's Builderment Calculator](https://human-crow.github.io/alt_calculator/)~ for the user to see the amount of resources, alt ratios, or boosted resources for that seed.
+- Changed the font of the seeds from the system monospace font to [Iosevka](https://typeof.net/Iosevka/)~.
+- Fixed layout margins in [Disclaimer](https://space-yg.github.io/builderment-seeds/disclaimer)~ and [Versions](https://space-yg.github.io/builderment-seeds/versions)~ pages.
 
 ## v2.0.0
 
