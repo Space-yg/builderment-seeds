@@ -17,7 +17,7 @@ function useCheckFolder(path: string, promise: Promise<any> | undefined): boolea
 
 	// Try to fetch the file
 	promise = fetch(path)
-		.then(res => res.text()) // Try to get the text
+		.then(res => res.json()) // Try to get the text
 		.then(text => langFolderChecks[path] = true) // true if file found
 		.catch(err => langFolderChecks[path] = false) // false if file is not found
 
